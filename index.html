@@ -241,8 +241,12 @@
 </head>
 <body>
 
-<!-- Page Loader -->
-<div class="page-loader" style="position:fixed;inset:0;background:#080808;z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity 0.6s ease;">
+<!-- Page Loader (CSS-only auto-hide) -->
+<style>
+  .page-loader{animation:loaderOut 0.6s ease 1.8s forwards;}
+  @keyframes loaderOut{to{opacity:0;visibility:hidden;pointer-events:none;}}
+</style>
+<div class="page-loader" style="position:fixed;inset:0;background:#080808;z-index:99999;display:flex;align-items:center;justify-content:center;">
   <div style="text-align:center;">
     <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#c9a452;letter-spacing:0.12em;font-weight:300;">3D GRAPHICS HOUSE</div>
     <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,#c9a452,transparent);margin:16px auto;animation:shimmer 1.5s infinite;"></div>
