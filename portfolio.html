@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — 3D Graphics House | Architectural Visualization Projects</title>
+  <meta name="description" content="Explore 3D Graphics House's portfolio of landmark architectural visualization, media production, and interactive technology projects across Saudi Arabia and the Gulf." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style>
+    .page-hero {
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(201,164,82,0.07) 0%, transparent 70%), var(--anthracite);
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,164,82,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,164,82,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+    }
+    .filter-section {
+      background: var(--black);
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 72px;
+      z-index: 100;
+    }
+    .portfolio-masonry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-top: 0;
+    }
+    .portfolio-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--card-bg);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      transition: var(--transition);
+    }
+    .portfolio-card.featured {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+    .portfolio-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .portfolio-card-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      transition: background 0.4s ease;
+    }
+    .portfolio-card:nth-child(6n+1) .portfolio-card-placeholder { background: linear-gradient(135deg,#121212,#1a1a1a); }
+    .portfolio-card:nth-child(6n+2) .portfolio-card-placeholder { background: linear-gradient(135deg,#141414,#1c1c1c); }
+    .portfolio-card:nth-child(6n+3) .portfolio-card-placeholder { background: linear-gradient(135deg,#111111,#181818); }
+    .portfolio-card:nth-child(6n+4) .portfolio-card-placeholder { background: linear-gradient(145deg,#0e0e0e,#161616); }
+    .portfolio-card:nth-child(6n+5) .portfolio-card-placeholder { background: linear-gradient(145deg,#131313,#1b1b1b); }
+    .portfolio-card:nth-child(6n+6) .portfolio-card-placeholder { background: linear-gradient(145deg,#101010,#191919); }
+    .portfolio-card:hover .portfolio-card-img { transform: scale(1.08); }
+    .portfolio-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.3) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .portfolio-card:hover .portfolio-card-overlay { opacity: 1; }
+    .portfolio-card-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .portfolio-card-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .portfolio-card-meta {
+      font-size: 0.78rem;
+      color: rgba(232,226,217,0.6);
+      margin-bottom: 16px;
+    }
+    .portfolio-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .portfolio-empty {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 80px 0;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      display: none;
+    }
+    .portfolio-count {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-left: auto;
+    }
+    body[dir="rtl"] .portfolio-count { margin-left: 0; margin-right: auto; }
+    @media (max-width: 900px) {
+      .portfolio-masonry { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-card.featured { grid-column: span 2; }
+    }
+    @media (max-width: 600px) {
+      .portfolio-masonry { grid-template-columns: 1fr; }
+      .portfolio-card.featured { grid-column: span 1; aspect-ratio: 4/3; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" role="navigation">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
+      <div class="nav-logo-mark">3DG</div>
+      <div class="nav-logo-text">
+        <span data-en="3D Graphics House" data-ar="3D جرافيكس هاوس">3D Graphics House</span>
+        <span data-en="VISUAL INTELLIGENCE" data-ar="الذكاء البصري">VISUAL INTELLIGENCE</span>
+      </div>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a></li>
+      <li><a href="about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a></li>
+      <li><a href="services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
+      <li><a href="portfolio.html" class="nav-link active" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
+      <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="lang-toggle" aria-label="Switch language">عربي</button>
+      <a href="contact.html" class="btn btn-gold" data-en="Get Free Quote" data-ar="احصل على عرض مجاني">Get Free Quote</a>
+      <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-nav" role="dialog" aria-modal="true">
+  <button class="mobile-nav-close">✕</button>
+  <ul role="list">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+    <li><a href="services.html" class="nav-link">Services</a></li>
+    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+    <li><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+</div>
+
+<!-- Hero -->
+<section class="page-hero" aria-label="Portfolio hero">
+  <div class="page-hero-grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-label" data-en="Our Work" data-ar="أعمالنا">Our Work</div>
+    <h1 style="max-width:700px;" class="reveal" data-en="500+ Projects.<br><em>One Standard.</em>" data-ar="أكثر من 500 مشروع.<br><em>معيار واحد.</em>">500+ Projects.<br><em>One Standard.</em></h1>
+    <p style="max-width:580px;margin-top:20px;" class="reveal" data-en="A curated selection of our most impactful work across visualization, media production, and interactive technology — delivered for Saudi Arabia's most prestigious clients." data-ar="مختارات من أكثر أعمالنا تأثيراً عبر الإظهار وإنتاج الإعلام والتقنية التفاعلية — مُسلَّمة لعملاء المملكة العربية السعودية الأكثر مكانة.">A curated selection of our most impactful work across visualization, media production, and interactive technology — delivered for Saudi Arabia's most prestigious clients.</p>
+  </div>
+</section>
+
+<!-- Filter Bar -->
+<div class="filter-section" role="navigation" aria-label="Portfolio filter">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div class="filter-row" style="margin-bottom:0;flex:1;">
+        <button class="filter-btn active" data-filter="all" data-en="All Projects" data-ar="جميع المشاريع">All Projects</button>
+        <button class="filter-btn" data-filter="residential" data-en="Residential" data-ar="سكني">Residential</button>
+        <button class="filter-btn" data-filter="commercial" data-en="Commercial" data-ar="تجاري">Commercial</button>
+        <button class="filter-btn" data-filter="hospitality" data-en="Hospitality" data-ar="ضيافة">Hospitality</button>
+        <button class="filter-btn" data-filter="government" data-en="Government" data-ar="حكومي">Government</button>
+        <button class="filter-btn" data-filter="interior" data-en="Interior" data-ar="داخلي">Interior</button>
+        <button class="filter-btn" data-filter="animation" data-en="Animation" data-ar="أنيميشن">Animation</button>
+        <button class="filter-btn" data-filter="interactive" data-en="Interactive" data-ar="تفاعلي">Interactive</button>
+      </div>
+      <span class="portfolio-count" id="projectCount" aria-live="polite">12 Projects</span>
+    </div>
+  </div>
+</div>
+
+<!-- Portfolio Grid -->
+<section style="background:var(--black);padding:4px 0;" aria-label="Portfolio projects">
+  <div class="portfolio-masonry" id="portfolioGrid">
+
+    <div class="portfolio-card featured reveal" data-category="residential" role="article" aria-label="Panorama Towers project">
+      <div class="portfolio-card-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" style="opacity:0.15;"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Panorama Towers · Exterior
+      </div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Residential · Exterior Visualization" data-ar="سكني · إظهار خارجي">Residential · Exterior Visualization</div>
+        <div class="portfolio-card-name" data-en="Panorama Towers, Riyadh" data-ar="أبراج بانوراما، الرياض">Panorama Towers, Riyadh</div>
+        <div class="portfolio-card-meta" data-en="48 luxury residential units · High-rise development" data-ar="48 وحدة سكنية فاخرة · تطوير ناطحات سحاب">48 luxury residential units · High-rise development</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar Project →" data-ar="ابدأ مشروعاً مشابهاً →">Start Similar Project →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal reveal-delay-1" data-category="interior" role="article" aria-label="Al Nakheel Villa interior project">
+      <div class="portfolio-card-placeholder">Interior · Al Nakheel Villa</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Interior Visualization" data-ar="إظهار داخلي">Interior Visualization</div>
+        <div class="portfolio-card-name" data-en="Al Nakheel Villa, Jeddah" data-ar="فيلا النخيل، جدة">Al Nakheel Villa, Jeddah</div>
+        <div class="portfolio-card-meta" data-en="12-room luxury villa · Full interior package" data-ar="فيلا فاخرة 12 غرفة · حزمة داخلية كاملة">12-room luxury villa · Full interior package</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar →" data-ar="ابدأ مشابهاً →">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal" data-category="commercial" role="article" aria-label="The Square commercial project">
+      <div class="portfolio-card-placeholder">Commercial · The Square</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Commercial · Exterior" data-ar="تجاري · خارجي">Commercial · Exterior</div>
+        <div class="portfolio-card-name" data-en="The Square, Riyadh" data-ar="ذا سكوير، الرياض">The Square, Riyadh</div>
+        <div class="portfolio-card-meta" data-en="Mixed-use commercial hub · 3 towers" data-ar="مركز تجاري متعدد الاستخدامات · 3 أبراج">Mixed-use commercial hub · 3 towers</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal reveal-delay-1" data-category="hospitality" role="article" aria-label="Red Sea Resort project">
+      <div class="portfolio-card-placeholder">Hospitality · Red Sea Resort</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Hospitality · Aerial Visualization" data-ar="ضيافة · إظهار جوي">Hospitality · Aerial Visualization</div>
+        <div class="portfolio-card-name" data-en="Red Sea Resort Complex" data-ar="مجمع منتجع البحر الأحمر">Red Sea Resort Complex</div>
+        <div class="portfolio-card-meta" data-en="280-key 5-star resort · Aerial & interior renders" data-ar="منتجع 5 نجوم 280 غرفة · إظهار جوي وداخلي">280-key 5-star resort · Aerial &amp; interior renders</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card featured reveal reveal-delay-2" data-category="government" role="article" aria-label="Smart City master plan project">
+      <div class="portfolio-card-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" style="opacity:0.15;"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+        Government · Smart City Master Plan
+      </div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Government · Smart City · Aerial Visualization" data-ar="حكومي · مدينة ذكية · إظهار جوي">Government · Smart City · Aerial Visualization</div>
+        <div class="portfolio-card-name" data-en="Alsafwa Smart City Master Plan" data-ar="مخطط مدينة الصفوة الذكية الرئيسي">Alsafwa Smart City Master Plan</div>
+        <div class="portfolio-card-meta" data-en="12km² master development · Full aerial visualization suite" data-ar="12 كم² تطوير رئيسي · حزمة إظهار جوي كاملة">12km² master development · Full aerial visualization suite</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal" data-category="interactive" role="article" aria-label="i-Maquette project">
+      <div class="portfolio-card-placeholder">
+        Interactive · i-Maquette
+      </div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Interactive · i-Maquette · Turriva" data-ar="تفاعلي · i-Maquette · Turriva">Interactive · i-Maquette · Turriva</div>
+        <div class="portfolio-card-name" data-en="Riyadh Heights i-Maquette" data-ar="i-Maquette مرتفعات الرياض">Riyadh Heights i-Maquette</div>
+        <div class="portfolio-card-meta" data-en="Touch-enabled sales center model · 2.4m × 1.8m" data-ar="نموذج مركز مبيعات بتقنية اللمس · 2.4م × 1.8م">Touch-enabled sales center model · 2.4m × 1.8m</div>
+        <a href="contact.html?ref=imaquette" class="portfolio-card-cta">Request Demo →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal reveal-delay-1" data-category="animation" role="article" aria-label="Walkthrough animation project">
+      <div class="portfolio-card-placeholder">Animation · Walkthrough</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Architectural Animation" data-ar="أنيميشن معماري">Architectural Animation</div>
+        <div class="portfolio-card-name" data-en="Crown Tower Walkthrough" data-ar="جولة برج كراون">Crown Tower Walkthrough</div>
+        <div class="portfolio-card-meta" data-en="4-minute cinematic walkthrough animation" data-ar="أنيميشن جولة سينمائية مدة 4 دقائق">4-minute cinematic walkthrough animation</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal reveal-delay-2" data-category="residential" role="article" aria-label="Garden Villas project">
+      <div class="portfolio-card-placeholder">Residential · Garden Villas</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Residential · Exterior & Interior" data-ar="سكني · خارجي وداخلي">Residential · Exterior &amp; Interior</div>
+        <div class="portfolio-card-name" data-en="Garden Villas, Al Khobar" data-ar="فلل الحدائق، الخبر">Garden Villas, Al Khobar</div>
+        <div class="portfolio-card-meta" data-en="32 villa compound · Complete visualization package" data-ar="مجمع 32 فيلا · حزمة إظهار كاملة">32 villa compound · Complete visualization package</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal" data-category="commercial" role="article" aria-label="Business Bay towers project">
+      <div class="portfolio-card-placeholder">Commercial · Business Bay</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Commercial · Office Towers" data-ar="تجاري · أبراج مكتبية">Commercial · Office Towers</div>
+        <div class="portfolio-card-name" data-en="Business Bay Towers, Riyadh" data-ar="أبراج بيزنس باي، الرياض">Business Bay Towers, Riyadh</div>
+        <div class="portfolio-card-meta" data-en="3-tower commercial complex · 180,000 m²" data-ar="مجمع تجاري 3 أبراج · 180,000 م²">3-tower commercial complex · 180,000 m²</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal reveal-delay-1" data-category="interior" role="article" aria-label="Luxury lobby interior project">
+      <div class="portfolio-card-placeholder">Interior · Luxury Lobby</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Interior · Hospitality" data-ar="داخلي · ضيافة">Interior · Hospitality</div>
+        <div class="portfolio-card-name" data-en="The Palace Hotel Lobby" data-ar="لوبي فندق البالاس">The Palace Hotel Lobby</div>
+        <div class="portfolio-card-meta" data-en="5-star hotel interior suite · 28 spaces" data-ar="حزمة داخلية فندق 5 نجوم · 28 مساحة">5-star hotel interior suite · 28 spaces</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal reveal-delay-2" data-category="hospitality" role="article" aria-label="Desert resort project">
+      <div class="portfolio-card-placeholder">Hospitality · Desert Resort</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Hospitality · Eco-Resort" data-ar="ضيافة · منتجع بيئي">Hospitality · Eco-Resort</div>
+        <div class="portfolio-card-name" data-en="Wadi Desert Eco-Resort" data-ar="منتجع وادي البيئي">Wadi Desert Eco-Resort</div>
+        <div class="portfolio-card-meta" data-en="60 tented villa resort · Full visualization & animation" data-ar="منتجع 60 خيمة فيلا · إظهار وأنيميشن كامل">60 tented villa resort · Full visualization &amp; animation</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal" data-category="interactive" role="article" aria-label="VR sales center project">
+      <div class="portfolio-card-placeholder">Interactive · VR Sales Center</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Interactive · VR · 360° Tours" data-ar="تفاعلي · VR · جولات 360">Interactive · VR · 360° Tours</div>
+        <div class="portfolio-card-name" data-en="Amwaj Sales Center VR Experience" data-ar="تجربة VR لمركز مبيعات أمواج">Amwaj Sales Center VR Experience</div>
+        <div class="portfolio-card-meta" data-en="Full VR tour suite · 8 unit types" data-ar="حزمة جولة VR كاملة · 8 أنواع وحدات">Full VR tour suite · 8 unit types</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+      </div>
+    </div>
+
+    <div class="portfolio-empty" id="portfolioEmpty" aria-live="polite">
+      <span data-en="No projects match this filter. Try another category." data-ar="لا توجد مشاريع تطابق هذا الفلتر. جرّب فئة أخرى.">No projects match this filter. Try another category.</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- Load More -->
+<div style="background:var(--black);padding:60px 0;text-align:center;border-top:1px solid var(--border);">
+  <p style="color:var(--text-dim);margin-bottom:24px;" data-en="Showing 12 of 500+ delivered projects" data-ar="عرض 12 من 500+ مشروع منجز">Showing 12 of 500+ delivered projects</p>
+  <a href="contact.html" class="btn btn-outline" data-en="Request Full Portfolio PDF" data-ar="اطلب ملف الأعمال الكامل PDF">Request Full Portfolio PDF</a>
+</div>
+
+<!-- CTA -->
+<section class="cta-banner" aria-label="Start similar project">
+  <div class="container">
+    <h2 class="reveal" data-en="Seen Something That<br>Inspires You?" data-ar="رأيت شيئاً<br>يلهمك؟">Seen Something That<br>Inspires You?</h2>
+    <p class="reveal" data-en="Share a reference project and let us build something even better for your development." data-ar="شارك مشروعاً مرجعياً ودعنا نبني شيئاً أفضل لتطويرك.">Share a reference project and let us build something even better for your development.</p>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn btn-gold" data-en="Start Your Project" data-ar="ابدأ مشروعك">Start Your Project</a>
+      <a href="services.html" class="btn btn-outline" data-en="Explore Services" data-ar="اكتشف الخدمات">Explore Services</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding:40px 0;">
+      <div class="footer-copy" data-en="© 2025 3D Graphics House. All rights reserved." data-ar="© 2025 3D جرافيكس هاوس. جميع الحقوق محفوظة.">© 2025 3D Graphics House. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="float-whatsapp">
+  <a href="https://wa.me/966XXXXXXXXX" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<a href="contact.html" class="sticky-quote-btn"><span data-en="GET FREE QUOTE" data-ar="احصل على عرض مجاني">GET FREE QUOTE</span></a>
+
+<script>
+  // Portfolio filter enhancement
+  document.addEventListener('DOMContentLoaded', () => {
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.portfolio-card');
+    const countEl = document.getElementById('projectCount');
+    const emptyEl = document.getElementById('portfolioEmpty');
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        let visible = 0;
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.style.display = match ? 'block' : 'none';
+          if (match) visible++;
+        });
+        if (countEl) countEl.textContent = visible + ' Projects';
+        if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+      });
+    });
+  });
+</script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

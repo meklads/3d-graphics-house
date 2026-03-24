@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — 3D Graphics House | 15 Years of Visual Excellence in Saudi Arabia</title>
+  <meta name="description" content="The story of 3D Graphics House — 15 years of proven excellence in Saudi Arabia, now expanding across the Gulf with our AI-powered subsidiary Turriva." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style>
+    .page-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 50%, rgba(201,164,82,0.07) 0%, transparent 70%),
+        var(--anthracite);
+      position: relative;
+      overflow: hidden;
+      padding-top: 120px;
+    }
+    .page-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,164,82,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,164,82,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 30% 50%, black, transparent);
+    }
+    .team-values {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .value-card {
+      background: var(--card-bg);
+      padding: 40px 32px;
+      border-top: 2px solid transparent;
+      transition: var(--transition);
+      text-align: center;
+    }
+    .value-card:hover {
+      border-top-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .value-card-icon {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .value-card-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .value-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .offices-map {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 60px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 64px;
+    }
+    .office-card {
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--anthracite);
+      transition: var(--transition);
+    }
+    .office-card:hover { border-color: var(--border-hover); }
+    .office-flag { font-size: 2rem; margin-bottom: 16px; }
+    .office-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .office-city {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .office-info {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .map-placeholder {
+      height: 280px;
+      background: linear-gradient(135deg, #141414, #1c1c1c);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+    .nda-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 32px;
+      background: var(--gold-pale);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-md);
+      margin-top: 40px;
+    }
+    .nda-badge-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+    .nda-badge-icon svg { width: 24px; height: 24px; }
+    .nda-badge-text-title {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    .nda-badge-text-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    @media (max-width: 900px) {
+      .team-values { grid-template-columns: 1fr 1fr; }
+      .offices-map { grid-template-columns: 1fr; }
+      .map-placeholder { height: 200px; }
+    }
+    @media (max-width: 600px) {
+      .team-values { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav (same as index) -->
+<nav class="navbar" role="navigation">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
+      <div class="nav-logo-mark">3DG</div>
+      <div class="nav-logo-text">
+        <span data-en="3D Graphics House" data-ar="3D جرافيكس هاوس">3D Graphics House</span>
+        <span data-en="VISUAL INTELLIGENCE" data-ar="الذكاء البصري">VISUAL INTELLIGENCE</span>
+      </div>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a></li>
+      <li><a href="about.html" class="nav-link active" data-en="About" data-ar="من نحن">About</a></li>
+      <li><a href="services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
+      <li><a href="portfolio.html" class="nav-link" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
+      <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="lang-toggle" aria-label="Switch language">عربي</button>
+      <a href="contact.html" class="btn btn-gold" data-en="Get Free Quote" data-ar="احصل على عرض مجاني">Get Free Quote</a>
+      <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-nav" role="dialog" aria-modal="true">
+  <button class="mobile-nav-close">✕</button>
+  <ul role="list">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+    <li><a href="services.html" class="nav-link">Services</a></li>
+    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+    <li><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero" aria-label="About page hero">
+  <div class="page-hero-grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-label" data-en="Our Story" data-ar="قصتنا">Our Story</div>
+    <h1 style="max-width:800px;" class="reveal" data-en="15 Years of Turning<br>Vision Into <em>Reality</em>" data-ar="15 عاماً من تحويل<br>الرؤية إلى <em>واقع</em>">15 Years of Turning<br>Vision Into <em>Reality</em></h1>
+    <p style="max-width:600px;font-size:1.1rem;margin-top:24px;" class="reveal" data-en="From a specialized visualization studio in Saudi Arabia to the region's most trusted full-service visual intelligence partner — this is our story." data-ar="من استوديو إظهار متخصص في المملكة العربية السعودية إلى الشريك البصري متكامل الخدمات الأكثر موثوقية في المنطقة — هذه قصتنا.">From a specialized visualization studio in Saudi Arabia to the region's most trusted full-service visual intelligence partner — this is our story.</p>
+  </div>
+</section>
+
+<!-- Company Story -->
+<section class="section" style="background:var(--black);" aria-label="Company story">
+  <div class="container">
+    <div class="grid-2" style="gap:80px;align-items:center;">
+      <div>
+        <div class="section-label reveal" data-en="Founded in KSA" data-ar="تأسست في المملكة">Founded in KSA</div>
+        <h2 class="reveal" data-en="Built from the Ground Up<br>in Saudi Arabia" data-ar="بُنيت من الصفر<br>في المملكة العربية السعودية">Built from the Ground Up<br>in Saudi Arabia</h2>
+        <p style="margin:24px 0 20px;" class="reveal" data-en="3D Graphics House was founded over 15 years ago with a singular mission: to bring world-class architectural visualization to the Saudi market. We started at a time when most developers relied on hand-drawn sketches and basic renders — and we set out to prove that photorealistic visualization could transform how the Kingdom's most ambitious projects were conceived and sold." data-ar="تأسست 3D Graphics House قبل أكثر من 15 عاماً برسالة واحدة: إحضار الإظهار المعماري على مستوى عالمي إلى السوق السعودي. بدأنا في وقت كان فيه معظم المطورين يعتمدون على رسومات يدوية وإظهار أساسي — وأثبتنا أن الإظهار الفوتوريالستي يمكن أن يحوّل كيفية تصوّر وبيع أكثر مشاريع المملكة طموحاً.">3D Graphics House was founded over 15 years ago with a singular mission: to bring world-class architectural visualization to the Saudi market. We started at a time when most developers relied on hand-drawn sketches and basic renders — and we set out to prove that photorealistic visualization could transform how the Kingdom's most ambitious projects were conceived and sold.</p>
+        <p class="reveal" data-en="Today, we are the trusted partner of Saudi Arabia's most prestigious corporations, government entities, and real estate developers — with 500+ landmark projects delivered and a reputation built entirely on precision, trust, and results." data-ar="اليوم، نحن الشريك الموثوق لكبرى شركات ومؤسسات حكومية ومطورين عقاريين في المملكة العربية السعودية — مع 500+ مشروع بارز منجز وسمعة مبنية كلياً على الدقة والثقة والنتائج.">Today, we are the trusted partner of Saudi Arabia's most prestigious corporations, government entities, and real estate developers — with 500+ landmark projects delivered and a reputation built entirely on precision, trust, and results.</p>
+      </div>
+      <div class="reveal">
+        <div class="about-img-placeholder" style="height:460px;background:linear-gradient(145deg,#161616,#1e1e1e);border-radius:var(--radius-md);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:0.78rem;letter-spacing:0.1em;" aria-label="Company history image">COMPANY HISTORY IMAGE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Expansion Story -->
+<section class="section" style="background:var(--anthracite);" aria-label="Expansion story">
+  <div class="container">
+    <div class="grid-2" style="gap:80px;align-items:center;">
+      <div class="reveal" style="order:2;">
+        <div class="about-img-placeholder" style="height:460px;background:linear-gradient(145deg,#161616,#1e1e1e);border-radius:var(--radius-md);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:0.78rem;letter-spacing:0.1em;" aria-label="Expansion image">EXPANSION / AMMAN OFFICE IMAGE</div>
+      </div>
+      <div style="order:1;">
+        <div class="section-label reveal" data-en="Now Expanding" data-ar="التوسع الآن">Now Expanding</div>
+        <h2 class="reveal" data-en="Going Regional —<br>The Gulf Is Our Next Chapter" data-ar="التوجه الإقليمي —<br>الخليج هو فصلنا القادم">Going Regional —<br>The Gulf Is Our Next Chapter</h2>
+        <p style="margin:24px 0 20px;" class="reveal" data-en="With our new regional office in Amman, Jordan, 3D Graphics House is now strategically positioned to serve clients across Saudi Arabia, UAE, Qatar, Kuwait, and the wider Arab world. Our Amman hub combines the creative talent of Jordan's thriving design community with the deep market expertise of our Saudi headquarters." data-ar="بمكتبنا الإقليمي الجديد في عمّان، الأردن، أصبحت 3D Graphics House مُهيَّأة استراتيجياً لخدمة العملاء عبر السعودية والإمارات وقطر والكويت والعالم العربي الأوسع. يجمع مركزنا في عمّان الموهبة الإبداعية لمجتمع التصميم الأردني المزدهر مع الخبرة السوقية العميقة لمقرنا السعودي.">With our new regional office in Amman, Jordan, 3D Graphics House is now strategically positioned to serve clients across Saudi Arabia, UAE, Qatar, Kuwait, and the wider Arab world. Our Amman hub combines the creative talent of Jordan's thriving design community with the deep market expertise of our Saudi headquarters.</p>
+        <p class="reveal" data-en="And through our AI and software subsidiary, Turriva, we are leading the charge in bringing physical-digital integration to the region — redefining what architectural visualization and client experience can be in the age of AI." data-ar="ومن خلال ذراعنا التقنية Turriva في البرمجيات والذكاء الاصطناعي، نقود المسيرة في إحضار التكامل المادي-الرقمي للمنطقة — لنُعيد تعريف ما يمكن أن يكون عليه الإظهار المعماري وتجربة العميل في عصر الذكاء الاصطناعي.">And through our AI and software subsidiary, Turriva, we are leading the charge in bringing physical-digital integration to the region — redefining what architectural visualization and client experience can be in the age of AI.</p>
+      </div>
+    </div>
+
+    <!-- Offices -->
+    <div class="offices-map reveal">
+      <div>
+        <h3 style="margin-bottom:28px;" data-en="Our Offices" data-ar="مكاتبنا">Our Offices</h3>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="office-card">
+            <div class="office-flag">🇸🇦</div>
+            <div class="office-label" data-en="Headquarters" data-ar="المقر الرئيسي">Headquarters</div>
+            <div class="office-city" data-en="Riyadh, Saudi Arabia" data-ar="الرياض، المملكة العربية السعودية">Riyadh, Saudi Arabia</div>
+            <div class="office-info" data-en="Full operations: Visualization · Media · Interactive · AI" data-ar="عمليات كاملة: إظهار · إعلام · تفاعلي · ذكاء اصطناعي">Full operations: Visualization · Media · Interactive · AI</div>
+          </div>
+          <div class="office-card">
+            <div class="office-flag">🇯🇴</div>
+            <div class="office-label" data-en="Regional Office" data-ar="المكتب الإقليمي">Regional Office</div>
+            <div class="office-city" data-en="Amman, Jordan" data-ar="عمّان، الأردن">Amman, Jordan</div>
+            <div class="office-info" data-en="Design · Client Relations · Gulf Market Coverage" data-ar="تصميم · علاقات عملاء · تغطية سوق الخليج">Design · Client Relations · Gulf Market Coverage</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-placeholder" aria-label="Map placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity:0.2;">
+          <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/>
+        </svg>
+        <span data-en="KSA + Jordan Office Map" data-ar="خريطة مكاتب السعودية + الأردن">KSA + Jordan Office Map</span>
+        <span style="font-size:0.68rem;opacity:0.6;" data-en="Replace with embedded Google Maps" data-ar="استبدل بخريطة جوجل المدمجة">Replace with embedded Google Maps</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Values -->
+<section class="section" style="background:var(--black);" aria-label="Team values">
+  <div class="container">
+    <div class="section-label reveal" data-en="Our Culture" data-ar="ثقافتنا">Our Culture</div>
+    <h2 class="section-title reveal" data-en="Built on Four Pillars<br>of <em>Excellence</em>" data-ar="مبنية على أربعة ركائز<br>من <em>التميز</em>">Built on Four Pillars<br>of <em>Excellence</em></h2>
+    <div class="team-values">
+      <div class="value-card reveal">
+        <div class="value-card-icon">◉</div>
+        <div class="value-card-title" data-en="Precision" data-ar="الدقة">Precision</div>
+        <p class="value-card-desc" data-en="Every pixel, every material, every light source is deliberate. We do not deliver until it's right." data-ar="كل بكسل، كل مادة، كل مصدر ضوء مقصود. لا نسلّم حتى يكون صحيحاً.">Every pixel, every material, every light source is deliberate. We do not deliver until it's right.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-card-icon">◈</div>
+        <div class="value-card-title" data-en="Innovation" data-ar="الابتكار">Innovation</div>
+        <p class="value-card-desc" data-en="We constantly push the boundaries of what's possible — from i-Maquette to AI-assisted visualization tools." data-ar="ندفع باستمرار حدود الممكن — من i-Maquette إلى أدوات الإظهار بمساعدة الذكاء الاصطناعي.">We constantly push the boundaries of what's possible — from i-Maquette to AI-assisted visualization tools.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-card-icon">◆</div>
+        <div class="value-card-title" data-en="Confidentiality" data-ar="السرية">Confidentiality</div>
+        <p class="value-card-desc" data-en="Your project, your data, your competitive advantage — protected by strict NDAs and internal data protocols." data-ar="مشروعك، بياناتك، ميزتك التنافسية — محمية باتفاقيات NDA صارمة وبروتوكولات بيانات داخلية.">Your project, your data, your competitive advantage — protected by strict NDAs and internal data protocols.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-3">
+        <div class="value-card-icon">◇</div>
+        <div class="value-card-title" data-en="Results" data-ar="النتائج">Results</div>
+        <p class="value-card-desc" data-en="Our work exists to help you close deals, win clients, and bring projects to life. Results are our only metric." data-ar="عملنا موجود لمساعدتك على إغلاق الصفقات وكسب العملاء وتجسيد المشاريع. النتائج هي مقياسنا الوحيد.">Our work exists to help you close deals, win clients, and bring projects to life. Results are our only metric.</p>
+      </div>
+    </div>
+
+    <!-- NDA Badge -->
+    <div class="nda-badge reveal">
+      <div class="nda-badge-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      </div>
+      <div>
+        <div class="nda-badge-text-title" data-en="NDA & Full Confidentiality Guaranteed" data-ar="اتفاقية NDA وسرية تامة مضمونة">NDA &amp; Full Confidentiality Guaranteed</div>
+        <div class="nda-badge-text-desc" data-en="Every engagement is covered by a mutual Non-Disclosure Agreement. Your projects, plans, and competitive intelligence stay exclusively with you." data-ar="كل تعامل مشمول باتفاقية عدم إفصاح متبادلة. مشاريعك وخططك ومعلوماتك التنافسية تظل حصرياً لك.">Every engagement is covered by a mutual Non-Disclosure Agreement. Your projects, plans, and competitive intelligence stay exclusively with you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" aria-label="Call to action">
+  <div class="container">
+    <h2 class="reveal" data-en="Ready to Work Together?" data-ar="مستعد للعمل معاً؟">Ready to Work Together?</h2>
+    <p class="reveal" data-en="15 years of expertise, full confidentiality, and a dedicated team ready for your next project." data-ar="15 عاماً من الخبرة وسرية تامة وفريق متخصص جاهز لمشروعك القادم.">15 years of expertise, full confidentiality, and a dedicated team ready for your next project.</p>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn btn-gold" data-en="Start Your Project" data-ar="ابدأ مشروعك">Start Your Project</a>
+      <a href="services.html" class="btn btn-outline" data-en="View Our Services" data-ar="مشاهدة خدماتنا">View Our Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer (abbreviated) -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding:40px 0;">
+      <div class="footer-copy" data-en="© 2025 3D Graphics House. All rights reserved." data-ar="© 2025 3D جرافيكس هاوس. جميع الحقوق محفوظة.">© 2025 3D Graphics House. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+        <a href="services.html" data-en="Services" data-ar="الخدمات">Services</a>
+        <a href="portfolio.html" data-en="Portfolio" data-ar="الأعمال">Portfolio</a>
+        <a href="contact.html" data-en="Contact" data-ar="تواصل">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="float-whatsapp">
+  <a href="https://wa.me/966XXXXXXXXX" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<a href="contact.html" class="sticky-quote-btn" aria-label="Get Free Quote">
+  <span data-en="GET FREE QUOTE" data-ar="احصل على عرض مجاني">GET FREE QUOTE</span>
+</a>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

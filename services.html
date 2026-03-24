@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — 3D Graphics House | Visualization · Media · AI-Powered Interactive</title>
+  <meta name="description" content="Architectural visualization, cinematic media production, and AI-powered interactive solutions including i-Maquette, 3D configurators, and VR tours for Saudi Arabia's leading developers." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style>
+    .page-hero {
+      min-height: 56vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 40%, rgba(201,164,82,0.07) 0%, transparent 70%),
+        var(--anthracite);
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,164,82,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,164,82,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 80% 40%, black, transparent);
+    }
+    .pillar-section {
+      padding: var(--section-pad) 0;
+      position: relative;
+    }
+    .pillar-section:nth-child(odd) { background: var(--black); }
+    .pillar-section:nth-child(even) { background: var(--anthracite); }
+    .pillar-anchor { scroll-margin-top: 80px; }
+    .service-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .service-card-full {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 36px 32px;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card-full:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      background: var(--card-hover);
+    }
+    .service-card-icon {
+      width: 52px; height: 52px;
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      margin-bottom: 24px;
+      transition: var(--transition);
+    }
+    .service-card-icon svg { width: 22px; height: 22px; }
+    .service-card-full:hover .service-card-icon {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+    .service-card-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .service-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .service-card-use-case {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--gold-pale);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .service-card-use-case::before { content: '↳'; opacity: 0.7; }
+    .pillar-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+      gap: 40px;
+      margin-bottom: 0;
+    }
+    .pillar-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      background: var(--gold-pale);
+      border: 1px solid var(--border-hover);
+      border-radius: 40px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .turriva-powered {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(201,164,82,0.12);
+      border: 1px solid rgba(201,164,82,0.3);
+      border-radius: 40px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    @media (max-width: 1000px) {
+      .service-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .pillar-header { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .service-cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" role="navigation">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
+      <div class="nav-logo-mark">3DG</div>
+      <div class="nav-logo-text">
+        <span data-en="3D Graphics House" data-ar="3D جرافيكس هاوس">3D Graphics House</span>
+        <span data-en="VISUAL INTELLIGENCE" data-ar="الذكاء البصري">VISUAL INTELLIGENCE</span>
+      </div>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a></li>
+      <li><a href="about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a></li>
+      <li><a href="services.html" class="nav-link active" data-en="Services" data-ar="الخدمات">Services</a></li>
+      <li><a href="portfolio.html" class="nav-link" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
+      <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="lang-toggle" aria-label="Switch language">عربي</button>
+      <a href="contact.html" class="btn btn-gold" data-en="Get Free Quote" data-ar="احصل على عرض مجاني">Get Free Quote</a>
+      <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-nav" role="dialog" aria-modal="true">
+  <button class="mobile-nav-close">✕</button>
+  <ul role="list">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+    <li><a href="services.html" class="nav-link">Services</a></li>
+    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+    <li><a href="contact.html" class="nav-link">Contact</a></li>
+  </ul>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero" aria-label="Services hero">
+  <div class="page-hero-grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-label" data-en="Our Services" data-ar="خدماتنا">Our Services</div>
+    <h1 style="max-width:800px;" class="reveal" data-en="Full-Spectrum Visual<br>Intelligence, <em>Delivered</em>" data-ar="ذكاء بصري متكامل الطيف،<br><em>يُسلَّم</em>">Full-Spectrum Visual<br>Intelligence, <em>Delivered</em></h1>
+    <p style="max-width:640px;margin-top:24px;font-size:1.05rem;" class="reveal" data-en="Three powerful service pillars — architectural visualization, cinematic media, and AI-powered interactive technology — all under one expert roof." data-ar="ثلاثة محاور خدمية قوية — إظهار معماري وإعلام سينمائي وتقنية تفاعلية مدعومة بالذكاء الاصطناعي — كل ذلك تحت سقف خبير واحد.">Three powerful service pillars — architectural visualization, cinematic media, and AI-powered interactive technology — all under one expert roof.</p>
+    <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+      <a href="#visualization" class="btn btn-outline" data-en="Visualization" data-ar="الإظهار المعماري">Visualization</a>
+      <a href="#media" class="btn btn-outline" data-en="Media" data-ar="الإعلام">Media</a>
+      <a href="#interactive" class="btn btn-outline" data-en="Interactive & AI" data-ar="التفاعلي والذكاء الاصطناعي">Interactive &amp; AI</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PILLAR 1: VISUALIZATION ══════════════════════════ -->
+<section id="visualization" class="pillar-section pillar-anchor" aria-label="Architectural Visualization services">
+  <div class="container">
+    <div class="pillar-header">
+      <div>
+        <div class="pillar-tag reveal" data-en="Pillar 01" data-ar="المحور الأول">Pillar 01</div>
+        <h2 class="reveal" data-en="Architectural<br><em>Visualization</em>" data-ar="الإظهار<br><em>المعماري</em>">Architectural<br><em>Visualization</em></h2>
+        <p style="max-width:640px;margin-top:16px;" class="reveal" data-en="Photorealistic 3D renders and animations that make your architectural vision tangible — before a single foundation is poured. The standard for Saudi Arabia's leading real estate developers and architects." data-ar="صور إظهار ثلاثية الأبعاد وأنيميشن فوتوريالستي يجعل رؤيتك المعمارية ملموسة — قبل صب الأساسات. المعيار لكبار مطوري العقارات والمعماريين في المملكة العربية السعودية.">Photorealistic 3D renders and animations that make your architectural vision tangible — before a single foundation is poured. The standard for Saudi Arabia's leading real estate developers and architects.</p>
+      </div>
+    </div>
+
+    <div class="service-cards-grid">
+      <div class="service-card-full reveal">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Exterior 3D Renders" data-ar="صور إظهار خارجي ثلاثية الأبعاد">Exterior 3D Renders</div>
+        <p class="service-card-desc" data-en="Ultra-photorealistic exterior visualization capturing architecture, landscaping, sky conditions, and surrounding context in perfect detail." data-ar="إظهار خارجي فوتوريالستي فائق يلتقط العمارة والمناظر الطبيعية وأحوال السماء والسياق المحيط بتفاصيل مثالية.">Ultra-photorealistic exterior visualization capturing architecture, landscaping, sky conditions, and surrounding context in perfect detail.</p>
+        <div class="service-card-use-case" data-en="Use case: Pre-launch marketing materials & investor presentations" data-ar="حالة استخدام: مواد تسويقية ما قبل الإطلاق وعروض المستثمرين">Use case: Pre-launch marketing materials &amp; investor presentations</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-1">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Interior 3D Renders" data-ar="صور إظهار داخلي ثلاثية الأبعاد">Interior 3D Renders</div>
+        <p class="service-card-desc" data-en="Showcase every design decision — material textures, lighting ambiance, furniture, and spatial flow — with cinematic interior visualization." data-ar="اعرض كل قرار تصميمي — ملمس المواد وأجواء الإضاءة والأثاث وتدفق المساحة — بإظهار داخلي سينمائي.">Showcase every design decision — material textures, lighting ambiance, furniture, and spatial flow — with cinematic interior visualization.</p>
+        <div class="service-card-use-case" data-en="Use case: Interior design approval & client sales" data-ar="حالة استخدام: اعتماد التصميم الداخلي ومبيعات العملاء">Use case: Interior design approval &amp; client sales</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-2">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Architectural Walkthrough Animations" data-ar="فيديوهات جولات معمارية ثلاثية الأبعاد">Architectural Walkthrough Animations</div>
+        <p class="service-card-desc" data-en="Cinematic 3D animated tours that guide viewers through your project — from master plan overview down to interior detail — with a narrative that sells." data-ar="جولات ثلاثية الأبعاد سينمائية متحركة تقود المشاهدين عبر مشروعك — من نظرة عامة على المخطط الرئيسي إلى التفاصيل الداخلية — بسرد يبيع.">Cinematic 3D animated tours that guide viewers through your project — from master plan overview down to interior detail — with a narrative that sells.</p>
+        <div class="service-card-use-case" data-en="Use case: Sales center presentations & event launches" data-ar="حالة استخدام: عروض مراكز المبيعات وإطلاقات الأحداث">Use case: Sales center presentations &amp; event launches</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Aerial & Bird's Eye View Renders" data-ar="مناظير جوية وعرض الطائر">Aerial &amp; Bird's Eye View Renders</div>
+        <p class="service-card-desc" data-en="Dramatic overhead perspectives that show master plan layout, site context, access points, and the development's relationship with its surroundings." data-ar="مناظير علوية درامية تُظهر تخطيط المخطط الرئيسي وسياق الموقع ونقاط الوصول وعلاقة التطوير بمحيطه.">Dramatic overhead perspectives that show master plan layout, site context, access points, and the development's relationship with its surroundings.</p>
+        <div class="service-card-use-case" data-en="Use case: Master plan presentations & government approvals" data-ar="حالة استخدام: عروض المخططات الرئيسية والموافقات الحكومية">Use case: Master plan presentations &amp; government approvals</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-1">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+        </div>
+        <div class="service-card-title" data-en="3D Floor Plan Rendering" data-ar="إظهار المخططات الطابقية ثلاثية الأبعاد">3D Floor Plan Rendering</div>
+        <p class="service-card-desc" data-en="Transform flat 2D floor plans into engaging 3D rendered layouts — making it easy for buyers to understand space, flow, and dimensions at a glance." data-ar="حوّل المخططات الطابقية ثنائية الأبعاد إلى تخطيطات ثلاثية الأبعاد جذابة — مما يجعل من السهل على المشترين فهم المساحة والتدفق والأبعاد بنظرة واحدة.">Transform flat 2D floor plans into engaging 3D rendered layouts — making it easy for buyers to understand space, flow, and dimensions at a glance.</p>
+        <div class="service-card-use-case" data-en="Use case: Sales brochures, digital platforms & print materials" data-ar="حالة استخدام: كتيبات المبيعات والمنصات الرقمية والمواد المطبوعة">Use case: Sales brochures, digital platforms &amp; print materials</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-2">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+        </div>
+        <div class="service-card-title" data-en="360° Virtual Tours" data-ar="جولات افتراضية 360 درجة">360° Virtual Tours</div>
+        <p class="service-card-desc" data-en="Immersive 360-degree rendered environments that allow prospects to explore interiors and exteriors independently — from any device, any location." data-ar="بيئات مُظهَرة بزاوية 360 درجة غامرة تتيح للمحتملين استكشاف المساحات الداخلية والخارجية بشكل مستقل — من أي جهاز، أي موقع.">Immersive 360-degree rendered environments that allow prospects to explore interiors and exteriors independently — from any device, any location.</p>
+        <div class="service-card-use-case" data-en="Use case: Online sales platforms & remote investor presentations" data-ar="حالة استخدام: منصات المبيعات الإلكترونية وعروض المستثمرين عن بُعد">Use case: Online sales platforms &amp; remote investor presentations</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PILLAR 2: MEDIA ═══════════════════════════════════ -->
+<section id="media" class="pillar-section pillar-anchor" aria-label="Media and Production services">
+  <div class="container">
+    <div class="pillar-header">
+      <div>
+        <div class="pillar-tag reveal" data-en="Pillar 02" data-ar="المحور الثاني">Pillar 02</div>
+        <h2 class="reveal" data-en="Media &<br><em>Production</em>" data-ar="الإعلام<br><em>والإنتاج</em>">Media &amp;<br><em>Production</em></h2>
+        <p style="max-width:640px;margin-top:16px;" class="reveal" data-en="Cinematic production capabilities that go beyond visualization — brand films, motion graphics, and content packages crafted for the Gulf's most competitive real estate markets." data-ar="قدرات إنتاج سينمائية تتجاوز الإظهار — أفلام علامة تجارية وموشن جرافيك وحزم محتوى مصممة لأكثر الأسواق العقارية تنافسية في الخليج.">Cinematic production capabilities that go beyond visualization — brand films, motion graphics, and content packages crafted for the Gulf's most competitive real estate markets.</p>
+      </div>
+    </div>
+
+    <div class="service-cards-grid">
+      <div class="service-card-full reveal">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16 10,8"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Cinematic Filming & Video Production" data-ar="تصوير سينمائي وإنتاج فيديو">Cinematic Filming &amp; Video Production</div>
+        <p class="service-card-desc" data-en="Professional on-location filming with cinema-grade equipment — for completed projects, site tours, and live event documentation." data-ar="تصوير ميداني احترافي بمعدات درجة السينما — للمشاريع المكتملة والجولات الميدانية وتوثيق الفعاليات المباشرة.">Professional on-location filming with cinema-grade equipment — for completed projects, site tours, and live event documentation.</p>
+        <div class="service-card-use-case" data-en="Use case: Handover events, project documentation & awards entries" data-ar="حالة استخدام: فعاليات التسليم وتوثيق المشاريع وترشيحات الجوائز">Use case: Handover events, project documentation &amp; awards entries</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-1">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Motion Graphics & 2D/3D Animation" data-ar="موشن جرافيك وأنيميشن ثنائي وثلاثي الأبعاد">Motion Graphics &amp; 2D/3D Animation</div>
+        <p class="service-card-desc" data-en="Dynamic animated content for brand identity, project explainer videos, corporate presentations, and digital marketing campaigns." data-ar="محتوى متحرك ديناميكي لهوية العلامة التجارية وفيديوهات شرح المشروع والعروض التقديمية الشركاتية وحملات التسويق الرقمي.">Dynamic animated content for brand identity, project explainer videos, corporate presentations, and digital marketing campaigns.</p>
+        <div class="service-card-use-case" data-en="Use case: Brand identity launches & digital advertising" data-ar="حالة استخدام: إطلاقات هوية العلامة والإعلان الرقمي">Use case: Brand identity launches &amp; digital advertising</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-2">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10l4.553-2.069A1 1 0 0121 8.82V15.18a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Brand Films for Real Estate Marketing" data-ar="أفلام علامة تجارية للتسويق العقاري">Brand Films for Real Estate Marketing</div>
+        <p class="service-card-desc" data-en="Storytelling films that build emotional connection to your development — combining cinematic footage, 3D visualization, music, and narration." data-ar="أفلام سردية تبني ارتباطاً عاطفياً بتطويرك — تجمع لقطات سينمائية وإظهار ثلاثي الأبعاد وموسيقى وسرد.">Storytelling films that build emotional connection to your development — combining cinematic footage, 3D visualization, music, and narration.</p>
+        <div class="service-card-use-case" data-en="Use case: Launch events, investor roadshows & social campaigns" data-ar="حالة استخدام: فعاليات الإطلاق وجولات المستثمرين والحملات الاجتماعية">Use case: Launch events, investor roadshows &amp; social campaigns</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Social Media Visual Content Packages" data-ar="حزم محتوى بصري للسوشيال ميديا">Social Media Visual Content Packages</div>
+        <p class="service-card-desc" data-en="Tailored visual content designed for Instagram, LinkedIn, YouTube, and Snapchat — crafted for the Gulf market's visual standards and cultural context." data-ar="محتوى بصري مُصمَّم لإنستغرام ولينكدإن ويوتيوب وسناب شات — مصنوع وفق المعايير البصرية والسياق الثقافي لسوق الخليج.">Tailored visual content designed for Instagram, LinkedIn, YouTube, and Snapchat — crafted for the Gulf market's visual standards and cultural context.</p>
+        <div class="service-card-use-case" data-en="Use case: Ongoing project marketing & brand awareness campaigns" data-ar="حالة استخدام: تسويق المشروع المستمر وحملات الوعي بالعلامة">Use case: Ongoing project marketing &amp; brand awareness campaigns</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PILLAR 3: INTERACTIVE & AI ═══════════════════════ -->
+<section id="interactive" class="pillar-section pillar-anchor" aria-label="Interactive and AI services powered by Turriva">
+  <div class="container">
+    <div class="pillar-header">
+      <div>
+        <div class="pillar-tag reveal" data-en="Pillar 03" data-ar="المحور الثالث">Pillar 03</div>
+        <div class="turriva-powered reveal" style="margin-bottom:16px;">POWERED BY TURRIVA</div>
+        <h2 class="reveal" data-en="Interactive & AI-Powered<br><em>Solutions</em>" data-ar="الحلول التفاعلية<br><em>والمدعومة بالذكاء الاصطناعي</em>">Interactive &amp; AI-Powered<br><em>Solutions</em></h2>
+        <p style="max-width:640px;margin-top:16px;" class="reveal" data-en="Where the physical and digital worlds meet — our Turriva-powered solutions create immersive, intelligent experiences that transform how your clients engage with your projects." data-ar="حيث يلتقي العالم المادي والرقمي — حلولنا المدعومة بـ Turriva تخلق تجارب غامرة وذكية تحوّل كيفية تفاعل عملائك مع مشاريعك.">Where the physical and digital worlds meet — our Turriva-powered solutions create immersive, intelligent experiences that transform how your clients engage with your projects.</p>
+      </div>
+    </div>
+
+    <div class="service-cards-grid">
+      <div class="service-card-full reveal">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Physical Architectural Scale Models (Maquettes)" data-ar="ماكيتات معمارية مادية مجسمة">Physical Architectural Scale Models (Maquettes)</div>
+        <p class="service-card-desc" data-en="Precision-crafted physical scale models of your development — from individual buildings to full master plan maquettes — for sales centers and executive presentations." data-ar="نماذج مجسمة مادية مصنوعة بدقة لتطويرك — من المباني الفردية إلى ماكيتات المخطط الرئيسي الكاملة — لمراكز المبيعات والعروض التنفيذية.">Precision-crafted physical scale models of your development — from individual buildings to full master plan maquettes — for sales centers and executive presentations.</p>
+        <div class="service-card-use-case" data-en="Use case: Sales center centerpieces & government presentations" data-ar="حالة استخدام: قطع مركزية لمراكز المبيعات والعروض الحكومية">Use case: Sales center centerpieces &amp; government presentations</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-1" style="border-color:var(--border-hover);">
+        <div style="position:absolute;top:16px;right:16px;background:var(--gold);color:var(--black);padding:4px 10px;font-size:0.65rem;font-weight:800;letter-spacing:0.14em;border-radius:4px;" aria-label="Flagship product">FLAGSHIP</div>
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+        </div>
+        <div class="service-card-title" data-en="i-Maquette: Touch-enabled Interactive Digital Models" data-ar="i-Maquette: نماذج رقمية تفاعلية بتقنية اللمس">i-Maquette: Touch-enabled Interactive Digital Models</div>
+        <p class="service-card-desc" data-en="Our signature product — a touch-enabled digital model that overlays interactive layers onto a physical maquette. Tap to reveal unit details, pricing, availability, views, and 360° interior tours in real time." data-ar="منتجنا المميز — نموذج رقمي بتقنية اللمس يُراكم طبقات تفاعلية على ماكيت مادي. انقر للكشف عن تفاصيل الوحدات والتسعير والتوفر والمناظر وجولات 360 درجة داخلية في الوقت الفعلي.">Our signature product — a touch-enabled digital model that overlays interactive layers onto a physical maquette. Tap to reveal unit details, pricing, availability, views, and 360° interior tours in real time.</p>
+        <div class="service-card-use-case" data-en="Use case: Premium sales centers — proven to increase conversion rates" data-ar="حالة استخدام: مراكز مبيعات راقية — مثبت أنها تزيد معدلات التحويل">Use case: Premium sales centers — proven to increase conversion rates</div>
+        <a href="contact.html" class="btn btn-gold" style="align-self:flex-start;" data-en="Request i-Maquette Demo" data-ar="اطلب عرض i-Maquette">Request i-Maquette Demo</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-2">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Real-time 3D Configurators for Sales Centers" data-ar="مُكوِّنات ثلاثية الأبعاد فورية لمراكز المبيعات">Real-time 3D Configurators for Sales Centers</div>
+        <p class="service-card-desc" data-en="Let your clients customize finishes, layouts, and views in real time on large-format displays — an interactive experience that closes sales faster." data-ar="دع عملاءك يُخصّصون التشطيبات والتخطيطات والمناظر في الوقت الفعلي على شاشات كبيرة — تجربة تفاعلية تُغلق المبيعات أسرع.">Let your clients customize finishes, layouts, and views in real time on large-format displays — an interactive experience that closes sales faster.</p>
+        <div class="service-card-use-case" data-en="Use case: Sales centers & property exhibition booths" data-ar="حالة استخدام: مراكز المبيعات وأجنحة المعارض العقارية">Use case: Sales centers &amp; property exhibition booths</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <div class="service-card-title" data-en="AI-Assisted Client Presentation Tools" data-ar="أدوات تقديم العملاء بمساعدة الذكاء الاصطناعي">AI-Assisted Client Presentation Tools</div>
+        <p class="service-card-desc" data-en="Smart presentation platforms powered by Turriva AI — that adapt content in real time based on client interest signals, delivering the right information at the right moment." data-ar="منصات عرض ذكية مدعومة بـ Turriva AI — تُكيَّف المحتوى في الوقت الفعلي بناءً على إشارات اهتمام العميل، لتقديم المعلومات الصحيحة في اللحظة الصحيحة.">Smart presentation platforms powered by Turriva AI — that adapt content in real time based on client interest signals, delivering the right information at the right moment.</p>
+        <div class="service-card-use-case" data-en="Use case: High-value client meetings & VIP investor presentations" data-ar="حالة استخدام: اجتماعات العملاء عالية القيمة وعروض المستثمرين VIP">Use case: High-value client meetings &amp; VIP investor presentations</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+
+      <div class="service-card-full reveal reveal-delay-1">
+        <div class="service-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="service-card-title" data-en="Physical-to-Digital Experience Integration" data-ar="تكامل التجارب المادية والرقمية">Physical-to-Digital Experience Integration</div>
+        <p class="service-card-desc" data-en="Custom integration of physical models, digital displays, and interactive software into cohesive, branded sales experiences — designed and delivered end-to-end." data-ar="تكامل مُخصَّص للنماذج المادية وشاشات العرض الرقمية والبرامج التفاعلية في تجارب مبيعات متماسكة وذات علامة تجارية — مُصمَّمة ومُسلَّمة من البداية للنهاية.">Custom integration of physical models, digital displays, and interactive software into cohesive, branded sales experiences — designed and delivered end-to-end.</p>
+        <div class="service-card-use-case" data-en="Use case: Full sales center concept, design & installation" data-ar="حالة استخدام: مفهوم وتصميم وتركيب مركز المبيعات الكامل">Use case: Full sales center concept, design &amp; installation</div>
+        <a href="contact.html" class="btn btn-outline" style="align-self:flex-start;" data-en="Request This Service" data-ar="اطلب هذه الخدمة">Request This Service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" aria-label="Call to action">
+  <div class="container">
+    <h2 class="reveal" data-en="Not Sure Which Service You Need?" data-ar="غير متأكد من الخدمة التي تحتاجها؟">Not Sure Which Service You Need?</h2>
+    <p class="reveal" data-en="Submit your project brief and our team will recommend the ideal service mix — no obligation, response within 24 hours." data-ar="أرسل موجز مشروعك وسيوصي فريقنا بمزيج الخدمات المثالي — بدون التزام، رد خلال 24 ساعة.">Submit your project brief and our team will recommend the ideal service mix — no obligation, response within 24 hours.</p>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn btn-gold" data-en="Submit Project Brief" data-ar="أرسل موجز المشروع">Submit Project Brief</a>
+      <a href="portfolio.html" class="btn btn-outline" data-en="See Our Work First" data-ar="شاهد أعمالنا أولاً">See Our Work First</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding:40px 0;">
+      <div class="footer-copy" data-en="© 2025 3D Graphics House. All rights reserved." data-ar="© 2025 3D جرافيكس هاوس. جميع الحقوق محفوظة.">© 2025 3D Graphics House. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="float-whatsapp">
+  <a href="https://wa.me/966XXXXXXXXX" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<a href="contact.html" class="sticky-quote-btn"><span data-en="GET FREE QUOTE" data-ar="احصل على عرض مجاني">GET FREE QUOTE</span></a>
+<script src="js/main.js" defer></script>
+</body>
+</html>

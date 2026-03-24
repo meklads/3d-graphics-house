@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Graphics House — Architectural Visualization & AI-Powered Experiences | Saudi Arabia</title>
+  <meta name="description" content="15 years of excellence in architectural visualization, cinematic media production, and AI-powered interactive solutions for Saudi Arabia's most prestigious real estate and corporate clients." />
+  <meta name="keywords" content="architectural visualization Saudi Arabia, 3D rendering Riyadh, i-Maquette, Turriva AI, architectural animation, real estate visualization KSA, interactive models" />
+  <meta property="og:title" content="3D Graphics House — Where Vision Meets Reality" />
+  <meta property="og:description" content="15 years of proven excellence. Visualization + Media + AI. Saudi Arabia's most trusted visual intelligence partner." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#080808" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style>
+    /* ── Page-specific additions ── */
+    .showreel-modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.96);
+      z-index: 9999; display: none; align-items: center; justify-content: center;
+    }
+    .showreel-modal.open { display: flex; }
+    .showreel-modal iframe {
+      width: 90vw; height: 50vw; max-height: 80vh;
+      border: 1px solid rgba(201,164,82,0.2); border-radius: 8px;
+    }
+    .showreel-close {
+      position: absolute; top: 24px; right: 28px;
+      color: #9a9080; font-size: 1.8rem; cursor: pointer;
+      transition: color 0.2s;
+    }
+    .showreel-close:hover { color: #c9a452; }
+
+    .cost-estimator {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      margin-top: 80px;
+    }
+    .estimator-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .estimator-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 36px; }
+    .estimator-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .estimator-result {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      padding: 24px;
+      background: var(--gold-pale);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+    .est-range {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .est-sep { color: var(--text-dim); font-size: 1.2rem; }
+    .est-note { font-size: 0.78rem; color: var(--text-dim); letter-spacing: 0.06em; }
+
+    .filter-btn {
+      padding: 8px 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      color: var(--text-muted);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-pale);
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 64px;
+    }
+    .insight-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .insight-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+    .insight-img {
+      height: 200px;
+      background: linear-gradient(135deg, #161616, #1e1e1e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+    .insight-body { padding: 28px; }
+    .insight-cat {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .insight-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .insight-excerpt {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    /* Before/After Slider */
+    .ba-wrap {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      user-select: none;
+      cursor: ew-resize;
+    }
+    .ba-before, .ba-after {
+      position: absolute;
+      inset: 0;
+    }
+    .ba-before { z-index: 1; }
+    .ba-after {
+      z-index: 2;
+      clip-path: inset(0 50% 0 0);
+    }
+    .ba-before-label, .ba-after-label {
+      position: absolute;
+      bottom: 16px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 4;
+    }
+    .ba-before-label { left: 16px; background: rgba(0,0,0,0.7); color: #9a9080; }
+    .ba-after-label { right: 16px; background: rgba(201,164,82,0.85); color: #080808; }
+    .ba-handle {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      z-index: 3;
+      width: 3px;
+      background: var(--gold);
+      cursor: ew-resize;
+    }
+    .ba-handle::before {
+      content: '◀ ▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.6rem;
+      padding: 8px 10px;
+      border-radius: 50%;
+      white-space: nowrap;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ba-placeholder {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ba-before-placeholder {
+      background: linear-gradient(135deg, #222, #2a2a2a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      height: 100%;
+    }
+    .ba-after-placeholder {
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 0.78rem;
+      height: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .estimator-grid { grid-template-columns: 1fr; }
+      .insights-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .cost-estimator { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page Loader -->
+<div class="page-loader" style="position:fixed;inset:0;background:#080808;z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity 0.6s ease;">
+  <div style="text-align:center;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#c9a452;letter-spacing:0.12em;font-weight:300;">3D GRAPHICS HOUSE</div>
+    <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,#c9a452,transparent);margin:16px auto;animation:shimmer 1.5s infinite;"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════════════════════ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="3D Graphics House Home">
+      <div class="nav-logo-mark">3DG</div>
+      <div class="nav-logo-text">
+        <span data-en="3D Graphics House" data-ar="3D جرافيكس هاوس">3D Graphics House</span>
+        <span data-en="VISUAL INTELLIGENCE" data-ar="الذكاء البصري">VISUAL INTELLIGENCE</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a></li>
+      <li><a href="services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
+      <li><a href="portfolio.html" class="nav-link" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
+      <li><a href="#turriva" class="nav-link" data-en="Turriva" data-ar="توريفا">Turriva</a></li>
+      <li><a href="#insights" class="nav-link" data-en="Insights" data-ar="مقالات">Insights</a></li>
+      <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="lang-toggle" aria-label="Switch language">عربي</button>
+      <a href="contact.html" class="btn btn-gold" data-en="Get Free Quote" data-ar="احصل على عرض مجاني">Get Free Quote</a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" aria-label="Close menu">✕</button>
+  <ul role="list">
+    <li><a href="about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a></li>
+    <li><a href="services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
+    <li><a href="portfolio.html" class="nav-link" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
+    <li><a href="#turriva" class="nav-link" data-en="Turriva" data-ar="توريفا">Turriva</a></li>
+    <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+    <li><a href="contact.html" class="btn btn-gold" style="margin-top:16px;" data-en="Get Free Quote" data-ar="احصل على عرض مجاني">Get Free Quote</a></li>
+  </ul>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero" aria-label="Hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-overlay"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        <span data-en="Saudi Arabia · Jordan · Gulf Region" data-ar="المملكة العربية السعودية · الأردن · منطقة الخليج">Saudi Arabia · Jordan · Gulf Region</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span data-en="Where Vision<br>Meets <em>Reality</em>" data-ar="حيث تلتقي الرؤية<br>بـ<em>الواقع</em>">
+          Where Vision<br>Meets <em>Reality</em>
+        </span>
+      </h1>
+
+      <p class="hero-subtitle" data-en="15 years of proven excellence in Saudi Arabia — from concept to experience. Photorealistic visualization, cinematic media, and AI-powered solutions for the region's most ambitious projects." data-ar="15 عاماً من التميز الموثّق في المملكة العربية السعودية — من الفكرة إلى التجربة. إظهار فوتوريالستي، إنتاج سينمائي، وحلول ذكاء اصطناعي لأكثر مشاريع المنطقة طموحاً.">
+        15 years of proven excellence in Saudi Arabia — from concept to experience. Photorealistic visualization, cinematic media, and AI-powered solutions for the region's most ambitious projects.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="contact.html" class="btn btn-gold" data-en="Start Your Project" data-ar="ابدأ مشروعك">
+          Start Your Project
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="btn btn-outline showreel-trigger" data-en="▶ Watch Showreel" data-ar="▶ شاهد أعمالنا">
+          ▶ Watch Showreel
+        </button>
+        <a href="portfolio.html" class="btn btn-ghost" data-en="Explore Our Work →" data-ar="اطّلع على أعمالنا →">Explore Our Work <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Visual -->
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-visual-inner">
+      <div class="hero-visual-placeholder">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="20" width="48" height="32" rx="2" stroke="#c9a452" stroke-width="1.5"/>
+          <path d="M8 20L32 8L56 20" stroke="#c9a452" stroke-width="1.5"/>
+          <rect x="24" y="36" width="16" height="16" rx="1" stroke="#c9a452" stroke-width="1"/>
+          <line x1="16" y1="28" x2="20" y2="28" stroke="#c9a452" stroke-width="1"/>
+          <line x1="44" y1="28" x2="48" y2="28" stroke="#c9a452" stroke-width="1"/>
+        </svg>
+        <span style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;">Replace with Hero Image/Video</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust Bar -->
+  <div class="hero-trust-bar" role="complementary" aria-label="Key statistics">
+    <div class="container">
+      <div class="trust-bar-inner">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <div>
+            <div class="trust-number"><span data-count="15" data-suffix="+">15+</span></div>
+            <div class="trust-label" data-en="Years in Market" data-ar="عاماً في السوق">Years in Market</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          </div>
+          <div>
+            <div class="trust-number"><span data-count="500" data-suffix="+">500+</span></div>
+            <div class="trust-label" data-en="Projects Delivered" data-ar="مشروع منجز">Projects Delivered</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+          </div>
+          <div>
+            <div class="trust-number"><span data-count="3" data-suffix="">3</span></div>
+            <div class="trust-label" data-en="Gulf Countries Active" data-ar="دول خليجية نشطة">Gulf Countries Active</div>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <div class="trust-number"><span data-en="Top" data-ar="نخبة">Top</span></div>
+            <div class="trust-label" data-en="Saudi Corporations Trust Us" data-ar="شركات السعودية تثق بنا">Saudi Corporations Trust Us</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Showreel Modal -->
+<div class="showreel-modal" role="dialog" aria-modal="true" aria-label="Showreel video">
+  <button class="showreel-close" aria-label="Close">✕</button>
+  <iframe data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" title="3D Graphics House Showreel" allowfullscreen frameborder="0"></iframe>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     ABOUT PREVIEW
+══════════════════════════════════════════════════════════ -->
+<section class="section about-preview" id="about" aria-label="About 3D Graphics House">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-img-placeholder" aria-label="About us image placeholder">
+          <span style="font-size:0.78rem;letter-spacing:0.1em;color:var(--text-dim);">COMPANY IMAGE</span>
+        </div>
+        <div class="about-badge" aria-label="15 years of excellence">
+          <span class="about-badge-num">15</span>
+          <span class="about-badge-text" data-en="Years of<br>Excellence" data-ar="عاماً<br>من التميز">Years of<br>Excellence</span>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="section-label" data-en="About Us" data-ar="من نحن">About Us</div>
+        <h2 class="section-title reveal">
+          <span data-en="Saudi Arabia's Premier Visual Intelligence Partner" data-ar="الشريك البصري الأول في المملكة العربية السعودية">Saudi Arabia's Premier Visual Intelligence Partner</span>
+        </h2>
+        <p class="about-text reveal" data-en="For 15 years, 3D Graphics House has been the trusted partner of Saudi Arabia's most prestigious corporations and real estate developers — delivering landmark projects that define the Kingdom's built environment. From Riyadh's skyline to the Gulf's most ambitious developments, we turn architectural vision into breathtaking reality." data-ar="لمدة 15 عاماً، كانت 3D Graphics House الشريك الموثوق لكبرى شركات المملكة العربية السعودية ومطوريها العقاريين — تُنجز مشاريع بارزة تُشكّل البيئة المبنية في المملكة. من أفق الرياض إلى أكثر تطورات الخليج طموحاً، نحوّل الرؤية المعمارية إلى واقع مبهر.">
+          For 15 years, 3D Graphics House has been the trusted partner of Saudi Arabia's most prestigious corporations and real estate developers — delivering landmark projects that define the Kingdom's built environment. From Riyadh's skyline to the Gulf's most ambitious developments, we turn architectural vision into breathtaking reality.
+        </p>
+        <p class="about-text reveal" data-en="Now expanding across the Gulf with a new regional office in Amman, Jordan, we are bridging the physical and digital worlds through our AI-powered subsidiary, Turriva — because the future of visualization is not just beautiful, it's intelligent." data-ar="نتوسع الآن عبر الخليج بمكتب إقليمي جديد في عمّان، الأردن، لنربط العالم المادي بالرقمي من خلال شركتنا التقنية المدعومة بالذكاء الاصطناعي، Turriva — لأن مستقبل الإظهار لن يكون جميلاً فحسب، بل ذكياً.">
+          Now expanding across the Gulf with a new regional office in Amman, Jordan, we are bridging the physical and digital worlds through our AI-powered subsidiary, Turriva — because the future of visualization is not just beautiful, it's intelligent.
+        </p>
+
+        <div class="about-highlights">
+          <div class="highlight-row reveal">
+            <span class="highlight-dot"></span>
+            <span data-en="Full-service: Visualization + Media + Interactive Technology" data-ar="خدمة متكاملة: إظهار + إعلام + تقنية تفاعلية">Full-service: Visualization + Media + Interactive Technology</span>
+          </div>
+          <div class="highlight-row reveal reveal-delay-1">
+            <span class="highlight-dot"></span>
+            <span data-en="NDA & strict confidentiality guaranteed on every project" data-ar="اتفاقية NDA وسرية تامة مضمونة في كل مشروع">NDA &amp; strict confidentiality guaranteed on every project</span>
+          </div>
+          <div class="highlight-row reveal reveal-delay-2">
+            <span class="highlight-dot"></span>
+            <span data-en="Dedicated project teams — never outsourced" data-ar="فرق عمل متخصصة — لا يُوكَل العمل لجهات خارجية">Dedicated project teams — never outsourced</span>
+          </div>
+          <div class="highlight-row reveal reveal-delay-3">
+            <span class="highlight-dot"></span>
+            <span data-en="Regional presence: Saudi Arabia (HQ) + Jordan (Regional Office)" data-ar="حضور إقليمي: السعودية (المقر الرئيسي) + الأردن (المكتب الإقليمي)">Regional presence: Saudi Arabia (HQ) + Jordan (Regional Office)</span>
+          </div>
+        </div>
+
+        <a href="about.html" class="btn btn-outline reveal" data-en="Our Full Story →" data-ar="قصتنا الكاملة →">Our Full Story →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BEFORE / AFTER SHOWCASE
+══════════════════════════════════════════════════════════ -->
+<section class="section" style="background:var(--black);padding-top:0;" aria-label="Before and After showcase">
+  <div class="container">
+    <div class="section-label reveal" data-en="Render Quality" data-ar="جودة الإظهار">Render Quality</div>
+    <h2 class="section-title reveal" data-en="The 3DGH Difference" data-ar="فارق جرافيكس هاوس">The 3DGH Difference</h2>
+    <p class="section-sub reveal" data-en="Drag the slider to compare standard rendering versus our photorealistic output — crafted to the highest standards of visual precision." data-ar="اسحب الشريط للمقارنة بين الإظهار العادي ومخرجاتنا الفوتوريالستية — محكوكة بأعلى معايير الدقة البصرية.">Drag the slider to compare standard rendering versus our photorealistic output — crafted to the highest standards of visual precision.</p>
+
+    <div class="before-after-slider ba-wrap reveal">
+      <div class="ba-before">
+        <div class="ba-before-placeholder">Standard Rendering — Placeholder</div>
+      </div>
+      <div class="ba-after">
+        <div class="ba-after-placeholder" style="background:linear-gradient(135deg,#0e0e0e,#161616);">3DGH Photorealistic — Placeholder</div>
+      </div>
+      <div class="ba-handle" aria-label="Drag to compare"></div>
+      <div class="ba-before-label" data-en="Standard" data-ar="عادي">Standard</div>
+      <div class="ba-after-label" data-en="3DGH Quality" data-ar="جودة جرافيكس هاوس">3DGH Quality</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SERVICES PILLARS
+══════════════════════════════════════════════════════════ -->
+<section class="section services-preview" id="services" aria-label="Our Services">
+  <div class="container">
+    <div class="section-label reveal" data-en="What We Do" data-ar="ما نقدمه">What We Do</div>
+    <h2 class="section-title reveal" data-en="Three Pillars of<br><em>Visual Excellence</em>" data-ar="ثلاثة محاور من<br><em>التميز البصري</em>">Three Pillars of<br><em>Visual Excellence</em></h2>
+    <p class="section-sub reveal" data-en="End-to-end visual intelligence — from photorealistic architecture to AI-powered immersive experiences." data-ar="ذكاء بصري متكامل — من الإظهار المعماري الفوتوريالستي إلى التجارب الغامرة المدعومة بالذكاء الاصطناعي.">End-to-end visual intelligence — from photorealistic architecture to AI-powered immersive experiences.</p>
+
+    <div class="service-pillars">
+      <!-- Pillar 1 -->
+      <div class="pillar-card reveal">
+        <div class="pillar-number" aria-hidden="true">01</div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <div class="pillar-title" data-en="Architectural Visualization" data-ar="الإظهار المعماري">Architectural Visualization</div>
+        <p class="pillar-desc" data-en="Photorealistic renders and animations that communicate your architectural vision with absolute precision — indistinguishable from reality." data-ar="صور إظهار وأنيميشن فوتوريالستي ينقل رؤيتك المعمارية بدقة مطلقة — لا تُميَّز عن الواقع.">Photorealistic renders and animations that communicate your architectural vision with absolute precision — indistinguishable from reality.</p>
+        <ul class="pillar-services" role="list">
+          <li class="pillar-service-item" data-en="Exterior & Interior 3D Renders" data-ar="صور إظهار خارجي وداخلي ثلاثية الأبعاد">Exterior &amp; Interior 3D Renders</li>
+          <li class="pillar-service-item" data-en="Architectural Walkthrough Animations" data-ar="فيديوهات جولات معمارية ثلاثية الأبعاد">Architectural Walkthrough Animations</li>
+          <li class="pillar-service-item" data-en="Aerial / Bird's Eye View Renders" data-ar="مناظير جوية وعرض الطائر">Aerial / Bird's Eye View Renders</li>
+          <li class="pillar-service-item" data-en="3D Floor Plan Rendering" data-ar="إظهار المخططات الطابقية ثلاثية الأبعاد">3D Floor Plan Rendering</li>
+          <li class="pillar-service-item" data-en="360° Virtual Tours" data-ar="جولات افتراضية 360 درجة">360° Virtual Tours</li>
+        </ul>
+        <a href="services.html#visualization" class="btn btn-ghost" data-en="Explore Service →" data-ar="اكتشف الخدمة →">Explore Service <span class="arrow">→</span></a>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="pillar-card reveal reveal-delay-1">
+        <div class="pillar-number" aria-hidden="true">02</div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div class="pillar-title" data-en="Media & Production" data-ar="الإعلام والإنتاج">Media & Production</div>
+        <p class="pillar-desc" data-en="Cinematic storytelling that elevates your brand — from brand films and motion graphics to social media content packages built for the regional market." data-ar="سرد سينمائي يرفع علامتك التجارية — من أفلام العلامة والموشن جرافيك إلى حزم المحتوى البصري للسوشيال ميديا.">Cinematic storytelling that elevates your brand — from brand films and motion graphics to social media content packages built for the regional market.</p>
+        <ul class="pillar-services" role="list">
+          <li class="pillar-service-item" data-en="Cinematic Filming & Video Production" data-ar="تصوير سينمائي وإنتاج فيديو">Cinematic Filming &amp; Video Production</li>
+          <li class="pillar-service-item" data-en="Motion Graphics & 2D/3D Animation" data-ar="موشن جرافيك وأنيميشن ثنائي وثلاثي الأبعاد">Motion Graphics &amp; 2D/3D Animation</li>
+          <li class="pillar-service-item" data-en="Brand Films for Real Estate Marketing" data-ar="أفلام علامة تجارية للتسويق العقاري">Brand Films for Real Estate Marketing</li>
+          <li class="pillar-service-item" data-en="Social Media Visual Content Packages" data-ar="حزم محتوى بصري للسوشيال ميديا">Social Media Visual Content Packages</li>
+        </ul>
+        <a href="services.html#media" class="btn btn-ghost" data-en="Explore Service →" data-ar="اكتشف الخدمة →">Explore Service <span class="arrow">→</span></a>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="pillar-card reveal reveal-delay-2">
+        <div class="pillar-number" aria-hidden="true">03</div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <div class="pillar-title" data-en="Interactive & AI Solutions" data-ar="الحلول التفاعلية والذكاء الاصطناعي">Interactive & AI Solutions</div>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(201,164,82,0.1);border:1px solid rgba(201,164,82,0.2);border-radius:40px;font-size:0.65rem;font-weight:700;letter-spacing:0.14em;color:var(--gold);margin-bottom:14px;">
+          <span data-en="POWERED BY TURRIVA" data-ar="مدعوم من TURRIVA">POWERED BY TURRIVA</span>
+        </div>
+        <p class="pillar-desc" data-en="Physical and digital integration at scale — from touch-enabled i-Maquette models to real-time 3D configurators and AI-assisted client presentation tools." data-ar="تكامل مادي ورقمي على نطاق واسع — من نماذج i-Maquette بتقنية اللمس إلى مُكوِّنات ثلاثية الأبعاد فورية وأدوات تقديم ذكية.">Physical and digital integration at scale — from touch-enabled i-Maquette models to real-time 3D configurators and AI-assisted client presentation tools.</p>
+        <ul class="pillar-services" role="list">
+          <li class="pillar-service-item" data-en="Physical Architectural Scale Models (Maquettes)" data-ar="ماكيتات معمارية مادية مجسمة">Physical Architectural Scale Models (Maquettes)</li>
+          <li class="pillar-service-item" data-en="i-Maquette: Touch-enabled Interactive Digital Models" data-ar="i-Maquette: نماذج رقمية تفاعلية بتقنية اللمس">i-Maquette: Touch-enabled Interactive Digital Models</li>
+          <li class="pillar-service-item" data-en="Real-time 3D Configurators for Sales Centers" data-ar="مُكوِّنات ثلاثية الأبعاد لمراكز المبيعات">Real-time 3D Configurators for Sales Centers</li>
+          <li class="pillar-service-item" data-en="AI-Assisted Client Presentation Tools" data-ar="أدوات تقديم ذكية مدعومة بالذكاء الاصطناعي">AI-Assisted Client Presentation Tools</li>
+        </ul>
+        <a href="services.html#interactive" class="btn btn-ghost" data-en="Explore Service →" data-ar="اكتشف الخدمة →">Explore Service <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STATS ROW
+══════════════════════════════════════════════════════════ -->
+<div class="stats-row" aria-label="Company statistics">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <span class="stat-number" data-count="15" data-suffix="+">0+</span>
+        <div class="stat-label" data-en="Years of Excellence" data-ar="عاماً من التميز">Years of Excellence</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <span class="stat-number" data-count="500" data-suffix="+">0+</span>
+        <div class="stat-label" data-en="Projects Delivered" data-ar="مشروع منجز">Projects Delivered</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <span class="stat-number" data-count="98" data-suffix="%">0%</span>
+        <div class="stat-label" data-en="Client Satisfaction Rate" data-ar="نسبة رضا العملاء">Client Satisfaction Rate</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <span class="stat-number" data-count="3" data-suffix="">0</span>
+        <div class="stat-label" data-en="Countries Active" data-ar="دول نشطة">Countries Active</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PORTFOLIO PREVIEW
+══════════════════════════════════════════════════════════ -->
+<section class="section portfolio-preview" id="portfolio" aria-label="Portfolio preview">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:0;">
+      <div>
+        <div class="section-label reveal" data-en="Our Work" data-ar="أعمالنا">Our Work</div>
+        <h2 class="section-title reveal" data-en="Selected Projects" data-ar="مشاريع مختارة">Selected Projects</h2>
+      </div>
+      <a href="portfolio.html" class="btn btn-outline reveal" data-en="View Full Portfolio →" data-ar="مشاهدة كامل الأعمال →">View Full Portfolio →</a>
+    </div>
+  </div>
+
+  <div class="portfolio-grid" style="margin-top:48px;" role="list" aria-label="Portfolio grid">
+    <div class="portfolio-item reveal" role="listitem" aria-label="Project 1">
+      <div class="portfolio-item-placeholder">Landmark Tower · Riyadh</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-item-tag" data-en="Exterior Visualization" data-ar="إظهار خارجي">Exterior Visualization</div>
+        <div class="portfolio-item-title" data-en="Landmark Tower, Riyadh" data-ar="برج لاند مارك، الرياض">Landmark Tower, Riyadh</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Project 2">
+      <div class="portfolio-item-placeholder">Luxury Villa · Jeddah</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-item-tag" data-en="Interior Visualization" data-ar="إظهار داخلي">Interior Visualization</div>
+        <div class="portfolio-item-title" data-en="Luxury Villa, Jeddah" data-ar="فيلا فاخرة، جدة">Luxury Villa, Jeddah</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal" role="listitem" aria-label="Project 3">
+      <div class="portfolio-item-placeholder">Mixed-Use Dev · KSA</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-item-tag" data-en="Aerial Visualization" data-ar="إظهار جوي">Aerial Visualization</div>
+        <div class="portfolio-item-title" data-en="Mixed-Use Development, KSA" data-ar="تطوير متعدد الاستخدامات">Mixed-Use Development, KSA</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Project 4">
+      <div class="portfolio-item-placeholder">Hotel Resort · Red Sea</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-item-tag" data-en="Hospitality" data-ar="ضيافة">Hospitality</div>
+        <div class="portfolio-item-title" data-en="Hotel Resort, Red Sea" data-ar="منتجع فندقي، البحر الأحمر">Hotel Resort, Red Sea</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal reveal-delay-2" role="listitem" aria-label="Project 5">
+      <div class="portfolio-item-placeholder">i-Maquette · Smart City</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-item-tag" data-en="Interactive · i-Maquette" data-ar="تفاعلي · i-Maquette">Interactive · i-Maquette</div>
+        <div class="portfolio-item-title" data-en="Smart City i-Maquette" data-ar="i-Maquette للمدينة الذكية">Smart City i-Maquette</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WHY 3D GRAPHICS HOUSE
+══════════════════════════════════════════════════════════ -->
+<section class="section why-us" id="why-us" aria-label="Why choose 3D Graphics House">
+  <div class="container">
+    <div class="section-label reveal" data-en="Why Choose Us" data-ar="لماذا تختارنا">Why Choose Us</div>
+    <h2 class="section-title reveal" data-en="The Company the Best in<br>Saudi Arabia <em>Trust</em>" data-ar="الشركة التي يثق بها<br><em>الأفضل</em> في المملكة">The Company the Best in<br>Saudi Arabia <em>Trust</em></h2>
+
+    <div class="reasons-grid">
+      <div class="reason-card reveal">
+        <div class="reason-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+        <div class="reason-title" data-en="15 Years in the Saudi Market" data-ar="15 عاماً في السوق السعودي">15 Years in the Saudi Market</div>
+        <p class="reason-desc" data-en="Deep roots, proven track record, and an unmatched understanding of Saudi Arabia's real estate and corporate landscape." data-ar="جذور راسخة وسجل حافل وفهم لا مثيل له للعقارات وبيئة الأعمال في المملكة.">Deep roots, proven track record, and an unmatched understanding of Saudi Arabia's real estate and corporate landscape.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-1">
+        <div class="reason-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <div class="reason-title" data-en="NDA & Full Confidentiality" data-ar="سرية تامة واتفاقية NDA">NDA &amp; Full Confidentiality</div>
+        <p class="reason-desc" data-en="Every project is protected by strict NDA agreements. Your designs, strategies, and competitive advantages stay exclusively yours." data-ar="كل مشروع محمي باتفاقية NDA صارمة. تصاميمك واستراتيجياتك ومزاياك التنافسية تظل حصرية لك.">Every project is protected by strict NDA agreements. Your designs, strategies, and competitive advantages stay exclusively yours.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-2">
+        <div class="reason-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        </div>
+        <div class="reason-title" data-en="Full-Service Under One Roof" data-ar="خدمة متكاملة تحت سقف واحد">Full-Service Under One Roof</div>
+        <p class="reason-desc" data-en="Visualization, media production, interactive models, and AI solutions — all coordinated under one expert team for seamless project delivery." data-ar="إظهار معماري، إنتاج إعلامي، نماذج تفاعلية، وحلول ذكاء اصطناعي — تحت فريق خبير واحد لتسليم سلس.">Visualization, media production, interactive models, and AI solutions — all coordinated under one expert team for seamless project delivery.</p>
+      </div>
+      <div class="reason-card reveal">
+        <div class="reason-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <div class="reason-title" data-en="AI Quality Assurance" data-ar="ضمان الجودة بالذكاء الاصطناعي">AI Quality Assurance</div>
+        <p class="reason-desc" data-en="Our Turriva AI layer reviews every deliverable for photorealism accuracy, material consistency, and lighting precision before client delivery." data-ar="طبقة Turriva الذكية تراجع كل مخرج للدقة الفوتوريالستية والاتساق المادي ودقة الإضاءة قبل التسليم.">Our Turriva AI layer reviews every deliverable for photorealism accuracy, material consistency, and lighting precision before client delivery.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-1">
+        <div class="reason-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div class="reason-title" data-en="On-Time Delivery Commitment" data-ar="التزام بالتسليم في الموعد">On-Time Delivery Commitment</div>
+        <p class="reason-desc" data-en="We understand the pressure of launch dates and investor presentations. Our project management systems are built around your deadlines." data-ar="نفهم ضغط مواعيد الإطلاق وعروض المستثمرين. أنظمة إدارة مشاريعنا مبنية حول مواعيدك.">We understand the pressure of launch dates and investor presentations. Our project management systems are built around your deadlines.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-2">
+        <div class="reason-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div class="reason-title" data-en="Regional Presence: KSA + Jordan" data-ar="حضور إقليمي: السعودية + الأردن">Regional Presence: KSA + Jordan</div>
+        <p class="reason-desc" data-en="Headquarters in Saudi Arabia with a regional office in Amman — positioned to serve clients across the Gulf with local expertise and regional reach." data-ar="المقر الرئيسي في السعودية ومكتب إقليمي في عمّان — لخدمة عملاء الخليج بخبرة محلية وامتداد إقليمي.">Headquarters in Saudi Arabia with a regional office in Amman — positioned to serve clients across the Gulf with local expertise and regional reach.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     INDUSTRIES
+══════════════════════════════════════════════════════════ -->
+<section class="section industries" id="industries" aria-label="Industries we serve">
+  <div class="container">
+    <div class="section-label reveal" data-en="Industries We Serve" data-ar="القطاعات التي نخدمها">Industries We Serve</div>
+    <h2 class="section-title reveal" data-en="Built for the Region's<br><em>Most Ambitious</em> Projects" data-ar="صُمِّمنا لأكثر مشاريع المنطقة<br><em>طموحاً</em>">Built for the Region's<br><em>Most Ambitious</em> Projects</h2>
+
+    <div class="industries-grid">
+      <div class="industry-card reveal">
+        <div class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <div class="industry-title" data-en="Real Estate Developers & Investors" data-ar="مطورو ومستثمرو العقارات">Real Estate Developers &amp; Investors</div>
+      </div>
+      <div class="industry-card reveal reveal-delay-1">
+        <div class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="industry-title" data-en="Architects & Engineering Consultancies" data-ar="المكاتب الهندسية والمعمارية">Architects &amp; Engineering Consultancies</div>
+      </div>
+      <div class="industry-card reveal reveal-delay-2">
+        <div class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="industry-title" data-en="Interior Design Studios" data-ar="استوديوهات التصميم الداخلي">Interior Design Studios</div>
+      </div>
+      <div class="industry-card reveal reveal-delay-3">
+        <div class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <div class="industry-title" data-en="Hospitality & Hotel Groups" data-ar="مجموعات الضيافة والفنادق">Hospitality &amp; Hotel Groups</div>
+      </div>
+      <div class="industry-card reveal">
+        <div class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+        </div>
+        <div class="industry-title" data-en="Government & Smart City Projects" data-ar="المشاريع الحكومية والمدن الذكية">Government &amp; Smart City Projects</div>
+      </div>
+      <div class="industry-card reveal reveal-delay-1">
+        <div class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="industry-title" data-en="Construction & Contracting Companies" data-ar="شركات الإنشاءات والمقاولات">Construction &amp; Contracting Companies</div>
+      </div>
+      <div class="industry-card reveal reveal-delay-2">
+        <div class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+        </div>
+        <div class="industry-title" data-en="Marketing & Advertising Agencies" data-ar="وكالات التسويق والإعلان">Marketing &amp; Advertising Agencies</div>
+      </div>
+      <div class="industry-card reveal reveal-delay-3">
+        <div class="industry-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div class="industry-title" data-en="Investment & Holding Companies" data-ar="شركات الاستثمار والقابضة">Investment &amp; Holding Companies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     TURRIVA SECTION
+══════════════════════════════════════════════════════════ -->
+<section class="section turriva-section" id="turriva" aria-label="Turriva Technology">
+  <div class="container">
+    <div class="turriva-inner">
+      <div>
+        <div class="turriva-badge reveal" data-en="AI & SOFTWARE SUBSIDIARY" data-ar="الذراع التقنية بالذكاء الاصطناعي">AI &amp; SOFTWARE SUBSIDIARY</div>
+        <h2 class="turriva-title reveal" data-en="Beyond Visualization —<br>Intelligent Experiences<br><em>Powered by AI</em>" data-ar="ما وراء الإظهار —<br>تجارب ذكية<br><em>مدعومة بالذكاء الاصطناعي</em>">Beyond Visualization —<br>Intelligent Experiences<br><em>Powered by AI</em></h2>
+        <p class="turriva-desc reveal" data-en="Turriva is our dedicated AI and software subsidiary — created to bridge the physical and digital worlds. It enhances every 3D Graphics House service with intelligent automation, real-time configurators, and immersive interactive experiences that redefine how clients engage with architectural space." data-ar="Turriva هي ذراعنا التقنية المتخصصة في البرمجيات والذكاء الاصطناعي — أُنشئت لتربط العالم المادي بالرقمي. تُعزز كل خدمات جرافيكس هاوس بالأتمتة الذكية والمُكوِّنات الفورية والتجارب التفاعلية الغامرة التي تُعيد تعريف كيفية تفاعل العملاء مع الفضاء المعماري.">Turriva is our dedicated AI and software subsidiary — created to bridge the physical and digital worlds. It enhances every 3D Graphics House service with intelligent automation, real-time configurators, and immersive interactive experiences that redefine how clients engage with architectural space.</p>
+
+        <div class="turriva-features">
+          <div class="turriva-feature reveal">
+            <div class="turriva-feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+            </div>
+            <span class="turriva-feature-text" data-en="i-Maquette: Touch-enabled interactive architectural scale models" data-ar="i-Maquette: نماذج معمارية مجسمة تفاعلية بتقنية اللمس">i-Maquette: Touch-enabled interactive architectural scale models</span>
+          </div>
+          <div class="turriva-feature reveal reveal-delay-1">
+            <div class="turriva-feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+            </div>
+            <span class="turriva-feature-text" data-en="Real-time 3D configurators for sales centers and showrooms" data-ar="مُكوِّنات ثلاثية الأبعاد فورية لمراكز المبيعات والمعارض">Real-time 3D configurators for sales centers and showrooms</span>
+          </div>
+          <div class="turriva-feature reveal reveal-delay-2">
+            <div class="turriva-feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <span class="turriva-feature-text" data-en="AI-assisted quality assurance and client presentation tools" data-ar="أدوات ضمان الجودة والتقديم للعملاء بمساعدة الذكاء الاصطناعي">AI-assisted quality assurance and client presentation tools</span>
+          </div>
+          <div class="turriva-feature reveal reveal-delay-3">
+            <div class="turriva-feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <span class="turriva-feature-text" data-en="Physical-to-Digital experience integration for premium developments" data-ar="تكامل التجارب المادية والرقمية للمشاريع الراقية">Physical-to-Digital experience integration for premium developments</span>
+          </div>
+        </div>
+
+        <a href="services.html#interactive" class="btn btn-gold reveal" data-en="Discover Our Tech Solutions →" data-ar="اكتشف حلولنا التقنية →">
+          Discover Our Tech Solutions
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="turriva-visual reveal">
+        <div class="turriva-visual-inner">
+          <div class="turriva-glow"></div>
+          <div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:20px;position:relative;z-index:1;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:rgba(201,164,82,0.6);letter-spacing:0.2em;">TURRIVA</div>
+            <div style="font-size:0.72rem;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;">AI · Software · Interactive</div>
+            <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,164,82,0.4),transparent);"></div>
+            <div style="font-size:0.75rem;color:var(--text-dim);text-align:center;max-width:220px;line-height:1.7;">
+              Place i-Maquette demo<br>video or product image here
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PROCESS
+══════════════════════════════════════════════════════════ -->
+<section class="section process-section" id="process" aria-label="Our process">
+  <div class="container">
+    <div class="section-label reveal" data-en="How We Work" data-ar="كيف نعمل">How We Work</div>
+    <h2 class="section-title reveal" data-en="From Brief to<br><em>Breathtaking</em>" data-ar="من الموجز إلى<br><em>المبهر</em>">From Brief to<br><em>Breathtaking</em></h2>
+    <p class="section-sub reveal" data-en="Our structured process ensures clarity, quality, and on-time delivery — every time." data-ar="عمليتنا المنظمة تضمن الوضوح والجودة والتسليم في الموعد — في كل مرة.">Our structured process ensures clarity, quality, and on-time delivery — every time.</p>
+
+    <div class="process-timeline">
+      <div class="process-step reveal">
+        <div class="process-step-num">01</div>
+        <div class="process-step-title" data-en="Submit Project Brief" data-ar="إرسال موجز المشروع">Submit Project Brief</div>
+        <p class="process-step-desc" data-en="Share your drawings, references, and project vision via our smart intake form." data-ar="شارك رسوماتك ومراجعك ورؤيتك عبر نموذجنا الذكي.">Share your drawings, references, and project vision via our smart intake form.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-step-num">02</div>
+        <div class="process-step-title" data-en="Consultation & Quote" data-ar="استشارة وعرض سعر">Consultation &amp; Quote</div>
+        <p class="process-step-desc" data-en="Receive a tailored proposal and timeline within 24 hours — no generic pricing." data-ar="احصل على عرض مخصص وجدول زمني خلال 24 ساعة — بدون أسعار عامة.">Receive a tailored proposal and timeline within 24 hours — no generic pricing.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-step-num">03</div>
+        <div class="process-step-title" data-en="Concept Approval" data-ar="اعتماد المفهوم">Concept Approval</div>
+        <p class="process-step-desc" data-en="Moodboard, style direction, and camera angles — approved before full production begins." data-ar="المزاج البصري والاتجاه والزوايا — تُعتمد قبل بدء الإنتاج الكامل.">Moodboard, style direction, and camera angles — approved before full production begins.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-step-num">04</div>
+        <div class="process-step-title" data-en="Full Production" data-ar="الإنتاج الكامل">Full Production</div>
+        <p class="process-step-desc" data-en="Our in-house team executes with precision, using the latest 3D and rendering technologies." data-ar="فريقنا الداخلي ينفذ بدقة باستخدام أحدث تقنيات ثلاثية الأبعاد والإظهار.">Our in-house team executes with precision, using the latest 3D and rendering technologies.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-step-num">05</div>
+        <div class="process-step-title" data-en="Review & Revisions" data-ar="المراجعة والتعديلات">Review &amp; Revisions</div>
+        <p class="process-step-desc" data-en="Structured revision rounds with clear feedback cycles to achieve exactly your vision." data-ar="جولات مراجعة منظمة مع دورات تغذية راجعة واضحة لتحقيق رؤيتك تماماً.">Structured revision rounds with clear feedback cycles to achieve exactly your vision.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-step-num">06</div>
+        <div class="process-step-title" data-en="Final Delivery" data-ar="التسليم النهائي">Final Delivery</div>
+        <p class="process-step-desc" data-en="Full handover package including all source files, print-ready and digital-ready outputs." data-ar="حزمة تسليم كاملة تشمل جميع الملفات المصدرية وجاهزة للطباعة والرقمية.">Full handover package including all source files, print-ready and digital-ready outputs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════════════════ -->
+<section class="section testimonials" id="testimonials" aria-label="Client testimonials">
+  <div class="container">
+    <div class="section-label reveal" data-en="Client Testimonials" data-ar="آراء العملاء">Client Testimonials</div>
+    <h2 class="section-title reveal" data-en="Trusted by the Kingdom's<br><em>Industry Leaders</em>" data-ar="موثوق من قادة الصناعة<br>في<em> المملكة</em>">Trusted by the Kingdom's<br><em>Industry Leaders</em></h2>
+
+    <div class="testimonial-carousel">
+      <div class="testimonial-card reveal">
+        <span class="testimonial-quote-mark">"</span>
+        <p class="testimonial-text" data-en="3D Graphics House delivered renders for our flagship development that were so realistic, investors initially thought they were photographs. The attention to lighting and material detail is unmatched in the Saudi market." data-ar="قدّمت 3D Graphics House صور إظهار لمشروعنا الرئيسي كانت واقعية لدرجة أن المستثمرين ظنوها في البداية صوراً حقيقية. الاهتمام بتفاصيل الإضاءة والمواد لا مثيل له في السوق السعودي.">3D Graphics House delivered renders for our flagship development that were so realistic, investors initially thought they were photographs. The attention to lighting and material detail is unmatched in the Saudi market.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name" data-en="Ahmed Al-Rashidi" data-ar="أحمد الراشدي">Ahmed Al-Rashidi</div>
+            <div class="testimonial-company" data-en="Director, Al-Rashidi Development Group" data-ar="المدير، مجموعة الراشدي للتطوير">Director, Al-Rashidi Development Group</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-1">
+        <span class="testimonial-quote-mark">"</span>
+        <p class="testimonial-text" data-en="The i-Maquette they built for our sales center transformed how clients interact with our project. We saw a 40% increase in on-site conversions within the first month. Truly innovative thinking." data-ar="حوّل i-Maquette الذي بنوه لمركز مبيعاتنا طريقة تفاعل العملاء مع مشروعنا. شهدنا زيادة 40% في التحويلات الميدانية خلال الشهر الأول. تفكير ابتكاري حقاً.">The i-Maquette they built for our sales center transformed how clients interact with our project. We saw a 40% increase in on-site conversions within the first month. Truly innovative thinking.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name" data-en="Sara Al-Mansouri" data-ar="سارة المنصوري">Sara Al-Mansouri</div>
+            <div class="testimonial-company" data-en="VP Marketing, Landmark Properties" data-ar="نائب رئيس التسويق، لاند مارك للعقارات">VP Marketing, Landmark Properties</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <span class="testimonial-quote-mark">"</span>
+        <p class="testimonial-text" data-en="We've worked with visualization studios across Europe and the Middle East. 3D Graphics House is in a different league — their understanding of the regional market, combined with world-class technical quality, makes them our permanent partner." data-ar="عملنا مع استوديوهات إظهار في أوروبا والشرق الأوسط. 3D Graphics House في دوري مختلف — فهمهم للسوق الإقليمي مقروناً بجودة تقنية عالمية يجعلهم شريكنا الدائم.">We've worked with visualization studios across Europe and the Middle East. 3D Graphics House is in a different league — their understanding of the regional market, combined with world-class technical quality, makes them our permanent partner.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">K</div>
+          <div>
+            <div class="testimonial-name" data-en="Khalid Al-Farsi" data-ar="خالد الفارسي">Khalid Al-Farsi</div>
+            <div class="testimonial-company" data-en="Principal Architect, K+A Studio" data-ar="المهندس المعماري الرئيسي، K+A Studio">Principal Architect, K+A Studio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partners Row -->
+<div class="partners-row" aria-label="Client logos">
+  <div class="container">
+    <div class="partners-label" data-en="Trusted by Saudi Arabia's Leading Corporations" data-ar="موثوق من كبرى شركات المملكة العربية السعودية">Trusted by Saudi Arabia's Leading Corporations</div>
+    <div class="partners-logos">
+      <div class="partner-logo-item" aria-label="Client 1">ALSAFWA GROUP</div>
+      <div class="partner-logo-item" aria-label="Client 2">LANDMARK CORP</div>
+      <div class="partner-logo-item" aria-label="Client 3">AL-RASHIDI DEV</div>
+      <div class="partner-logo-item" aria-label="Client 4">KINGDOM REAL ESTATE</div>
+      <div class="partner-logo-item" aria-label="Client 5">GULF VISION</div>
+      <div class="partner-logo-item" aria-label="Client 6">SMART CITY KSA</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     INSIGHTS / BLOG
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="insights" style="background:var(--black);" aria-label="Insights and articles">
+  <div class="container">
+    <div class="section-label reveal" data-en="Industry Insights" data-ar="رؤى الصناعة">Industry Insights</div>
+    <h2 class="section-title reveal" data-en="Thought Leadership from<br><em>the Field</em>" data-ar="قيادة فكرية من<br><em>الميدان</em>">Thought Leadership from<br><em>the Field</em></h2>
+    <p class="section-sub reveal" data-en="Expert perspectives on architectural visualization, Saudi real estate, AI in architecture, and the future of immersive experiences." data-ar="وجهات نظر خبراء في الإظهار المعماري وعقارات السعودية والذكاء الاصطناعي في العمارة ومستقبل التجارب الغامرة.">Expert perspectives on architectural visualization, Saudi real estate, AI in architecture, and the future of immersive experiences.</p>
+
+    <div class="insights-grid">
+      <article class="insight-card reveal">
+        <div class="insight-img" role="img" aria-label="Article image placeholder">ARTICLE COVER IMAGE</div>
+        <div class="insight-body">
+          <div class="insight-cat" data-en="Visualization Trends" data-ar="اتجاهات الإظهار">Visualization Trends</div>
+          <h3 class="insight-title" data-en="Why Photorealism is the New Standard in Saudi Real Estate Marketing" data-ar="لماذا أصبح الفوتوريالزم المعيار الجديد في تسويق عقارات السعودية">Why Photorealism is the New Standard in Saudi Real Estate Marketing</h3>
+          <p class="insight-excerpt" data-en="The shift from hand-drawn sketches to photorealistic 3D renders has fundamentally changed how developers sell pre-launch properties in the Kingdom." data-ar="التحول من الرسومات اليدوية إلى صور الإظهار الفوتوريالستية غيّر جذرياً كيف يبيع المطورون عقارات ما قبل الإطلاق في المملكة.">The shift from hand-drawn sketches to photorealistic 3D renders has fundamentally changed how developers sell pre-launch properties in the Kingdom.</p>
+          <a href="#" class="btn btn-ghost" data-en="Read Article →" data-ar="اقرأ المقال →">Read Article <span class="arrow">→</span></a>
+        </div>
+      </article>
+      <article class="insight-card reveal reveal-delay-1">
+        <div class="insight-img" role="img" aria-label="Article image placeholder">ARTICLE COVER IMAGE</div>
+        <div class="insight-body">
+          <div class="insight-cat" data-en="AI in Architecture" data-ar="الذكاء الاصطناعي في العمارة">AI in Architecture</div>
+          <h3 class="insight-title" data-en="How AI is Transforming Architectural Visualization — and What it Means for Developers" data-ar="كيف يحوّل الذكاء الاصطناعي الإظهار المعماري وما يعنيه للمطورين">How AI is Transforming Architectural Visualization — and What it Means for Developers</h3>
+          <p class="insight-excerpt" data-en="From AI-assisted rendering to intelligent project management, we explore the technologies reshaping our industry in 2025 and beyond." data-ar="من الإظهار بمساعدة الذكاء الاصطناعي إلى إدارة المشاريع الذكية، نستكشف التقنيات التي تُعيد تشكيل صناعتنا في 2025 وما بعده.">From AI-assisted rendering to intelligent project management, we explore the technologies reshaping our industry in 2025 and beyond.</p>
+          <a href="#" class="btn btn-ghost" data-en="Read Article →" data-ar="اقرأ المقال →">Read Article <span class="arrow">→</span></a>
+        </div>
+      </article>
+      <article class="insight-card reveal reveal-delay-2">
+        <div class="insight-img" role="img" aria-label="Article image placeholder">ARTICLE COVER IMAGE</div>
+        <div class="insight-body">
+          <div class="insight-cat" data-en="VR in Sales" data-ar="الواقع الافتراضي في المبيعات">VR in Sales</div>
+          <h3 class="insight-title" data-en="VR Sales Centers: The Future of Off-Plan Property Sales in the Gulf" data-ar="مراكز مبيعات الواقع الافتراضي: مستقبل بيع العقارات على الخارطة في الخليج">VR Sales Centers: The Future of Off-Plan Property Sales in the Gulf</h3>
+          <p class="insight-excerpt" data-en="Interactive virtual tours and i-Maquette models are closing the gap between imagination and conviction — helping buyers commit to projects before a single brick is laid." data-ar="الجولات الافتراضية التفاعلية ونماذج i-Maquette تقلص الفجوة بين الخيال والاقتناع — تساعد المشترين على الالتزام بالمشاريع قبل وضع أي لبنة.">Interactive virtual tours and i-Maquette models are closing the gap between imagination and conviction — helping buyers commit to projects before a single brick is laid.</p>
+          <a href="#" class="btn btn-ghost" data-en="Read Article →" data-ar="اقرأ المقال →">Read Article <span class="arrow">→</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     COST ESTIMATOR
+══════════════════════════════════════════════════════════ -->
+<section class="section" style="background:var(--anthracite);padding-top:0;" aria-label="Project cost estimator">
+  <div class="container">
+    <div class="cost-estimator reveal" role="region" aria-label="Interactive project cost estimator">
+      <div class="estimator-title" data-en="Interactive Project Cost Estimator" data-ar="أداة تقدير تكلفة المشروع التفاعلية">Interactive Project Cost Estimator</div>
+      <p class="estimator-sub" data-en="Get an indicative budget range for your project. Select your service, scale, and quality tier for an instant estimate." data-ar="احصل على نطاق ميزانية تقريبية لمشروعك. اختر خدمتك وحجمك ومستوى الجودة للحصول على تقدير فوري.">Get an indicative budget range for your project. Select your service, scale, and quality tier for an instant estimate.</p>
+      <div class="estimator-grid">
+        <div class="form-group">
+          <label class="form-label" for="est-service" data-en="Service Pillar" data-ar="محور الخدمة">Service Pillar</label>
+          <select class="form-control" id="est-service" name="est-service" aria-label="Select service">
+            <option value="" data-en="Select Service..." data-ar="اختر الخدمة...">Select Service...</option>
+            <option value="viz" data-en="Architectural Visualization" data-ar="الإظهار المعماري">Architectural Visualization</option>
+            <option value="media" data-en="Media & Production" data-ar="الإعلام والإنتاج">Media &amp; Production</option>
+            <option value="interactive" data-en="Interactive & AI Solutions" data-ar="الحلول التفاعلية والذكاء الاصطناعي">Interactive &amp; AI Solutions</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="est-scale" data-en="Project Scale" data-ar="حجم المشروع">Project Scale</label>
+          <select class="form-control" id="est-scale" name="est-scale" aria-label="Select scale">
+            <option value="" data-en="Select Scale..." data-ar="اختر الحجم...">Select Scale...</option>
+            <option value="small" data-en="Small (1–3 units / deliverables)" data-ar="صغير (1-3 وحدات / مخرجات)">Small (1–3 units / deliverables)</option>
+            <option value="medium" data-en="Medium (4–15 units / deliverables)" data-ar="متوسط (4-15 وحدة / مخرجات)">Medium (4–15 units / deliverables)</option>
+            <option value="large" data-en="Large / Master Development" data-ar="كبير / تطوير رئيسي">Large / Master Development</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="est-quality" data-en="Quality Tier" data-ar="مستوى الجودة">Quality Tier</label>
+          <select class="form-control" id="est-quality" name="est-quality" aria-label="Select quality">
+            <option value="" data-en="Select Tier..." data-ar="اختر المستوى...">Select Tier...</option>
+            <option value="standard" data-en="Standard" data-ar="قياسي">Standard</option>
+            <option value="premium" data-en="Premium" data-ar="ممتاز">Premium</option>
+            <option value="ultra" data-en="Ultra Photorealistic" data-ar="فوتوريالستي فائق">Ultra Photorealistic</option>
+          </select>
+        </div>
+      </div>
+      <div class="estimator-result" aria-live="polite" aria-label="Cost estimate result"></div>
+      <p style="font-size:0.78rem;color:var(--text-dim);margin-top:16px;text-align:center;" data-en="* Indicative ranges only. Final pricing requires full project brief. All quotes include dedicated project manager and NDA." data-ar="* نطاقات تقريبية فقط. التسعير النهائي يتطلب موجز المشروع الكامل. جميع العروض تشمل مدير مشروع مخصص واتفاقية NDA.">* Indicative ranges only. Final pricing requires full project brief. All quotes include dedicated project manager and NDA.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CTA BANNER
+══════════════════════════════════════════════════════════ -->
+<section class="cta-banner" aria-label="Call to action">
+  <div class="container">
+    <div class="section-label reveal" style="justify-content:center;" data-en="Ready to Begin?" data-ar="مستعد للبدء؟">Ready to Begin?</div>
+    <h2 class="reveal" data-en="Let's Turn Your Vision<br>Into <em>Reality</em>" data-ar="لنحوّل رؤيتك<br>إلى <em>واقع</em>">Let's Turn Your Vision<br>Into <em>Reality</em></h2>
+    <p class="reveal" data-en="Submit your project brief today and receive a tailored proposal within 24 hours. Our team is ready." data-ar="أرسل موجز مشروعك اليوم واستلم عرضاً مخصصاً خلال 24 ساعة. فريقنا جاهز.">Submit your project brief today and receive a tailored proposal within 24 hours. Our team is ready.</p>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn btn-gold" data-en="Start Your Project" data-ar="ابدأ مشروعك">
+        Start Your Project
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="portfolio.html" class="btn btn-outline" data-en="View Our Portfolio" data-ar="مشاهدة أعمالنا">View Our Portfolio</a>
+      <a href="about.html" class="btn btn-ghost" data-en="Learn About Us →" data-ar="تعرف علينا →">Learn About Us <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo" aria-label="Site footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:0;" aria-label="3D Graphics House">
+          <div class="nav-logo-mark">3DG</div>
+          <div class="nav-logo-text">
+            <span>3D Graphics House</span>
+            <span>VISUAL INTELLIGENCE</span>
+          </div>
+        </a>
+        <p data-en="Saudi Arabia's premier architectural visualization, media production, and AI-powered interactive technology company. 15 years of proven excellence." data-ar="شركة الإظهار المعماري وإنتاج الإعلام والتقنيات التفاعلية الذكية الرائدة في المملكة العربية السعودية. 15 عاماً من التميز الموثّق.">Saudi Arabia's premier architectural visualization, media production, and AI-powered interactive technology company. 15 years of proven excellence.</p>
+        <div class="contact-social" style="margin-top:24px;">
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="none" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Behance">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h8.5c2 0 3.5 1 3.5 3s-1.5 3-3.5 3H1V6z"/><path d="M1 12h9c2.5 0 4 1.2 4 3.5S12.5 19 10 19H1v-7z"/><path d="M16 7h6M16 10c0-1.5 1.5-3 3-3s3 1.5 3 3H16z"/><path d="M16 14h6c-.5 2-2 3-3 3s-2.5-1-3-3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title" data-en="Services" data-ar="الخدمات">Services</div>
+        <ul class="footer-links" role="list">
+          <li><a href="services.html#visualization" class="footer-link" data-en="Architectural Visualization" data-ar="الإظهار المعماري">Architectural Visualization</a></li>
+          <li><a href="services.html#media" class="footer-link" data-en="Media & Production" data-ar="الإعلام والإنتاج">Media &amp; Production</a></li>
+          <li><a href="services.html#interactive" class="footer-link" data-en="i-Maquette" data-ar="i-Maquette">i-Maquette</a></li>
+          <li><a href="services.html#interactive" class="footer-link" data-en="AI Solutions (Turriva)" data-ar="حلول الذكاء الاصطناعي (توريفا)">AI Solutions (Turriva)</a></li>
+          <li><a href="services.html" class="footer-link" data-en="All Services" data-ar="جميع الخدمات">All Services</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title" data-en="Company" data-ar="الشركة">Company</div>
+        <ul class="footer-links" role="list">
+          <li><a href="about.html" class="footer-link" data-en="About Us" data-ar="من نحن">About Us</a></li>
+          <li><a href="portfolio.html" class="footer-link" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
+          <li><a href="#process" class="footer-link" data-en="Our Process" data-ar="آلية عملنا">Our Process</a></li>
+          <li><a href="#insights" class="footer-link" data-en="Insights" data-ar="مقالات">Insights</a></li>
+          <li><a href="contact.html" class="footer-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title" data-en="Contact" data-ar="تواصل">Contact</div>
+        <ul class="footer-links" role="list">
+          <li><span class="footer-link" data-en="🇸🇦 Riyadh, Saudi Arabia (HQ)" data-ar="🇸🇦 الرياض، المملكة العربية السعودية (المقر)">🇸🇦 Riyadh, Saudi Arabia (HQ)</span></li>
+          <li><span class="footer-link" data-en="🇯🇴 Amman, Jordan (Regional)" data-ar="🇯🇴 عمّان، الأردن (إقليمي)">🇯🇴 Amman, Jordan (Regional)</span></li>
+          <li><a href="tel:+966" class="footer-link">+966 XX XXX XXXX (KSA)</a></li>
+          <li><a href="tel:+962" class="footer-link">+962 XX XXX XXXX (JO)</a></li>
+          <li><a href="mailto:hello@3dgraphicshouse.com" class="footer-link">hello@3dgraphicshouse.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy" data-en="© 2025 3D Graphics House. All rights reserved." data-ar="© 2025 3D جرافيكس هاوس. جميع الحقوق محفوظة.">© 2025 3D Graphics House. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+        <a href="#" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+        <a href="#" data-en="NDA Policy" data-ar="سياسة NDA">NDA Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FLOATING ELEMENTS
+══════════════════════════════════════════════════════════ -->
+<div class="float-whatsapp" aria-label="WhatsApp contact">
+  <div class="whatsapp-label" data-en="Chat on WhatsApp" data-ar="تواصل عبر واتساب">Chat on WhatsApp</div>
+  <a href="https://wa.me/966XXXXXXXXX" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</div>
+
+<a href="contact.html" class="sticky-quote-btn" aria-label="Get Free Quote">
+  <span data-en="GET FREE QUOTE" data-ar="احصل على عرض مجاني">GET FREE QUOTE</span>
+</a>
+
+
+<!-- Scripts -->
+<script src="js/main.js" defer></script>
+</body>
+</html>
