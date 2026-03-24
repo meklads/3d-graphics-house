@@ -234,7 +234,7 @@ body[dir="rtl"] .btn-ghost:hover .arrow { transform: translateX(-5px); }
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
   flex-shrink: 0;
 }
 
@@ -564,6 +564,15 @@ body[dir="rtl"] .trust-item:last-child { border-left: none; }
 .about-preview {
   background: var(--anthracite);
   overflow: hidden;
+  margin-top: 2px;
+}
+
+/* Ensure hero trust-bar doesn't overlap next section */
+.hero { padding-bottom: 0; }
+.hero + section,
+.hero + div {
+  position: relative;
+  z-index: 1;
 }
 
 .about-grid {

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أخبارنا — 3D جرافيكس هاوس | آخر المشاريع والإنجازات</title>
+  <meta name="description" content="آخر مشاريع وإنجازات 3D Graphics House في مجال الإظهار المعماري والإنتاج الإعلامي في المملكة العربية السعودية." />
+  <link rel="alternate" hreflang="en" href="../news.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black:      #080808;
+      --deep:       #0c0c0c;
+      --anthracite: #111111;
+      --panel:      #161616;
+      --gold:       #c9a452;
+      --gold-light: #e0b85a;
+      --border:     rgba(201,164,82,0.12);
+      --text-dim:   rgba(255,255,255,0.42);
+      --text-mid:   rgba(255,255,255,0.68);
+      --white:      #ffffff;
+      --font-display: 'Markazi Text', serif;
+      --font-body:    'Tajawal', sans-serif;
+      --section-pad: 120px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black); color: var(--white);
+      font-family: var(--font-body); font-weight: 300;
+      line-height: 1.7; direction: rtl;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: rgba(201,164,82,0.3); }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: var(--section-pad) 0; }
+    .gold-line { width: 48px; height: 1px; background: linear-gradient(270deg, var(--gold), transparent); margin-bottom: 20px; }
+
+    .t-label { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--gold); text-transform: uppercase; font-weight: 400; }
+    .t-section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.6rem); font-weight: 500; line-height: 1.15; }
+    .t-section-title em { font-style: italic; color: var(--gold); }
+    .t-body { font-size: 0.95rem; color: var(--text-mid); line-height: 1.85; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.82rem; letter-spacing: 0.04em; font-weight: 400;
+      padding: 14px 32px; transition: all 0.3s ease; border: none;
+      font-family: var(--font-body);
+    }
+    .btn-gold { background: var(--gold); color: var(--black); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 0; right: 0; left: 0;
+      z-index: 1000; background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+      transition: all 0.4s ease;
+    }
+    .navbar.scrolled { background: rgba(8,8,8,0.98); }
+    .nav-inner { display: flex; align-items: center; height: 76px; gap: 40px; }
+    .nav-logo { display: flex; align-items: center; margin-right: auto; }
+    .nav-logo img { height: 49px; width: auto; }
+    .nav-links { display: flex; list-style: none; align-items: center; gap: 32px; }
+    .nav-link { font-size: 0.82rem; letter-spacing: 0.04em; color: var(--text-mid); font-weight: 400; transition: color 0.2s; position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -3px; right: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+    .nav-link:hover, .nav-link.active { color: var(--white); }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .lang-btn { font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); background: none; border: 1px solid var(--border); padding: 6px 14px; transition: all 0.2s; font-family: var(--font-body); }
+    .lang-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; }
+    .hamburger span { width: 22px; height: 1px; background: var(--white); transition: all 0.3s; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--black); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav .nav-link { font-size: 1.6rem; font-family: var(--font-display); }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--white); font-size: 1.4rem; }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 180px 0 100px;
+      background: linear-gradient(180deg, var(--anthracite) 0%, var(--black) 100%);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: 0; right: 0; left: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .page-hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 20px; }
+    .page-hero-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 400; line-height: 1.1; margin-bottom: 24px; }
+    .page-hero-title em { font-style: italic; color: var(--gold); }
+    .page-hero-sub { font-size: 1rem; color: var(--text-mid); max-width: 560px; }
+
+    /* FEATURED PROJECT */
+    .featured-project {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      background: var(--panel); overflow: hidden;
+    }
+    .featured-img { position: relative; min-height: 560px; overflow: hidden; cursor: pointer; }
+    .featured-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .featured-img:hover img { transform: scale(1.04); }
+    .featured-tag {
+      position: absolute; top: 24px; right: 24px;
+      background: var(--gold); color: var(--black);
+      font-size: 0.68rem; letter-spacing: 0.1em; font-weight: 500;
+      padding: 6px 14px; z-index: 2;
+    }
+    .featured-thumbs {
+      position: absolute; bottom: 20px; right: 0; left: 0;
+      display: flex; gap: 8px; padding: 0 20px; z-index: 2;
+    }
+    .featured-thumb {
+      width: 72px; height: 48px; overflow: hidden; cursor: pointer;
+      border: 2px solid transparent; transition: border-color 0.2s; flex-shrink: 0;
+    }
+    .featured-thumb.active { border-color: var(--gold); }
+    .featured-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .featured-content { padding: 60px 48px; display: flex; flex-direction: column; justify-content: center; }
+    .featured-cat { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 20px; }
+    .featured-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 20px; line-height: 1.2; }
+    .featured-desc { font-size: 0.92rem; color: var(--text-mid); margin-bottom: 32px; line-height: 1.9; }
+    .featured-meta { display: flex; gap: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .featured-meta-item span:first-child { font-size: 0.68rem; letter-spacing: 0.08em; color: var(--text-dim); display: block; margin-bottom: 4px; }
+    .featured-meta-item span:last-child { font-size: 0.88rem; color: var(--white); }
+
+    /* NEWS GRID */
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .news-card { background: var(--panel); overflow: hidden; cursor: pointer; position: relative; }
+    .news-card-img { aspect-ratio: 16/9; overflow: hidden; position: relative; }
+    .news-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .news-card:hover .news-card-img img { transform: scale(1.06); }
+    .news-card.wide { grid-column: span 2; }
+    .news-card.wide .news-card-img { aspect-ratio: 21/9; }
+    .news-card-body { padding: 28px 28px 32px; }
+    .news-card-cat { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 12px; }
+    .news-card-title { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.3; margin-bottom: 12px; }
+    .news-card-excerpt { font-size: 0.84rem; color: var(--text-dim); line-height: 1.8; }
+    .play-badge {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(201,164,82,0.15); border: 1px solid rgba(201,164,82,0.4);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(10px); transition: all 0.3s;
+    }
+    .play-badge svg { width: 18px; fill: var(--white); margin-right: -3px; }
+    .news-card:hover .play-badge { background: rgba(201,164,82,0.3); transform: translate(-50%, -50%) scale(1.1); }
+    .news-card-date { font-size: 0.72rem; color: var(--text-dim); margin-top: 16px; }
+
+    /* BLOG */
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .blog-card { border-top: 1px solid var(--border); padding-top: 32px; }
+    .blog-cat { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 16px; }
+    .blog-title { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.35; margin-bottom: 14px; transition: color 0.2s; }
+    .blog-card:hover .blog-title { color: var(--gold); }
+    .blog-excerpt { font-size: 0.84rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 20px; }
+    .blog-read { font-size: 0.78rem; color: var(--gold); letter-spacing: 0.06em; display: flex; align-items: center; gap: 6px; }
+    .blog-read::after { content: '←'; }
+
+    /* NEWSLETTER */
+    .newsletter {
+      background: var(--panel); border: 1px solid var(--border);
+      padding: 64px 80px; text-align: center; margin: 0 auto; max-width: 700px;
+    }
+    .newsletter-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 16px; }
+    .newsletter-sub { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 32px; }
+    .newsletter-form { display: flex; gap: 0; max-width: 440px; margin: 0 auto; }
+    .newsletter-form input {
+      flex: 1; padding: 14px 20px; background: var(--black);
+      border: 1px solid var(--border); border-left: none;
+      color: var(--white); font-family: var(--font-body); font-size: 0.85rem;
+      outline: none;
+    }
+    .newsletter-form input::placeholder { color: var(--text-dim); }
+    .newsletter-form input:focus { border-color: var(--gold); }
+    .newsletter-form button { border: none; padding: 14px 28px; background: var(--gold); color: var(--black); font-size: 0.82rem; font-family: var(--font-body); letter-spacing: 0.04em; transition: background 0.2s; }
+    .newsletter-form button:hover { background: var(--gold-light); }
+
+    /* FOOTER */
+    .footer { background: var(--deep); border-top: 1px solid var(--border); padding: 64px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-logo { height: 44px; margin-bottom: 20px; }
+    .footer-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.8; max-width: 280px; }
+    .footer-title { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-dim); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--text-dim); }
+    .social-links { display: flex; gap: 16px; }
+    .social-link { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .social-link:hover { border-color: var(--gold); }
+    .social-link svg { width: 15px; fill: var(--text-dim); transition: fill 0.2s; }
+    .social-link:hover svg { fill: var(--gold); }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lb-close { position: absolute; top: 24px; left: 24px; background: none; border: none; color: var(--white); font-size: 2rem; opacity: 0.6; transition: opacity 0.2s; }
+    .lb-close:hover { opacity: 1; }
+    .lb-video-wrap { width: 90vw; max-width: 1100px; aspect-ratio: 16/9; }
+    .lb-video-wrap iframe { width: 100%; height: 100%; border: 0; }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-actions .btn { display: none; }
+      .hamburger { display: flex; }
+      .container { padding: 0 20px; }
+      .featured-project { grid-template-columns: 1fr; }
+      .featured-img { min-height: 320px; }
+      .featured-content { padding: 32px 24px; }
+      .news-grid { grid-template-columns: 1fr; }
+      .news-card.wide { grid-column: span 1; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .newsletter { padding: 40px 24px; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form input { border-left: 1px solid var(--border); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <img src="../assets/images/logo.png" alt="3D Graphics House" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+          <li><a href="portfolio.html" class="nav-link">أعمالنا</a></li>
+          <li><a href="news.html" class="nav-link active">أخبارنا</a></li>
+          <li><a href="about.html" class="nav-link">عن الشركة</a></li>
+          <li><a href="services.html" class="nav-link">خدماتنا</a></li>
+          <li><a href="contact.html" class="nav-link">تواصل معنا</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="../news.html" class="lang-btn">EN</a>
+          <a href="contact.html" class="btn btn-gold">طلب عرض سعر</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="قائمة">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+    <a href="index.html" class="nav-link">الرئيسية</a>
+    <a href="portfolio.html" class="nav-link">أعمالنا</a>
+    <a href="news.html" class="nav-link">أخبارنا</a>
+    <a href="about.html" class="nav-link">عن الشركة</a>
+    <a href="services.html" class="nav-link">خدماتنا</a>
+    <a href="contact.html" class="nav-link">تواصل معنا</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="page-hero-eyebrow">أحدث المشاريع والأخبار</p>
+      <h1 class="page-hero-title">أخبارنا<br /><em>وإنجازاتنا</em></h1>
+      <p class="page-hero-sub">تابع آخر أعمالنا وإنجازاتنا في مجال الإظهار المعماري والإنتاج الإعلامي والنماذج المجسمة.</p>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECT -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="gold-line"></div>
+      <span class="t-label">المشروع المميز</span>
+      <h2 class="t-section-title" style="margin: 12px 0 40px;">ميثاق <em>مكة المكرمة</em></h2>
+      <div class="featured-project">
+        <div class="featured-img" id="featMainImg">
+          <span class="featured-tag">حدث دولي بارز</span>
+          <img src="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-1.jpg" id="featMainImgEl" alt="ميثاق مكة المكرمة" />
+          <div class="featured-thumbs">
+            <div class="featured-thumb active" data-img="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-1.jpg">
+              <img src="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-1.jpg" alt="" />
+            </div>
+            <div class="featured-thumb" data-img="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-2.jpg">
+              <img src="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-2.jpg" alt="" />
+            </div>
+            <div class="featured-thumb" data-img="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-3.jpg">
+              <img src="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-3.jpg" alt="" />
+            </div>
+            <div class="featured-thumb" data-img="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-4.jpg">
+              <img src="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-4.jpg" alt="" />
+            </div>
+            <div class="featured-thumb" data-img="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-5.jpg">
+              <img src="https://3dgraphicshouse.com/wp-content/uploads/2024/04/makkah-5.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="featured-content">
+          <p class="featured-cat">إنتاج إعلامي · رابطة العالم الإسلامي</p>
+          <h3 class="featured-title">ميثاق مكة المكرمة — الهوية البصرية الكاملة</h3>
+          <p class="featured-desc">تشرّفنا بالمساهمة في إنتاج الهوية البصرية لحدث ميثاق مكة المكرمة الذي نظّمته رابطة العالم الإسلامي. قدّمنا حزمة إبداعية متكاملة شملت تصميم الأجنحة ثلاثية الأبعاد والإنتاج الإعلامي والأنيميشن الاحترافي الذي عكس مكانة هذا الحدث الدولي البارز.</p>
+          <div class="featured-meta">
+            <div class="featured-meta-item">
+              <span>العميل</span>
+              <span>رابطة العالم الإسلامي</span>
+            </div>
+            <div class="featured-meta-item">
+              <span>التخصص</span>
+              <span>هوية بصرية متكاملة</span>
+            </div>
+            <div class="featured-meta-item">
+              <span>العام</span>
+              <span>٢٠٢٤</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS GRID -->
+  <section class="section" style="background: var(--anthracite);">
+    <div class="container">
+      <div class="gold-line"></div>
+      <span class="t-label">آخر المشاريع</span>
+      <h2 class="t-section-title" style="margin: 12px 0 48px;">أحدث <em>أعمالنا</em></h2>
+      <div class="news-grid">
+        <!-- Wide video card -->
+        <div class="news-card wide" data-video="vYbn-9ramsI">
+          <div class="news-card-img">
+            <img src="https://img.youtube.com/vi/vYbn-9ramsI/maxresdefault.jpg" alt="منتدى جدة الدولي" loading="lazy" />
+            <div class="play-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="news-card-body">
+            <p class="news-card-cat">فيلم سينمائي · ٤K HDR</p>
+            <h3 class="news-card-title">منتدى جدة الدولي — إظهار معماري سينمائي</h3>
+            <p class="news-card-excerpt">أنجزنا الفيلم المعماري السينمائي الكامل لأحد أبرز مشاريع جدة، بتقنية ٤K HDR وتفاصيل فوتوريالستية تعكس الرؤية المعمارية بدقة استثنائية.</p>
+            <p class="news-card-date">يناير ٢٠٢٤</p>
+          </div>
+        </div>
+        <!-- Regular card -->
+        <div class="news-card">
+          <div class="news-card-img">
+            <img src="https://3dgraphicshouse.com/wp-content/uploads/2024/04/ma-1.jpg" alt="نموذج مجسم" loading="lazy" />
+          </div>
+          <div class="news-card-body">
+            <p class="news-card-cat">نموذج مجسم</p>
+            <h3 class="news-card-title">نموذج مجسم دقيق لمجمع سكني فاخر</h3>
+            <p class="news-card-excerpt">نموذج مجسم بمقياس ١:٢٠٠ بإضاءة داخلية وتفاصيل حرفية متناهية الدقة.</p>
+            <p class="news-card-date">مارس ٢٠٢٤</p>
+          </div>
+        </div>
+        <!-- Video card -->
+        <div class="news-card" data-video="ALz6GdeITYc">
+          <div class="news-card-img">
+            <img src="https://img.youtube.com/vi/ALz6GdeITYc/maxresdefault.jpg" alt="نسيم الراجحي" loading="lazy" />
+            <div class="play-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="news-card-body">
+            <p class="news-card-cat">إظهار معماري</p>
+            <h3 class="news-card-title">نسيم الراجحي — مجمع سكني متميز</h3>
+            <p class="news-card-excerpt">فيلم إظهار معماري لمشروع سكني راقٍ يجمع بين الأصالة والعصرية.</p>
+            <p class="news-card-date">فبراير ٢٠٢٤</p>
+          </div>
+        </div>
+        <!-- Video card -->
+        <div class="news-card" data-video="ilWeCush3ew">
+          <div class="news-card-img">
+            <img src="https://img.youtube.com/vi/ilWeCush3ew/maxresdefault.jpg" alt="أجنحة رافال" loading="lazy" />
+            <div class="play-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="news-card-body">
+            <p class="news-card-cat">أنيميشن معماري</p>
+            <h3 class="news-card-title">أجنحة رافال — فيلم ترويجي سينمائي</h3>
+            <p class="news-card-excerpt">فيلم ترويجي سينمائي لمشروع الأجنحة السكنية الفاخرة.</p>
+            <p class="news-card-date">أبريل ٢٠٢٣</p>
+          </div>
+        </div>
+        <!-- Video card -->
+        <div class="news-card" data-video="GlbvI0DRXE4">
+          <div class="news-card-img">
+            <img src="https://img.youtube.com/vi/GlbvI0DRXE4/maxresdefault.jpg" alt="سوق مكة المكرمة" loading="lazy" />
+            <div class="play-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="news-card-body">
+            <p class="news-card-cat">CGI تجاري</p>
+            <h3 class="news-card-title">سوق مكة المكرمة — إظهار بصري متكامل</h3>
+            <p class="news-card-excerpt">إظهار معماري شامل لمشروع تجاري يمزج بين التراث والحداثة.</p>
+            <p class="news-card-date">يونيو ٢٠٢٣</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG / ARTICLES -->
+  <section class="section">
+    <div class="container">
+      <div class="gold-line"></div>
+      <span class="t-label">مقالات ورؤى</span>
+      <h2 class="t-section-title" style="margin: 12px 0 48px;">معرفة <em>واحترافية</em></h2>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <p class="blog-cat">إنتاج فيديو</p>
+          <h3 class="blog-title">الجدول الزمني لإنتاج فيلم معماري احترافي</h3>
+          <p class="blog-excerpt">دليل شامل لمراحل إنتاج الأفلام المعمارية من مرحلة ما قبل الإنتاج حتى التسليم النهائي بتقنية ٤K.</p>
+          <span class="blog-read">اقرأ المقال</span>
+        </div>
+        <div class="blog-card">
+          <p class="blog-cat">تسويق رقمي</p>
+          <h3 class="blog-title">كيف يُعزز المحتوى المرئي مبيعات المشاريع العقارية</h3>
+          <p class="blog-excerpt">دراسة أثبتت أن المشاريع ذات المحتوى المرئي الاحترافي تحقق نسبة مبيعات أعلى بـ٧٣٪ مقارنة بغيرها.</p>
+          <span class="blog-read">اقرأ المقال</span>
+        </div>
+        <div class="blog-card">
+          <p class="blog-cat">تقنيات التصور</p>
+          <h3 class="blog-title">مستقبل الإظهار المعماري: الذكاء الاصطناعي وتقنية الـ VR</h3>
+          <p class="blog-excerpt">كيف تُعيد تقنيات الذكاء الاصطناعي والواقع الافتراضي تشكيل مستقبل التصور والإظهار المعماري.</p>
+          <span class="blog-read">اقرأ المقال</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section" style="background: var(--anthracite);">
+    <div class="container" style="display:flex; justify-content:center;">
+      <div class="newsletter">
+        <h2 class="newsletter-title">ابقَ على اطلاع دائم</h2>
+        <p class="newsletter-sub">اشترك في نشرتنا البريدية لتصلك آخر أعمالنا ورؤانا حول صناعة الإظهار المعماري.</p>
+        <form class="newsletter-form" onsubmit="return false">
+          <input type="email" placeholder="بريدك الإلكتروني" aria-label="البريد الإلكتروني" />
+          <button type="submit">اشترك</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="../assets/images/logo.png" alt="3D Graphics House" class="footer-logo" />
+          <p class="footer-desc">الشركة الرائدة في الإظهار المعماري والإنتاج الإعلامي في المملكة العربية السعودية منذ ٢٠٠٨.</p>
+        </div>
+        <div>
+          <p class="footer-title">الخدمات</p>
+          <ul class="footer-links">
+            <li><a href="services.html">الإظهار المعماري</a></li>
+            <li><a href="services.html">النماذج المجسمة</a></li>
+            <li><a href="services.html">الإنتاج الإعلامي</a></li>
+            <li><a href="services.html">التصميم التفاعلي</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-title">الشركة</p>
+          <ul class="footer-links">
+            <li><a href="about.html">عن الشركة</a></li>
+            <li><a href="portfolio.html">أعمالنا</a></li>
+            <li><a href="news.html">أخبارنا</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-title">تواصل معنا</p>
+          <ul class="footer-links">
+            <li><a href="mailto:info@3dgraphicshouse.com">info@3dgraphicshouse.com</a></li>
+            <li><a href="tel:+966500000000">٠٥٠٠ ٠٠٠ ٠٠٠</a></li>
+            <li>جدة، المملكة العربية السعودية</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© ٢٠٢٤ 3D Graphics House. جميع الحقوق محفوظة.</p>
+        <div class="social-links">
+          <a href="https://youtube.com" class="social-link" aria-label="يوتيوب">
+            <svg viewBox="0 0 24 24"><path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.4 2.8 12 2.8 12 2.8s-4.4 0-6.8.1C4.6 3 3.3 3 2.2 4.2 1.3 5 1 7 1 7S.7 9.3.7 11.5v2.1c0 2.2.3 4.4.3 4.4s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.3 22.2 12 22.2 12 22.2s4.4 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.1C23.3 9.3 23 7 23 7zM9.7 15.5V8.4l8.1 3.6-8.1 3.5z"/></svg>
+          </a>
+          <a href="https://instagram.com" class="social-link" aria-label="إنستغرام">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://linkedin.com" class="social-link" aria-label="لينكد إن">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- VIDEO LIGHTBOX -->
+  <div class="lightbox" id="videoLightbox">
+    <button class="lb-close" id="lbClose">✕</button>
+    <div class="lb-video-wrap">
+      <iframe id="lbIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Navbar
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+
+    // Mobile nav
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileNavClose = document.getElementById('mobileNavClose');
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+    mobileNavClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+
+    // Video lightbox
+    const lb = document.getElementById('videoLightbox');
+    const lbIframe = document.getElementById('lbIframe');
+    const lbClose = document.getElementById('lbClose');
+
+    function openVideo(id) {
+      lbIframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeVideo() {
+      lb.classList.remove('open');
+      lbIframe.src = '';
+      document.body.style.overflow = '';
+    }
+    lbClose.addEventListener('click', closeVideo);
+    lb.addEventListener('click', e => { if (e.target === lb) closeVideo(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideo(); });
+
+    document.querySelectorAll('.news-card[data-video]').forEach(card => {
+      card.addEventListener('click', () => openVideo(card.dataset.video));
+    });
+
+    // Featured thumbnail switcher
+    const thumbs = document.querySelectorAll('.featured-thumb');
+    const mainImg = document.getElementById('featMainImgEl');
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        mainImg.src = thumb.dataset.img;
+      });
+    });
+  </script>
+</body>
+</html>

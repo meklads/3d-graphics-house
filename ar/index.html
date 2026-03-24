@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D جرافيكس هاوس — الإظهار المعماري وإنتاج الأعمال الإبداعية</title>
+  <meta name="description" content="3D Graphics House — الشركة الرائدة في الإظهار المعماري الفوتوريالستي، والأنيميشن ثلاثي الأبعاد، والنماذج المجسمة في المملكة العربية السعودية والخليج." />
+  <meta name="keywords" content="إظهار معماري, أنيميشن ثلاثي الأبعاد, ماكيت, تصور معماري, السعودية" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Tajawal:wght@200;300;400;500;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="alternate" hreflang="en" href="../index.html" />
+
+  <style>
+    /* ═══ TOKENS ════════════════════════════════════════════ */
+    :root {
+      --black:      #080808;
+      --deep:       #0c0c0c;
+      --anthracite: #111111;
+      --panel:      #161616;
+      --gold:       #c9a452;
+      --gold-light: #e0b85a;
+      --border:     rgba(201,164,82,0.12);
+      --text-dim:   rgba(255,255,255,0.42);
+      --text-mid:   rgba(255,255,255,0.68);
+      --white:      #ffffff;
+
+      --font-display: 'Markazi Text', 'Noto Naskh Arabic', serif;
+      --font-body:    'Tajawal', sans-serif;
+
+      --section-pad: 120px;
+      --radius:      0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      direction: rtl;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ═══ SCROLLBAR ═════════════════════════════════════════ */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: rgba(201,164,82,0.3); }
+
+    /* ═══ TYPOGRAPHY ════════════════════════════════════════ */
+    .t-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    .t-section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--white);
+    }
+    .t-section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .t-body { font-size: 0.95rem; color: var(--text-mid); line-height: 1.85; }
+
+    /* ═══ LAYOUT ════════════════════════════════════════════ */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .section { padding: var(--section-pad) 0; }
+    .gold-line {
+      width: 48px; height: 1px;
+      background: linear-gradient(270deg, var(--gold), transparent);
+      margin-bottom: 20px;
+    }
+
+    /* ═══ BUTTONS ═══════════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      font-weight: 400;
+      padding: 14px 32px;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--black);
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,164,82,0.25); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-ghost {
+      background: rgba(201,164,82,0.08);
+      border: 1px solid var(--border);
+      color: var(--gold);
+    }
+    .btn-ghost:hover { background: rgba(201,164,82,0.15); }
+
+    /* ═══ NAVBAR ════════════════════════════════════════════ */
+    .navbar {
+      position: fixed; top: 0; right: 0; left: 0;
+      z-index: 1000;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.4s ease;
+    }
+    .navbar.scrolled { background: rgba(8,8,8,0.98); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      height: 76px;
+      gap: 40px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+    .nav-logo img { height: 49px; width: auto; }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 32px;
+      margin-right: 0;
+    }
+    .nav-link {
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      color: var(--text-mid);
+      font-weight: 400;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; right: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--white); }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 16px; margin-right: 0; margin-left: 0; }
+    .lang-btn {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      transition: all 0.2s;
+      font-family: var(--font-body);
+    }
+    .lang-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+    }
+    .hamburger span { width: 22px; height: 1px; background: var(--white); transition: all 0.3s; }
+    .mobile-nav {
+      display: none;
+      position: fixed; inset: 0;
+      background: var(--black);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav .nav-link { font-size: 1.6rem; font-family: var(--font-display); }
+    .mobile-nav-close {
+      position: absolute; top: 24px; left: 24px;
+      background: none; border: none;
+      color: var(--text-dim); font-size: 22px;
+    }
+
+    /* ═══ HERO ══════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 76px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 40%, rgba(201,164,82,0.065) 0%, transparent 70%),
+        linear-gradient(135deg, #040404 0%, #0d0d0d 50%, #070707 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,164,82,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,164,82,0.03) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 70% 80% at 30% 40%, black, transparent 80%);
+    }
+    .hero-shimmer {
+      position: absolute;
+      width: 1px;
+      height: 45%;
+      background: linear-gradient(180deg, transparent, rgba(201,164,82,0.4), transparent);
+      top: 10%; left: 25%;
+      animation: shimmerFall 4s ease-in-out infinite;
+    }
+    .hero-shimmer:nth-child(2) { left: 55%; animation-delay: 1.5s; height: 35%; }
+    .hero-shimmer:nth-child(3) { left: 75%; animation-delay: 3s; height: 25%; }
+    @keyframes shimmerFall { 0%,100%{opacity:0;transform:translateY(-20px)} 50%{opacity:1;transform:translateY(20px)} }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-content { padding: 60px 0; }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .hero-eyebrow-text {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5.5vw, 5.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+      max-width: 460px;
+      margin-bottom: 40px;
+    }
+    .hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+
+    .hero-visual {
+      position: relative;
+    }
+    .hero-visual-frame {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--panel);
+    }
+    .hero-visual-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) contrast(1.05);
+    }
+    .hero-visual-frame::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,164,82,0.08) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: -24px; right: -24px;
+      width: 120px; height: 120px;
+      background: var(--gold);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 2;
+    }
+    .hero-badge-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1;
+    }
+    .hero-badge-label {
+      font-size: 0.6rem;
+      color: var(--black);
+      letter-spacing: 0.06em;
+      text-align: center;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+    .hero-corner-accent {
+      position: absolute;
+      top: -2px; right: -2px;
+      width: 60px; height: 60px;
+      border-top: 1px solid var(--gold);
+      border-right: 1px solid var(--gold);
+    }
+
+    /* ═══ TRUST BAR ════════════════════════════════════════ */
+    .trust-bar {
+      background: rgba(12,12,12,0.95);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+    }
+    .trust-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 48px;
+      border-left: 1px solid var(--border);
+      flex: 1;
+      max-width: 280px;
+    }
+    .trust-item:last-child { border-left: none; }
+    .trust-icon { font-size: 1.3rem; color: var(--gold); opacity: 0.7; }
+    .trust-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem; font-weight: 600; color: var(--gold); line-height: 1;
+    }
+    .trust-label { font-size: 0.72rem; color: var(--text-dim); margin-top: 3px; }
+
+    /* ═══ ABOUT SECTION ════════════════════════════════════ */
+    .about-section { background: var(--anthracite); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+      height: 520px;
+    }
+    .about-img-main {
+      grid-row: span 2;
+      overflow: hidden;
+      background: var(--panel);
+    }
+    .about-img-main img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); }
+    .about-img-sm { overflow: hidden; background: var(--panel); }
+    .about-img-sm img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75); }
+    .about-text-label {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .about-text-label::after { content:''; flex:1; height:1px; background:var(--border); }
+    .about-text-label span { font-size: 0.7rem; letter-spacing: 0.14em; color: var(--gold); white-space: nowrap; }
+    .about-body { font-size: 0.95rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 28px; }
+    .about-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .about-value {
+      border-right: 1px solid var(--border);
+      padding-right: 16px;
+    }
+    .about-value-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--white); margin-bottom: 6px; }
+    .about-value-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
+
+    /* ═══ SERVICES ══════════════════════════════════════════ */
+    .services-section { background: var(--black); }
+    .services-header { text-align: center; margin-bottom: 72px; }
+    .services-header .t-label { margin-bottom: 16px; }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .pillar-card {
+      background: var(--panel);
+      padding: 52px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+    }
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.5s ease;
+    }
+    .pillar-card:hover { background: #1a1a1a; }
+    .pillar-card:hover::before { width: 100%; }
+    .pillar-num {
+      font-family: var(--font-display);
+      font-size: 4rem; font-weight: 700;
+      color: rgba(201,164,82,0.1);
+      line-height: 1; margin-bottom: 24px;
+    }
+    .pillar-icon { font-size: 2.4rem; margin-bottom: 20px; }
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 500;
+      color: var(--white); margin-bottom: 14px;
+    }
+    .pillar-desc { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 24px; }
+    .pillar-services {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 28px;
+    }
+    .pillar-services li {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      padding-right: 14px;
+      position: relative;
+    }
+    .pillar-services li::before {
+      content: '—';
+      position: absolute; right: 0;
+      color: rgba(201,164,82,0.4);
+    }
+    .pillar-cta {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.3s;
+    }
+    .pillar-card:hover .pillar-cta { gap: 14px; }
+    .pillar-badge {
+      position: absolute;
+      top: 20px; left: 20px;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      background: rgba(201,164,82,0.12);
+      border: 1px solid rgba(201,164,82,0.3);
+      color: var(--gold); padding: 3px 10px;
+      text-transform: uppercase;
+    }
+
+    /* ═══ STATS ════════════════════════════════════════════ */
+    .stats-section {
+      background: var(--anthracite);
+      padding: 80px 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 40px 20px;
+      border-left: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-left: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 3.6rem; font-weight: 600;
+      color: var(--gold); line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat-label { font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; }
+
+    /* ═══ PORTFOLIO PREVIEW ════════════════════════════════ */
+    .portfolio-section { background: var(--black); }
+    .portfolio-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    .port-item {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--panel);
+      cursor: pointer;
+    }
+    .port-item.featured { grid-column: span 2; aspect-ratio: 21/9; }
+    .port-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease, filter 0.5s;
+      filter: brightness(0.75);
+    }
+    .port-item:hover img { transform: scale(1.07); filter: brightness(0.55); }
+    .port-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(8,8,8,0.9) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 24px;
+      transform: translateY(8px);
+      transition: transform 0.4s;
+    }
+    .port-item:hover .port-overlay { transform: translateY(0); }
+    .port-tag { font-size: 0.65rem; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 6px; }
+    .port-name { font-family: var(--font-display); font-size: 1.3rem; color: var(--white); font-weight: 400; }
+
+    /* ═══ WHY US ════════════════════════════════════════════ */
+    .why-section { background: var(--anthracite); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .why-card {
+      background: var(--panel);
+      padding: 40px 32px;
+      transition: background 0.3s;
+    }
+    .why-card:hover { background: #1c1c1c; }
+    .why-icon {
+      width: 52px; height: 52px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      transition: border-color 0.3s;
+    }
+    .why-card:hover .why-icon { border-color: var(--gold); }
+    .why-title { font-family: var(--font-display); font-size: 1.2rem; color: var(--white); margin-bottom: 10px; }
+    .why-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.75; }
+
+    /* ═══ TURRIVA ═══════════════════════════════════════════ */
+    .turriva-section {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+    }
+    .turriva-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .turriva-badge {
+      display: inline-block;
+      background: rgba(201,164,82,0.08);
+      border: 1px solid rgba(201,164,82,0.25);
+      color: var(--gold);
+      font-size: 0.7rem; letter-spacing: 0.12em;
+      padding: 6px 16px; margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .turriva-visual {
+      position: relative;
+      background: linear-gradient(135deg, var(--panel) 0%, #0e0e0e 100%);
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .turriva-logo {
+      font-family: var(--font-display);
+      font-size: 4rem; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+    .turriva-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201,164,82,0.08) 0%, transparent 70%);
+      animation: turivaGlow 3s ease-in-out infinite alternate;
+    }
+    @keyframes turivaGlow { from{opacity:0.5} to{opacity:1} }
+
+    /* ═══ TESTIMONIALS ══════════════════════════════════════ */
+    .testimonials-section { background: var(--anthracite); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .testimonial-card {
+      background: var(--panel);
+      padding: 40px 36px;
+    }
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: 4rem; color: rgba(201,164,82,0.15);
+      line-height: 0.5; margin-bottom: 16px;
+    }
+    .testimonial-text {
+      font-size: 0.92rem; color: var(--text-mid);
+      line-height: 1.85; margin-bottom: 28px;
+      font-family: var(--font-display);
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 14px;
+      border-top: 1px solid var(--border); padding-top: 20px;
+    }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #a07830);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.1rem; color: var(--black); font-weight: 600;
+    }
+    .testimonial-name { font-size: 0.88rem; color: var(--white); }
+    .testimonial-role { font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; }
+
+    /* ═══ CTA BANNER ═══════════════════════════════════════ */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(201,164,82,0.08) 0%, transparent 70%);
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+      text-align: center;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5vw, 4.5rem);
+      font-weight: 500; color: var(--white);
+      line-height: 1.15; margin-bottom: 20px;
+    }
+    .cta-title em { font-style: italic; color: var(--gold); }
+    .cta-sub { font-size: 0.95rem; color: var(--text-mid); max-width: 480px; margin: 0 auto 40px; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ═══ FOOTER ════════════════════════════════════════════ */
+    .footer {
+      background: #040404;
+      border-top: 1px solid var(--border);
+      padding: 72px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 56px;
+    }
+    .footer-brand-desc {
+      font-size: 0.85rem; color: var(--text-dim);
+      line-height: 1.8; margin: 20px 0 28px;
+      max-width: 300px;
+    }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social-link {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .footer-social-link:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-col-title {
+      font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.82rem; color: var(--text-dim); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-contact-item { display: flex; gap: 12px; margin-bottom: 12px; }
+    .footer-contact-item span:first-child { color: var(--gold); font-size: 0.8rem; flex-shrink: 0; }
+    .footer-contact-item span:last-child { font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: 0.7rem; color: rgba(255,255,255,0.25); transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: var(--text-dim); }
+
+    /* ═══ FLOATING ELEMENTS ════════════════════════════════ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 32px; left: 32px;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; z-index: 800;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.5); }
+    .sticky-quote {
+      position: fixed;
+      left: -38px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 10px 20px;
+      z-index: 800;
+      transition: left 0.3s;
+      white-space: nowrap;
+    }
+    .sticky-quote:hover { left: 0; }
+
+    /* ═══ REVEAL ANIMATIONS ════════════════════════════════ */
+    .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .js-ready .reveal { opacity: 0; transform: translateY(28px); }
+    .js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ═══ RESPONSIVE ════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-images { display: none; }
+      .turriva-inner { grid-template-columns: 1fr; }
+      .turriva-visual { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      :root { --section-pad: 80px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .port-item.featured { grid-column: span 1; aspect-ratio: 16/9; }
+      .why-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .trust-inner { flex-wrap: wrap; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      :root { --section-pad: 60px; }
+      .hero-title { font-size: 2.8rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+  <ul style="list-style:none;display:flex;flex-direction:column;align-items:center;gap:28px;">
+    <li><a href="index.html" class="nav-link active">الرئيسية</a></li>
+    <li><a href="about.html" class="nav-link">من نحن</a></li>
+    <li><a href="services.html" class="nav-link">الخدمات</a></li>
+    <li><a href="portfolio.html" class="nav-link">الأعمال</a></li>
+    <li><a href="news.html" class="nav-link">الأخبار</a></li>
+    <li><a href="contact.html" class="nav-link">تواصل معنا</a></li>
+  </ul>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <button class="hamburger" id="hamburger" aria-label="القائمة"><span></span><span></span><span></span></button>
+    <div class="nav-actions">
+      <a href="../index.html" class="lang-btn">EN</a>
+      <a href="contact.html" class="btn btn-gold" style="padding:10px 22px;font-size:0.78rem;">طلب عرض مشروع</a>
+    </div>
+    <ul class="nav-links" role="list">
+      <li><a href="contact.html" class="nav-link">تواصل معنا</a></li>
+      <li><a href="news.html" class="nav-link">الأخبار</a></li>
+      <li><a href="portfolio.html" class="nav-link">الأعمال</a></li>
+      <li><a href="services.html" class="nav-link">الخدمات</a></li>
+      <li><a href="about.html" class="nav-link">من نحن</a></li>
+      <li><a href="index.html" class="nav-link active">الرئيسية</a></li>
+    </ul>
+    <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
+      <img src="../assets/images/logo.png" alt="3D جرافيكس هاوس">
+    </a>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" aria-label="الرئيسية">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-shimmer" aria-hidden="true"></div>
+  <div class="hero-shimmer" aria-hidden="true"></div>
+  <div class="hero-shimmer" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-line"></div>
+          <span class="hero-eyebrow-text">الشركة الرائدة في الإظهار المعماري · المملكة العربية السعودية</span>
+        </div>
+        <h1 class="hero-title reveal">
+          نحوّل الرؤية
+          <em>إلى واقع سينمائي</em>
+        </h1>
+        <p class="hero-subtitle reveal">
+          منذ خمسة عشر عامًا، نصنع إظهارًا معماريًا فوتوريالستيًا ونماذج مجسمة وأنيميشن ثلاثي الأبعاد يستحق الجوائز — لأبرز المطورين العقاريين في المملكة والخليج.
+        </p>
+        <div class="hero-ctas reveal">
+          <a href="portfolio.html" class="btn btn-gold">استعرض أعمالنا</a>
+          <a href="contact.html" class="btn btn-outline">طلب عرض مشروع</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-visual-frame">
+          <img src="../assets/images/portfolio/jeddah-forum.jpg" alt="مشروع منتدى جدة">
+          <div class="hero-corner-accent" aria-hidden="true"></div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-num">15+</div>
+          <div class="hero-badge-label">سنة<br>خبرة</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TRUST BAR ═══════════ -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <div class="trust-icon">◎</div>
+        <div>
+          <div class="trust-num">500+</div>
+          <div class="trust-label">مشروع منجز</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">◎</div>
+        <div>
+          <div class="trust-num">3</div>
+          <div class="trust-label">دول خليجية</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">◎</div>
+        <div>
+          <div class="trust-num">15+</div>
+          <div class="trust-label">عامًا في السوق</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">◎</div>
+        <div>
+          <div class="trust-num">100%</div>
+          <div class="trust-label">سرية المشاريع</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="about-section section" id="about" aria-label="من نحن">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-images" aria-hidden="true">
+        <div class="about-img-main">
+          <img src="../assets/images/portfolio/makkah-market.jpg" alt="مشروع مركز سوق مكة">
+        </div>
+        <div class="about-img-sm">
+          <img src="../assets/images/portfolio/rafal-pavilions.jpg" alt="رفال بافيليونز">
+        </div>
+        <div class="about-img-sm">
+          <img src="../assets/images/portfolio/alrajhi-naseem.jpg" alt="الراجحي نسيم الحرام">
+        </div>
+      </div>
+      <div>
+        <div class="about-text-label">
+          <span>قصتنا</span>
+        </div>
+        <div class="gold-line"></div>
+        <h2 class="t-section-title reveal" style="margin-bottom:24px;">
+          خمسة عشر عامًا من
+          <em>التميز البصري</em>
+        </h2>
+        <p class="about-body reveal">
+          تأسست 3D Graphics House في المملكة العربية السعودية لتكون الشريك الإبداعي للمطورين العقاريين الذين يرفضون الوسطية. من مقرنا الرئيسي في المملكة وفرعنا في الأردن، نقدم خدمات الإظهار المعماري ثلاثي الأبعاد، والأنيميشن السينمائي، والنماذج المجسمة الدقيقة، والحلول التفاعلية المتقدمة.
+        </p>
+        <p class="about-body reveal">
+          كل مشروع يُعامَل كمنجز فريد — بمعايير إخراج سينمائي، ودقة هندسية لا تقبل المساومة.
+        </p>
+        <div class="about-values reveal">
+          <div class="about-value">
+            <div class="about-value-title">الدقة</div>
+            <div class="about-value-desc">كل بكسل مدروس. كل زاوية مقصودة.</div>
+          </div>
+          <div class="about-value">
+            <div class="about-value-title">الابتكار</div>
+            <div class="about-value-desc">نتجاوز حدود ما يُظَن ممكنًا بصريًا.</div>
+          </div>
+          <div class="about-value">
+            <div class="about-value-title">السرية</div>
+            <div class="about-value-desc">مشاريعكم محمية بالكامل في كل مرحلة.</div>
+          </div>
+          <div class="about-value">
+            <div class="about-value-title">النتائج</div>
+            <div class="about-value-desc">ليس مجرد جمال — بل أداء مبيعات حقيقي.</div>
+          </div>
+        </div>
+        <a href="about.html" class="btn btn-ghost" style="margin-top:32px;">اعرف أكثر عنا ←</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="services-section section" id="services" aria-label="خدماتنا">
+  <div class="container">
+    <div class="services-header">
+      <div class="t-label" style="margin-bottom:14px;">ما نقدمه</div>
+      <h2 class="t-section-title reveal">ثلاثة محاور من <em>التميز البصري</em></h2>
+      <p class="t-body reveal" style="max-width:540px;margin:16px auto 0;">ذكاء بصري متكامل — من الإظهار المعماري الفوتوريالستي إلى التجارب الغامرة المدعومة بالذكاء الاصطناعي.</p>
+    </div>
+    <div class="pillars-grid">
+
+      <!-- Pillar 1 -->
+      <div class="pillar-card reveal">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon">◈</div>
+        <div class="pillar-title">الإظهار المعماري</div>
+        <p class="pillar-desc">إظهار فوتوريالستي يُقنع المشترين قبل أن تُبنى البنية التحتية الأولى.</p>
+        <ul class="pillar-services">
+          <li>إظهار خارجي وداخلي بدقة عالية</li>
+          <li>مناظر جوية ومخططات رئيسية</li>
+          <li>أنيميشن المشي ثلاثي الأبعاد</li>
+          <li>جولات VR تفاعلية بزاوية 360°</li>
+        </ul>
+        <a href="services.html#visualization" class="pillar-cta">استعرض الخدمة ←</a>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="pillar-card reveal reveal-delay-1">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon">◉</div>
+        <div class="pillar-title">الإنتاج الإعلامي</div>
+        <p class="pillar-desc">إنتاج سينمائي احترافي — من الفيلم الدعائي إلى تغطية الفعاليات الكبرى.</p>
+        <ul class="pillar-services">
+          <li>إنتاج الأفلام الدعائية</li>
+          <li>التصوير السينمائي الاحترافي</li>
+          <li>تصوير وتحرير الفعاليات</li>
+          <li>موشن جرافيكس وهوية مرئية</li>
+        </ul>
+        <a href="services.html#media" class="pillar-cta">استعرض الخدمة ←</a>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="pillar-card reveal reveal-delay-2" style="position:relative;">
+        <div class="pillar-badge">مدعوم من Turriva</div>
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon">◬</div>
+        <div class="pillar-title">الحلول التفاعلية والذكاء الاصطناعي</div>
+        <p class="pillar-desc">تقنيات تفاعلية متقدمة تحوّل المشاريع إلى تجارب غامرة لا تُنسى.</p>
+        <ul class="pillar-services">
+          <li>النموذج المجسم التفاعلي i-Maquette</li>
+          <li>تجارب الواقع الافتراضي VR</li>
+          <li>العروض التقديمية التفاعلية</li>
+          <li>حلول الذكاء الاصطناعي البصري</li>
+        </ul>
+        <a href="services.html#interactive" class="pillar-cta">استعرض الخدمة ←</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STATS ═══════════ -->
+<section class="stats-section" aria-label="إحصائياتنا">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">مشروع منجز<br>في المملكة والخليج</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">عامًا من الخبرة<br>في السوق السعودي</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num">3</div>
+        <div class="stat-label">مكاتب إقليمية<br>السعودية والأردن والخليج</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">نسبة رضا العملاء<br>بتوصية موثّقة</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PORTFOLIO PREVIEW ═══════════ -->
+<section class="portfolio-section section" id="portfolio" aria-label="نماذج من أعمالنا">
+  <div class="container">
+    <div class="portfolio-header">
+      <div>
+        <div class="t-label" style="margin-bottom:12px;">نماذج من أعمالنا</div>
+        <h2 class="t-section-title reveal">مشاريع <em>تتحدث عن نفسها</em></h2>
+      </div>
+      <a href="portfolio.html" class="btn btn-ghost" style="white-space:nowrap;">استعرض جميع الأعمال ←</a>
+    </div>
+    <div class="portfolio-grid">
+      <div class="port-item featured reveal" aria-label="منتدى جدة">
+        <img src="../assets/images/portfolio/jeddah-forum.jpg" alt="منتدى جدة — أنيميشن ثلاثي الأبعاد" loading="lazy">
+        <div class="port-overlay">
+          <div class="port-tag">أنيميشن ثلاثي الأبعاد · تجاري</div>
+          <div class="port-name">منتدى جدة</div>
+        </div>
+      </div>
+      <div class="port-item reveal" aria-label="رفال بافيليونز">
+        <img src="../assets/images/portfolio/rafal-pavilions.jpg" alt="رفال بافيليونز" loading="lazy">
+        <div class="port-overlay">
+          <div class="port-tag">أنيميشن ثلاثي الأبعاد · سكني</div>
+          <div class="port-name">رفال بافيليونز</div>
+        </div>
+      </div>
+      <div class="port-item reveal reveal-delay-1" aria-label="مركز سوق مكة">
+        <img src="../assets/images/portfolio/makkah-market.jpg" alt="مركز سوق مكة" loading="lazy">
+        <div class="port-overlay">
+          <div class="port-tag">أنيميشن ثلاثي الأبعاد · تجاري</div>
+          <div class="port-name">مركز سوق مكة</div>
+        </div>
+      </div>
+      <div class="port-item reveal" aria-label="الراجحي نسيم الحرام">
+        <img src="../assets/images/portfolio/alrajhi-naseem.jpg" alt="الراجحي نسيم الحرام" loading="lazy">
+        <div class="port-overlay">
+          <div class="port-tag">أنيميشن ثلاثي الأبعاد · ضيافة</div>
+          <div class="port-name">الراجحي نسيم الحرام</div>
+        </div>
+      </div>
+      <div class="port-item reveal reveal-delay-1" aria-label="واحة السلام">
+        <img src="../assets/images/portfolio/wahat-alsalam.jpg" alt="واحة السلام" loading="lazy">
+        <div class="port-overlay">
+          <div class="port-tag">إظهار معماري · سكني</div>
+          <div class="port-name">واحة السلام</div>
+        </div>
+      </div>
+      <div class="port-item reveal reveal-delay-2" aria-label="ماكيت معماري">
+        <img src="../assets/images/portfolio/maquette-model.jpg" alt="نموذج معماري مجسم" loading="lazy">
+        <div class="port-overlay">
+          <div class="port-tag">نموذج مجسم · ماكيت</div>
+          <div class="port-name">الماكيت المعماري الدقيق</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WHY US ═══════════ -->
+<section class="why-section section" id="why" aria-label="لماذا 3D Graphics House">
+  <div class="container">
+    <div class="t-label" style="margin-bottom:14px;text-align:center;">ما يميزنا</div>
+    <h2 class="t-section-title reveal" style="text-align:center;">لماذا يثق بنا <em>كبار المطورين</em></h2>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">⬡</div>
+        <div class="why-title">15 عامًا من الخبرة الموثّقة</div>
+        <div class="why-desc">رصيد يتحدث بنفسه — أكثر من 500 مشروع مُسلَّم لعملاء يعودون إلينا مرارًا.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">◈</div>
+        <div class="why-title">جودة سينمائية في كل إطار</div>
+        <div class="why-desc">لا نقبل بأقل من معيار الإنتاج السينمائي الاحترافي في كل مشروع، مهما كان حجمه.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">◎</div>
+        <div class="why-title">سرية تامة مكفولة</div>
+        <div class="why-desc">كل مشروع يعمل عليه فريق مخصص مع اتفاقية سرية صارمة وأنظمة حماية بيانات متقدمة.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">◬</div>
+        <div class="why-title">حضور خليجي موسّع</div>
+        <div class="why-desc">مكتب رئيسي في المملكة، وفرع إقليمي في الأردن — خدمة محلية بمعايير عالمية.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">▣</div>
+        <div class="why-title">مزود واحد لكل احتياجاتك</div>
+        <div class="why-desc">من التخطيط الأولي إلى الأنيميشن والتصوير والنماذج المجسمة — كل شيء تحت سقف واحد.</div>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">✦</div>
+        <div class="why-title">نتائج تُحقق مبيعات</div>
+        <div class="why-desc">إظهارنا لا يُبهر فحسب — بل يُقنع ويُحوِّل ويُسرِّع دورة المبيعات لعملائنا.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TURRIVA ═══════════ -->
+<section class="turriva-section section" id="turriva" aria-label="Turriva">
+  <div class="container">
+    <div class="turriva-inner">
+      <div>
+        <div class="turriva-badge">الذكاء الاصطناعي · مستقبل الإظهار</div>
+        <div class="gold-line"></div>
+        <h2 class="t-section-title reveal" style="margin-bottom:20px;">
+          مرحبًا بـ <em>Turriva</em>
+        </h2>
+        <p class="t-body reveal" style="margin-bottom:16px;">
+          ذراعنا التقنية المتخصصة في الذكاء الاصطناعي والحلول التفاعلية المتقدمة — من خلالها نقدم تجارب بصرية لا مثيل لها في السوق.
+        </p>
+        <p class="t-body reveal" style="margin-bottom:32px;">
+          من النموذج المجسم التفاعلي i-Maquette إلى منصات الواقع الافتراضي وأدوات اتخاذ القرار المدعومة بالذكاء الاصطناعي.
+        </p>
+        <a href="services.html#interactive" class="btn btn-ghost">استعرض حلول Turriva ←</a>
+      </div>
+      <div class="turriva-visual" aria-hidden="true">
+        <div class="turriva-glow"></div>
+        <div class="turriva-logo">Turriva</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="testimonials-section section" aria-label="آراء عملائنا">
+  <div class="container">
+    <div class="t-label" style="margin-bottom:14px;text-align:center;">آراء عملائنا</div>
+    <h2 class="t-section-title reveal" style="text-align:center;">ما يقوله <em>شركاؤنا</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote">"</div>
+        <div class="testimonial-text">جودة الأنيميشن الذي قدمته 3D Graphics House لمشروعنا تجاوزت كل توقعاتنا. أصبح الفيلم الأساسي في حملتنا التسويقية ووسيلتنا الأولى في المعارض.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">م.ع</div>
+          <div>
+            <div class="testimonial-name">م. عبدالله الشمري</div>
+            <div class="testimonial-role">مدير تطوير، مجموعة عقارية رائدة، الرياض</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-quote">"</div>
+        <div class="testimonial-text">النموذج المجسم الذي أنجزوه لمشروع أنان إسكان كان مذهلًا في دقته وروعة تنفيذه. استقطب انتباه كل زوار معرضنا وأسهم مباشرة في إغلاق صفقات مهمة.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">خ.ر</div>
+          <div>
+            <div class="testimonial-name">خالد الرشيدي</div>
+            <div class="testimonial-role">المدير التنفيذي، أنان إسكان للتطوير</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-quote">"</div>
+        <div class="testimonial-text">فريق متميز يجمع بين الفهم العميق للسوق المحلي واحترافية على المستوى الدولي. سرية عالية وأعمال استثنائية في كل مرحلة.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">س.م</div>
+          <div>
+            <div class="testimonial-name">سامي المطيري</div>
+            <div class="testimonial-role">مدير المشاريع، مجموعة عمرانية متكاملة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section reveal" aria-label="ابدأ مشروعك">
+  <div class="container">
+    <div class="t-label" style="margin-bottom:16px;">هل أنت جاهز؟</div>
+    <h2 class="cta-title">
+      مشروعك القادم
+      <em>يستحق أفضل</em>
+    </h2>
+    <p class="cta-sub">من تصور أولي إلى إنتاج سينمائي كامل — نحوّل مشاريعكم إلى تجارب بصرية تُقنع وتُلهم وتُحقق نتائج.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-gold">ابدأ مشروعك الآن</a>
+      <a href="portfolio.html" class="btn btn-outline">استعرض أعمالنا</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="../assets/images/logo.png" alt="3D Graphics House" style="height:44px;margin-bottom:16px;">
+        <p class="footer-brand-desc">الشركة الرائدة في الإظهار المعماري ثلاثي الأبعاد، والأنيميشن السينمائي، والنماذج المجسمة الدقيقة في المملكة العربية السعودية والخليج.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/3dgraphicshouse/" target="_blank" class="footer-social-link" aria-label="Instagram">IG</a>
+          <a href="https://www.youtube.com/user/3dghouse/videos" target="_blank" class="footer-social-link" aria-label="YouTube">YT</a>
+          <a href="https://web.facebook.com/3dghouse" target="_blank" class="footer-social-link" aria-label="Facebook">FB</a>
+          <a href="https://twitter.com/GraphicsHouse2" target="_blank" class="footer-social-link" aria-label="Twitter">TW</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">الصفحات</div>
+        <ul class="footer-links">
+          <li><a href="about.html">من نحن</a></li>
+          <li><a href="services.html">الخدمات</a></li>
+          <li><a href="portfolio.html">الأعمال</a></li>
+          <li><a href="news.html">الأخبار</a></li>
+          <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">خدماتنا</div>
+        <ul class="footer-links">
+          <li><a href="services.html#visualization">الإظهار المعماري</a></li>
+          <li><a href="services.html#animation">الأنيميشن ثلاثي الأبعاد</a></li>
+          <li><a href="services.html#maquette">النماذج المجسمة</a></li>
+          <li><a href="services.html#media">الإنتاج الإعلامي</a></li>
+          <li><a href="services.html#interactive">الحلول التفاعلية</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">تواصل معنا</div>
+        <div class="footer-contact-item">
+          <span>📍</span>
+          <span>المملكة العربية السعودية<br>المكتب الرئيسي</span>
+        </div>
+        <div class="footer-contact-item">
+          <span>📍</span>
+          <span>عمّان، الأردن<br>المكتب الإقليمي</span>
+        </div>
+        <div class="footer-contact-item">
+          <span>✉</span>
+          <span>info@3dgraphicshouse.com</span>
+        </div>
+        <a href="https://wa.me/966XXXXXXXXX" target="_blank" class="btn btn-ghost" style="margin-top:16px;font-size:0.75rem;padding:10px 18px;">
+          واتساب ←
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 3D Graphics House. جميع الحقوق محفوظة. المملكة العربية السعودية · الخليج · الأردن</p>
+      <div class="footer-bottom-links">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">الشروط والأحكام</a>
+        <a href="../index.html">English</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/966XXXXXXXXX" target="_blank" rel="noopener" class="whatsapp-float" aria-label="واتساب">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.83L0 24l6.32-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.365l-.36-.214-3.732.884.915-3.63-.235-.374A9.818 9.818 0 0112 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.421-4.398 9.818-9.818 9.818z"/></svg>
+</a>
+
+<!-- Sticky Quote -->
+<a href="contact.html" class="sticky-quote">طلب عرض مشروع</a>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Mobile nav
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileNav').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('mobileNavClose').addEventListener('click', () => {
+    document.getElementById('mobileNav').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  // Scroll reveal
+  document.body.classList.add('js-ready');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
