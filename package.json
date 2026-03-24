@@ -2,9 +2,13 @@
   "name": "3d-graphics-house",
   "version": "1.0.0",
   "description": "3D Graphics House - Architectural Visualization Website",
+  "main": "server.js",
   "scripts": {
-    "build": "echo 'Static site - no build needed'",
-    "start": "npx serve ."
+    "start": "node server.js",
+    "build": "echo 'Static site ready'"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   },
   "keywords": ["static", "html"],
   "author": "3D Graphics House"
