@@ -3,168 +3,636 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio — 3D Graphics House | Architectural Visualization Projects</title>
-  <meta name="description" content="Explore 3D Graphics House's portfolio of landmark architectural visualization, media production, and interactive technology projects across Saudi Arabia and the Gulf." />
+  <title>Portfolio — 3D Graphics House | Cinematic Visualization & Maquette Projects</title>
+  <meta name="description" content="Explore 500+ landmark projects — 3D cinematic films, precision maquettes, media production, and interactive experiences across Saudi Arabia and the Gulf." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet" />
+
   <style>
-    .page-hero {
-      min-height: 52vh;
+    /* ── VIDEO HERO ─────────────────────────────────────── */
+    .vid-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 80px;
+    }
+    .vid-hero-bg {
+      position: absolute; inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .vid-hero-bg iframe {
+      width: 100%; height: 100%;
+      border: 0;
+      position: absolute; inset: 0;
+      transform: scale(1.08);
+    }
+    .vid-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.3) 40%, rgba(8,8,8,0.85) 100%);
+      z-index: 1;
+    }
+    .vid-hero-content {
+      position: relative; z-index: 2;
+      padding: 0 40px;
+    }
+    .vid-hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
-      background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(201,164,82,0.07) 0%, transparent 70%), var(--anthracite);
-      padding-top: 120px;
-      position: relative;
-      overflow: hidden;
+      gap: 12px;
     }
-    .page-hero-grid {
-      position: absolute; inset: 0;
-      background-image: linear-gradient(rgba(201,164,82,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,164,82,0.03) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+    .vid-hero-label::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--gold);
     }
-    .filter-section {
+    .vid-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .vid-hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .vid-hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn-play-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 14px 28px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-play-main:hover { background: #e0b85a; transform: scale(1.03); }
+    .btn-play-main .play-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .vid-hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 48px;
+    }
+    .vid-hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .vid-hero-stat-label {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .scroll-cue {
+      position: absolute;
+      bottom: 30px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .scroll-cue span { font-size: 0.65rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+    .scroll-cue-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(180deg, rgba(201,164,82,0.6), transparent);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollLine { 0%,100%{height:50px;opacity:1} 50%{height:20px;opacity:0.4} }
+
+    /* ── FILM STRIP ─────────────────────────────────────── */
+    .filmstrip-wrap {
       background: var(--black);
-      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 18px 0;
+    }
+    .filmstrip-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: filmScroll 28s linear infinite;
+    }
+    .filmstrip-wrap:hover .filmstrip-track { animation-play-state: paused; }
+    @keyframes filmScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .filmstrip-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 32px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .filmstrip-item:hover { opacity: 0.7; }
+    .filmstrip-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .filmstrip-item span {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+    }
+    .filmstrip-item strong {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 400;
+    }
+
+    /* ── FILTER BAR ─────────────────────────────────────── */
+    .filter-bar {
+      background: var(--anthracite);
+      padding: 20px 0;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 72px;
       z-index: 100;
     }
-    .portfolio-masonry {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-      margin-top: 0;
+    .filter-bar .container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
-    .portfolio-card {
-      position: relative;
-      overflow: hidden;
-      background: var(--card-bg);
+    .f-btn {
+      padding: 8px 20px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
       cursor: pointer;
-      aspect-ratio: 4/3;
-      transition: var(--transition);
+      transition: all 0.25s;
     }
-    .portfolio-card.featured {
-      grid-column: span 2;
+    .f-btn:hover, .f-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+    }
+    .f-count {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+    body[dir="rtl"] .f-count { margin-left:0; margin-right:auto; }
+
+    /* ── VIDEO CARDS ────────────────────────────────────── */
+    .section-title-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .section-title-bar h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: #fff;
+    }
+    .section-title-bar h2 em { color: var(--gold); font-style: italic; }
+    .section-title-bar::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+    }
+    .video-card {
+      position: relative;
       aspect-ratio: 16/9;
+      overflow: hidden;
+      cursor: pointer;
+      background: #111;
     }
-    .portfolio-card-img {
+    .video-card.featured-vid {
+      grid-column: span 2;
+      aspect-ratio: 21/9;
+    }
+    .video-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.7s ease;
+      transition: transform 0.8s ease, filter 0.5s ease;
+      filter: brightness(0.75);
     }
-    .portfolio-card-play {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      width: 56px;
-      height: 56px;
-      background: rgba(201,164,82,0.85);
-      border-radius: 50%;
+    .video-card:hover img {
+      transform: scale(1.06);
+      filter: brightness(0.55);
+    }
+    .video-card-overlay {
+      position: absolute; inset: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      color: #080808;
-      z-index: 2;
-      transition: all 0.3s ease;
-      pointer-events: none;
-    }
-    .portfolio-card:hover .portfolio-card-play {
-      background: #c9a452;
-      transform: translate(-50%,-50%) scale(1.15);
-    }
-    .portfolio-card-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
-      gap: 8px;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      color: var(--text-dim);
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
       transition: background 0.4s ease;
     }
-    .portfolio-card:nth-child(6n+1) .portfolio-card-placeholder { background: linear-gradient(135deg,#121212,#1a1a1a); }
-    .portfolio-card:nth-child(6n+2) .portfolio-card-placeholder { background: linear-gradient(135deg,#141414,#1c1c1c); }
-    .portfolio-card:nth-child(6n+3) .portfolio-card-placeholder { background: linear-gradient(135deg,#111111,#181818); }
-    .portfolio-card:nth-child(6n+4) .portfolio-card-placeholder { background: linear-gradient(145deg,#0e0e0e,#161616); }
-    .portfolio-card:nth-child(6n+5) .portfolio-card-placeholder { background: linear-gradient(145deg,#131313,#1b1b1b); }
-    .portfolio-card:nth-child(6n+6) .portfolio-card-placeholder { background: linear-gradient(145deg,#101010,#191919); }
-    .portfolio-card:hover .portfolio-card-img { transform: scale(1.08); }
-    .portfolio-card-overlay {
+    .video-card:hover .video-card-overlay {
+      background: rgba(0,0,0,0.25);
+    }
+    .play-btn-outer {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      border: 2px solid rgba(201,164,82,0.7);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.4s ease;
+      animation: pulseBorder 2.5s ease-in-out infinite;
+    }
+    .video-card:hover .play-btn-outer {
+      border-color: var(--gold);
+      transform: scale(1.12);
+      animation: none;
+    }
+    @keyframes pulseBorder {
+      0%,100%{box-shadow:0 0 0 0 rgba(201,164,82,0.3)}
+      50%{box-shadow:0 0 0 12px rgba(201,164,82,0)}
+    }
+    .play-btn-inner {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(201,164,82,0.85);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      color: #080808;
+      transition: background 0.3s;
+    }
+    .video-card:hover .play-btn-inner { background: var(--gold); }
+    .video-card-info {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.3) 50%, transparent 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 32px;
+      bottom: 0; left: 0; right: 0;
+      padding: 20px 24px;
+      background: linear-gradient(0deg, rgba(8,8,8,0.95) 0%, transparent 100%);
+      transform: translateY(8px);
+      transition: transform 0.4s ease;
+    }
+    .video-card:hover .video-card-info { transform: translateY(0); }
+    .video-card-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .video-card-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: #fff;
+      font-weight: 300;
+    }
+    .video-card-name.large { font-size: 2rem; }
+    .autoplay-badge {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: rgba(201,164,82,0.15);
+      border: 1px solid rgba(201,164,82,0.4);
+      color: var(--gold);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* ── AUTOPLAY EMBED ─────────────────────────────────── */
+    .autoplay-section {
+      position: relative;
+      aspect-ratio: 21/9;
+      overflow: hidden;
+      margin: 3px 0;
+    }
+    .autoplay-section iframe {
+      width: 100%; height: 100%;
+      border: 0;
+      pointer-events: none;
+      transform: scale(1.05);
+    }
+    .autoplay-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(8,8,8,0.2) 0%, rgba(8,8,8,0.65) 100%);
+      pointer-events: none;
+    }
+    .autoplay-caption {
+      position: absolute;
+      bottom: 32px; left: 40px;
+      pointer-events: none;
+    }
+    .autoplay-caption .tag {
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .autoplay-caption h3 {
+      font-family: var(--font-display);
+      font-size: 2.4rem; font-weight: 300; color: #fff;
+    }
+
+    /* ── MAQUETTE GALLERY ───────────────────────────────── */
+    .maquette-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+    .maquette-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: #111;
+      cursor: pointer;
+    }
+    .maquette-card.wide { grid-column: span 2; aspect-ratio: 4/3; }
+    .maquette-card.tall { grid-row: span 2; }
+    .maquette-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease, filter 0.5s ease;
+    }
+    .maquette-card:hover img { transform: scale(1.1); filter: brightness(0.7); }
+    .maquette-card-info {
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(8,8,8,0.9) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 20px;
       opacity: 0;
       transition: opacity 0.4s ease;
     }
-    .portfolio-card:hover .portfolio-card-overlay { opacity: 1; }
-    .portfolio-card-tag {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-    .portfolio-card-name {
+    .maquette-card:hover .maquette-card-info { opacity: 1; }
+    .maquette-card-name {
       font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--white);
+      font-size: 1.1rem; color: #fff; font-weight: 300;
+    }
+    .maquette-card-sub {
+      font-size: 0.7rem; letter-spacing: 0.1em;
+      color: var(--gold); text-transform: uppercase;
       margin-bottom: 6px;
     }
-    .portfolio-card-meta {
-      font-size: 0.78rem;
-      color: rgba(232,226,217,0.6);
-      margin-bottom: 16px;
-    }
-    .portfolio-card-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+    .maquette-event-badge {
+      display: inline-block;
+      background: rgba(201,164,82,0.15);
+      border: 1px solid rgba(201,164,82,0.35);
       color: var(--gold);
+      font-size: 0.65rem; letter-spacing: 0.12em;
       text-transform: uppercase;
+      padding: 3px 10px;
+      margin-bottom: 10px;
     }
-    .portfolio-empty {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 80px 0;
-      color: var(--text-dim);
-      font-size: 0.9rem;
+
+    /* ── MEDIA PRODUCTION ───────────────────────────────── */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+    }
+    .media-card {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #111;
+      cursor: pointer;
+    }
+    .media-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s, filter 0.5s;
+      filter: brightness(0.65) grayscale(0.3);
+    }
+    .media-card:hover img { transform: scale(1.07); filter: brightness(0.5) grayscale(0); }
+    .media-card-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 60%);
+    }
+    .media-card-type {
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .media-card-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem; color: #fff; font-weight: 300;
+      margin-bottom: 10px;
+    }
+    .media-card-desc {
+      font-size: 0.78rem; color: rgba(255,255,255,0.55);
+      line-height: 1.6; max-width: 420px;
+    }
+    .media-card-cta {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 0.72rem; letter-spacing: 0.12em;
+      color: var(--gold); text-transform: uppercase;
+      border-bottom: 1px solid rgba(201,164,82,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.3s;
+    }
+    .media-card:hover .media-card-cta { border-color: var(--gold); }
+
+    /* ── LIGHTBOX ────────────────────────────────────────── */
+    .lightbox {
       display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.97);
+      z-index: 9999;
+      align-items: center; justify-content: center;
+      flex-direction: column;
     }
-    .portfolio-count {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      margin-left: auto;
+    .lightbox.open { display: flex; animation: lbIn 0.3s ease; }
+    @keyframes lbIn { from{opacity:0;transform:scale(0.96)} to{opacity:1;transform:scale(1)} }
+    .lightbox-inner {
+      position: relative;
+      width: min(900px, 92vw);
+      aspect-ratio: 16/9;
+      background: #000;
+      box-shadow: 0 0 80px rgba(201,164,82,0.15);
     }
-    body[dir="rtl"] .portfolio-count { margin-left: 0; margin-right: auto; }
+    .lightbox-inner iframe { width: 100%; height: 100%; border: 0; }
+    .lightbox-close {
+      position: absolute;
+      top: -44px; right: 0;
+      background: none; border: none;
+      color: #fff; font-size: 22px;
+      cursor: pointer; opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; color: var(--gold); }
+    .lightbox-title {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
+    .lightbox-nav {
+      display: flex; gap: 20px; margin-top: 14px;
+    }
+    .lb-nav-btn {
+      background: rgba(201,164,82,0.12);
+      border: 1px solid rgba(201,164,82,0.25);
+      color: var(--gold);
+      font-size: 0.7rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 8px 20px; cursor: pointer;
+      transition: all 0.3s;
+    }
+    .lb-nav-btn:hover { background: var(--gold); color: var(--black); }
+
+    /* ── IMAGE LIGHTBOX (maquette) ──────────────────────── */
+    .img-lightbox {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.97);
+      z-index: 9999;
+      align-items: center; justify-content: center;
+    }
+    .img-lightbox.open { display: flex; animation: lbIn 0.3s ease; }
+    .img-lightbox img {
+      max-width: min(90vw, 1200px);
+      max-height: 85vh;
+      object-fit: contain;
+      box-shadow: 0 0 60px rgba(0,0,0,0.5);
+    }
+    .img-lightbox-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none; border: none;
+      color: #fff; font-size: 28px;
+      cursor: pointer; transition: color 0.2s;
+    }
+    .img-lightbox-close:hover { color: var(--gold); }
+
+    /* ── SECTION DIVIDER ────────────────────────────────── */
+    .section-divider {
+      display: flex; align-items: center;
+      gap: 24px;
+      padding: 64px 40px 32px;
+    }
+    .section-divider .sd-icon {
+      width: 48px; height: 48px;
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 18px;
+      flex-shrink: 0;
+    }
+    .section-divider h2 {
+      font-family: var(--font-display);
+      font-size: 2.4rem; font-weight: 300; color: #fff;
+    }
+    .section-divider h2 em { color: var(--gold); font-style: italic; }
+    .section-divider p {
+      font-size: 0.82rem; color: var(--text-dim);
+      margin-top: 6px; max-width: 520px;
+    }
+    .section-divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* ── CTA BANNER ─────────────────────────────────────── */
+    .portfolio-cta {
+      background: linear-gradient(135deg, rgba(201,164,82,0.08) 0%, transparent 60%);
+      border-top: 1px solid var(--border);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .portfolio-cta h2 {
+      font-family: var(--font-display);
+      font-size: 2.8rem; font-weight: 300;
+      color: #fff; margin-bottom: 16px;
+    }
+    .portfolio-cta h2 em { color: var(--gold); font-style: italic; }
+    .portfolio-cta p {
+      color: var(--text-dim); max-width: 480px;
+      margin: 0 auto 32px; font-size: 0.9rem; line-height: 1.7;
+    }
+    .portfolio-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 900px) {
-      .portfolio-masonry { grid-template-columns: repeat(2, 1fr); }
-      .portfolio-card.featured { grid-column: span 2; }
+      .videos-grid { grid-template-columns: 1fr; }
+      .video-card.featured-vid { grid-column: span 1; aspect-ratio: 16/9; }
+      .maquette-grid { grid-template-columns: repeat(2,1fr); }
+      .maquette-card.wide { grid-column: span 2; }
+      .maquette-card.tall { grid-row: span 1; }
+      .media-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .portfolio-masonry { grid-template-columns: 1fr; }
-      .portfolio-card.featured { grid-column: span 1; aspect-ratio: 4/3; }
+      .vid-hero-title { font-size: 2.6rem; }
+      .vid-hero-stats { gap: 24px; }
+      .maquette-grid { grid-template-columns: 1fr; }
+      .maquette-card.wide { grid-column: span 1; }
+      .section-divider { flex-direction: column; align-items: flex-start; }
+      .autoplay-section { aspect-ratio: 16/9; }
     }
+    body[dir="rtl"] .vid-hero-label::before { display: none; }
+    body[dir="rtl"] .vid-hero-label::after { content:''; width:32px; height:1px; background:var(--gold); }
+    body[dir="rtl"] .section-divider-line { background: linear-gradient(270deg, var(--border), transparent); }
+    body[dir="rtl"] .autoplay-caption { left: auto; right: 40px; }
   </style>
 </head>
 <body>
 
+<!-- Lightbox: Video -->
+<div class="lightbox" id="videoLightbox" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
+    <iframe id="lbIframe" src="" title="Project video" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+  </div>
+  <p class="lightbox-title" id="lbTitle"></p>
+  <div class="lightbox-nav">
+    <button class="lb-nav-btn" id="lbPrev" data-en="← Previous" data-ar="السابق ←">← Previous</button>
+    <button class="lb-nav-btn" id="lbNext" data-en="Next →" data-ar="→ التالي">Next →</button>
+  </div>
+</div>
+
+<!-- Lightbox: Image -->
+<div class="img-lightbox" id="imgLightbox" role="dialog" aria-modal="true">
+  <button class="img-lightbox-close" id="imgLbClose" aria-label="Close">✕</button>
+  <img src="" alt="" id="imgLbSrc" />
+</div>
+
+<!-- NAVBAR -->
 <nav class="navbar" role="navigation">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
@@ -179,6 +647,7 @@
       <li><a href="about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a></li>
       <li><a href="services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
       <li><a href="portfolio.html" class="nav-link active" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
+      <li><a href="news.html" class="nav-link" data-en="News" data-ar="الأخبار">News</a></li>
       <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
     </ul>
     <div class="nav-actions">
@@ -191,219 +660,497 @@
 <div class="mobile-nav" role="dialog" aria-modal="true">
   <button class="mobile-nav-close">✕</button>
   <ul role="list">
-    <li><a href="index.html" class="nav-link">Home</a></li>
-    <li><a href="about.html" class="nav-link">About</a></li>
-    <li><a href="services.html" class="nav-link">Services</a></li>
-    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-    <li><a href="contact.html" class="nav-link">Contact</a></li>
+    <li><a href="index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a></li>
+    <li><a href="about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a></li>
+    <li><a href="services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
+    <li><a href="portfolio.html" class="nav-link" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
+    <li><a href="news.html" class="nav-link" data-en="News" data-ar="الأخبار">News</a></li>
+    <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
   </ul>
 </div>
 
-<!-- Hero -->
-<section class="page-hero" aria-label="Portfolio hero">
-  <div class="page-hero-grid" aria-hidden="true"></div>
-  <div class="container">
-    <div class="section-label" data-en="Our Work" data-ar="أعمالنا">Our Work</div>
-    <h1 style="max-width:700px;" class="reveal" data-en="500+ Projects.<br><em>One Standard.</em>" data-ar="أكثر من 500 مشروع.<br><em>معيار واحد.</em>">500+ Projects.<br><em>One Standard.</em></h1>
-    <p style="max-width:580px;margin-top:20px;" class="reveal" data-en="A curated selection of our most impactful work across visualization, media production, and interactive technology — delivered for Saudi Arabia's most prestigious clients." data-ar="مختارات من أكثر أعمالنا تأثيراً عبر الإظهار وإنتاج الإعلام والتقنية التفاعلية — مُسلَّمة لعملاء المملكة العربية السعودية الأكثر مكانة.">A curated selection of our most impactful work across visualization, media production, and interactive technology — delivered for Saudi Arabia's most prestigious clients.</p>
+<!-- ═══════════ CINEMATIC HERO ═══════════ -->
+<section class="vid-hero" aria-label="Portfolio hero">
+  <!-- YouTube background video — Jeddah Forum, autoplay muted loop -->
+  <div class="vid-hero-bg">
+    <iframe
+      src="https://www.youtube.com/embed/vYbn-9ramsI?autoplay=1&mute=1&loop=1&playlist=vYbn-9ramsI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+      title="Background showreel"
+      allow="autoplay; encrypted-media"
+      loading="eager">
+    </iframe>
+  </div>
+  <div class="vid-hero-overlay" aria-hidden="true"></div>
+
+  <div class="vid-hero-content container">
+    <div class="vid-hero-label" data-en="500+ Delivered Projects" data-ar="أكثر من 500 مشروع منجز">500+ Delivered Projects</div>
+    <h1 class="vid-hero-title" data-en="Vision Becomes<br><em>Cinematic Reality</em>" data-ar="الرؤية تصبح<br><em>واقعاً سينمائياً</em>">Vision Becomes<br><em>Cinematic Reality</em></h1>
+    <div class="vid-hero-actions">
+      <button class="btn-play-main" data-video="vYbn-9ramsI" data-title="Jeddah Forum" data-en="▶ Watch Jeddah Forum Film" data-ar="▶ شاهد فيلم منتدى جدة">
+        <span class="play-icon">▶</span>
+        Watch Jeddah Forum Film
+      </button>
+      <a href="#cinematic" class="btn btn-outline" data-en="Explore All Projects" data-ar="استعرض جميع المشاريع">Explore All Projects</a>
+    </div>
+    <div class="vid-hero-stats">
+      <div>
+        <div class="vid-hero-stat-num">15+</div>
+        <div class="vid-hero-stat-label" data-en="Years in Market" data-ar="سنة في السوق">Years in Market</div>
+      </div>
+      <div>
+        <div class="vid-hero-stat-num">500+</div>
+        <div class="vid-hero-stat-label" data-en="Projects Delivered" data-ar="مشروع منجز">Projects Delivered</div>
+      </div>
+      <div>
+        <div class="vid-hero-stat-num">3</div>
+        <div class="vid-hero-stat-label" data-en="Gulf Countries" data-ar="دول خليجية">Gulf Countries</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">
+    <span data-en="Scroll" data-ar="للأسفل">Scroll</span>
+    <div class="scroll-cue-line"></div>
   </div>
 </section>
 
-<!-- Filter Bar -->
-<div class="filter-section" role="navigation" aria-label="Portfolio filter">
-  <div class="container">
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-      <div class="filter-row" style="margin-bottom:0;flex:1;">
-        <button class="filter-btn active" data-filter="all" data-en="All Projects" data-ar="جميع المشاريع">All Projects</button>
-        <button class="filter-btn" data-filter="animation" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</button>
-        <button class="filter-btn" data-filter="visualization" data-en="Visualization" data-ar="إظهار معماري">Visualization</button>
-        <button class="filter-btn" data-filter="interactive" data-en="Interactive · Maquette" data-ar="تفاعلي · ماكيت">Interactive · Maquette</button>
-        <button class="filter-btn" data-filter="residential" data-en="Residential" data-ar="سكني">Residential</button>
-        <button class="filter-btn" data-filter="commercial" data-en="Commercial" data-ar="تجاري">Commercial</button>
-      </div>
-      <span class="portfolio-count" id="projectCount" aria-live="polite">12 Projects</span>
-    </div>
+<!-- ═══════════ FILM STRIP TICKER ═══════════ -->
+<div class="filmstrip-wrap" aria-hidden="true">
+  <div class="filmstrip-track" id="filmStrip">
+    <!-- duplicated for seamless loop -->
+    <div class="filmstrip-item" data-video="vYbn-9ramsI" data-title="Jeddah Forum"><div class="filmstrip-dot"></div><span>3D Animation</span><strong>Jeddah Forum</strong></div>
+    <div class="filmstrip-item" data-video="ilWeCush3ew" data-title="Rafal Pavilions"><div class="filmstrip-dot"></div><span>3D Animation</span><strong>Rafal Pavilions</strong></div>
+    <div class="filmstrip-item" data-video="GlbvI0DRXE4" data-title="Makkah Market Center"><div class="filmstrip-dot"></div><span>3D Animation</span><strong>Makkah Market Center</strong></div>
+    <div class="filmstrip-item" data-video="ALz6GdeITYc" data-title="Alrajhi Naseem Al-Haram"><div class="filmstrip-dot"></div><span>3D Animation</span><strong>Alrajhi Naseem Al-Haram</strong></div>
+    <div class="filmstrip-item"><div class="filmstrip-dot"></div><span>Maquette</span><strong>Muslim World League</strong></div>
+    <div class="filmstrip-item"><div class="filmstrip-dot"></div><span>Maquette</span><strong>Anan Escan Co.</strong></div>
+    <div class="filmstrip-item"><div class="filmstrip-dot"></div><span>Media</span><strong>Al-Khayyat Red Bricks Factory</strong></div>
+    <div class="filmstrip-item"><div class="filmstrip-dot"></div><span>Media</span><strong>Al-Ahli Saudi Club</strong></div>
+    <!-- duplicate -->
+    <div class="filmstrip-item" data-video="vYbn-9ramsI" data-title="Jeddah Forum"><div class="filmstrip-dot"></div><span>3D Animation</span><strong>Jeddah Forum</strong></div>
+    <div class="filmstrip-item" data-video="ilWeCush3ew" data-title="Rafal Pavilions"><div class="filmstrip-dot"></div><span>3D Animation</span><strong>Rafal Pavilions</strong></div>
+    <div class="filmstrip-item" data-video="GlbvI0DRXE4" data-title="Makkah Market Center"><div class="filmstrip-dot"></div><span>3D Animation</span><strong>Makkah Market Center</strong></div>
+    <div class="filmstrip-item" data-video="ALz6GdeITYc" data-title="Alrajhi Naseem Al-Haram"><div class="filmstrip-dot"></div><span>3D Animation</span><strong>Alrajhi Naseem Al-Haram</strong></div>
+    <div class="filmstrip-item"><div class="filmstrip-dot"></div><span>Maquette</span><strong>Muslim World League</strong></div>
+    <div class="filmstrip-item"><div class="filmstrip-dot"></div><span>Maquette</span><strong>Anan Escan Co.</strong></div>
+    <div class="filmstrip-item"><div class="filmstrip-dot"></div><span>Media</span><strong>Al-Khayyat Red Bricks Factory</strong></div>
+    <div class="filmstrip-item"><div class="filmstrip-dot"></div><span>Media</span><strong>Al-Ahli Saudi Club</strong></div>
   </div>
 </div>
 
-<!-- Portfolio Grid -->
-<section style="background:var(--black);padding:4px 0;" aria-label="Portfolio projects">
-  <div class="portfolio-masonry" id="portfolioGrid">
-
-    <!-- 1. Jeddah Forum — Featured Animation (real YouTube project) -->
-    <div class="portfolio-card featured reveal" data-category="animation" role="article" aria-label="Jeddah Forum project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/jeddah-forum.jpg" alt="Jeddah Forum 3D Animation" loading="lazy">
-      <div class="portfolio-card-play">▶</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="3D Animation · Commercial" data-ar="أنيميشن ثلاثي الأبعاد · تجاري">3D Animation · Commercial</div>
-        <div class="portfolio-card-name" data-en="Jeddah Forum" data-ar="منتدى جدة">Jeddah Forum</div>
-        <div class="portfolio-card-meta" data-en="Cinematic 3D animation · Commercial complex" data-ar="أنيميشن سينمائي ثلاثي الأبعاد · مجمع تجاري">Cinematic 3D animation · Commercial complex</div>
-        <a href="https://www.youtube.com/watch?v=vYbn-9ramsI" target="_blank" rel="noopener" class="portfolio-card-cta" data-en="Watch on YouTube →" data-ar="شاهد على يوتيوب →">Watch on YouTube →</a>
-      </div>
-    </div>
-
-    <!-- 2. Rafal Pavilions -->
-    <div class="portfolio-card reveal reveal-delay-1" data-category="animation" role="article" aria-label="Rafal Pavilions project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/rafal-pavilions.jpg" alt="Rafal Pavilions VIP Offices" loading="lazy">
-      <div class="portfolio-card-play">▶</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="3D Animation · Residential" data-ar="أنيميشن ثلاثي الأبعاد · سكني">3D Animation · Residential</div>
-        <div class="portfolio-card-name" data-en="Rafal Pavilions — VIP Offices" data-ar="رفال بافيليونز — مكاتب VIP">Rafal Pavilions — VIP Offices</div>
-        <div class="portfolio-card-meta" data-en="Luxury pavilions 3D walkthrough" data-ar="جولة ثلاثية الأبعاد لأجنحة فاخرة">Luxury pavilions 3D walkthrough</div>
-        <a href="https://www.youtube.com/watch?v=ilWeCush3ew" target="_blank" rel="noopener" class="portfolio-card-cta" data-en="Watch on YouTube →" data-ar="شاهد على يوتيوب →">Watch on YouTube →</a>
-      </div>
-    </div>
-
-    <!-- 3. Makkah Market Center -->
-    <div class="portfolio-card reveal" data-category="animation" role="article" aria-label="Makkah Market Center project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/makkah-market.jpg" alt="Makkah Market Center" loading="lazy">
-      <div class="portfolio-card-play">▶</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="3D Animation · Commercial" data-ar="أنيميشن ثلاثي الأبعاد · تجاري">3D Animation · Commercial</div>
-        <div class="portfolio-card-name" data-en="Makkah Market Center" data-ar="مركز سوق مكة">Makkah Market Center</div>
-        <div class="portfolio-card-meta" data-en="Commercial center full 3D cinematic" data-ar="أنيميشن سينمائي كامل لمركز تجاري">Commercial center full 3D cinematic</div>
-        <a href="https://www.youtube.com/watch?v=GlbvI0DRXE4" target="_blank" rel="noopener" class="portfolio-card-cta" data-en="Watch on YouTube →" data-ar="شاهد على يوتيوب →">Watch on YouTube →</a>
-      </div>
-    </div>
-
-    <!-- 4. Alrajhi Naseem Al-Haram -->
-    <div class="portfolio-card reveal reveal-delay-1" data-category="animation" role="article" aria-label="Alrajhi Naseem Al-Haram project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/alrajhi-naseem.jpg" alt="Alrajhi Naseem Al-Haram" loading="lazy">
-      <div class="portfolio-card-play">▶</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="3D Animation · Hospitality" data-ar="أنيميشن ثلاثي الأبعاد · ضيافة">3D Animation · Hospitality</div>
-        <div class="portfolio-card-name" data-en="Alrajhi Naseem Al-Haram" data-ar="الراجحي نسيم الحرام">Alrajhi Naseem Al-Haram</div>
-        <div class="portfolio-card-meta" data-en="Luxury residential project near Holy Mosque" data-ar="مشروع سكني فاخر بالقرب من الحرم">Luxury residential project near Holy Mosque</div>
-        <a href="https://youtu.be/ALz6GdeITYc" target="_blank" rel="noopener" class="portfolio-card-cta" data-en="Watch on YouTube →" data-ar="شاهد على يوتيوب →">Watch on YouTube →</a>
-      </div>
-    </div>
-
-    <!-- 5. Birds Eye View — Featured Visualization -->
-    <div class="portfolio-card featured reveal reveal-delay-2" data-category="visualization" role="article" aria-label="Birds eye view project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/birds-eye-view.jpg" alt="Aerial Birds Eye View Visualization" loading="lazy">
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Aerial Visualization · Master Plan" data-ar="إظهار جوي · مخطط رئيسي">Aerial Visualization · Master Plan</div>
-        <div class="portfolio-card-name" data-en="Birds Eye Aerial Views" data-ar="إظهارات الطيران الجوي">Birds Eye Aerial Views</div>
-        <div class="portfolio-card-meta" data-en="High-altitude photorealistic aerial renders" data-ar="إظهارات جوية فوتوواقعية عالية الارتفاع">High-altitude photorealistic aerial renders</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar Project →" data-ar="ابدأ مشروعاً مشابهاً →">Start Similar Project →</a>
-      </div>
-    </div>
-
-    <!-- 6. Wahat Alsalam -->
-    <div class="portfolio-card reveal" data-category="visualization" role="article" aria-label="Wahat Alsalam project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/wahat-alsalam.jpg" alt="Wahat Alsalam Residential" loading="lazy">
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Residential · Exterior Visualization" data-ar="سكني · إظهار خارجي">Residential · Exterior Visualization</div>
-        <div class="portfolio-card-name" data-en="Wahat Alsalam" data-ar="واحة السلام">Wahat Alsalam</div>
-        <div class="portfolio-card-meta" data-en="Multiple-angle photorealistic renders" data-ar="إظهارات فوتوواقعية من زوايا متعددة">Multiple-angle photorealistic renders</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar →" data-ar="ابدأ مشابهاً →">Start Similar →</a>
-      </div>
-    </div>
-
-    <!-- 7. Aloula Al-Nakheel -->
-    <div class="portfolio-card reveal reveal-delay-1" data-category="visualization" role="article" aria-label="Aloula Al-Nakheel project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/aloula-nakheel.jpg" alt="Aloula Al-Nakheel Views" loading="lazy">
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Residential · Landscape Visualization" data-ar="سكني · إظهار المناظر الطبيعية">Residential · Landscape Visualization</div>
-        <div class="portfolio-card-name" data-en="Aloula — Al-Nakheel Views" data-ar="العلا — مناظر النخيل">Aloula — Al-Nakheel Views</div>
-        <div class="portfolio-card-meta" data-en="Luxury compound full visualization package" data-ar="حزمة إظهار كاملة لمجمع فاخر">Luxury compound full visualization package</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar →" data-ar="ابدأ مشابهاً →">Start Similar →</a>
-      </div>
-    </div>
-
-    <!-- 8. Architectural Scale Model / Maquette -->
-    <div class="portfolio-card reveal reveal-delay-2" data-category="interactive" role="article" aria-label="Maquette scale model project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/maquette-model.jpg" alt="Architectural Scale Model Maquette" loading="lazy">
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Interactive · Scale Model · Maquette" data-ar="تفاعلي · نموذج مجسم · ماكيت">Interactive · Scale Model · Maquette</div>
-        <div class="portfolio-card-name" data-en="Architectural Scale Maquette" data-ar="النموذج المعماري المجسم">Architectural Scale Maquette</div>
-        <div class="portfolio-card-meta" data-en="Handcrafted precision architectural model" data-ar="نموذج معماري دقيق مصنوع يدوياً">Handcrafted precision architectural model</div>
-        <a href="contact.html?ref=imaquette" class="portfolio-card-cta" data-en="Request Demo →" data-ar="اطلب عرضاً →">Request Demo →</a>
-      </div>
-    </div>
-
-    <!-- 9. Interior Render -->
-    <div class="portfolio-card reveal" data-category="visualization" role="article" aria-label="Interior visualization project">
-      <img class="portfolio-card-img" src="assets/images/portfolio/interior-render.jpg" alt="Luxury Interior Visualization" loading="lazy">
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Interior · Luxury Visualization" data-ar="داخلي · إظهار فاخر">Interior · Luxury Visualization</div>
-        <div class="portfolio-card-name" data-en="Luxury Interior Renders" data-ar="إظهارات داخلية فاخرة">Luxury Interior Renders</div>
-        <div class="portfolio-card-meta" data-en="Full photorealistic interior visualization package" data-ar="حزمة إظهار داخلي فوتوواقعي كاملة">Full photorealistic interior visualization package</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar →" data-ar="ابدأ مشابهاً →">Start Similar →</a>
-      </div>
-    </div>
-
-    <div class="portfolio-empty" id="portfolioEmpty" aria-live="polite">
-      <span data-en="No projects match this filter. Try another category." data-ar="لا توجد مشاريع تطابق هذا الفلتر. جرّب فئة أخرى.">No projects match this filter. Try another category.</span>
-    </div>
-
+<!-- ═══════════ FILTER BAR ═══════════ -->
+<div class="filter-bar" role="navigation" aria-label="Portfolio filter">
+  <div class="container">
+    <button class="f-btn active" data-filter="all" data-en="All Projects" data-ar="جميع المشاريع">All Projects</button>
+    <button class="f-btn" data-filter="cinematic" data-en="3D Cinematic" data-ar="سينمائي ثلاثي الأبعاد">3D Cinematic</button>
+    <button class="f-btn" data-filter="maquette" data-en="Maquette" data-ar="ماكيت">Maquette</button>
+    <button class="f-btn" data-filter="media" data-en="Media Production" data-ar="إنتاج إعلامي">Media Production</button>
+    <button class="f-btn" data-filter="visualization" data-en="Visualization" data-ar="إظهار معماري">Visualization</button>
+    <span class="f-count" id="projectCount" data-en="Showing all projects" data-ar="عرض جميع المشاريع">Showing all projects</span>
   </div>
-</section>
-
-<!-- Load More -->
-<div style="background:var(--black);padding:60px 0;text-align:center;border-top:1px solid var(--border);">
-  <p style="color:var(--text-dim);margin-bottom:24px;" data-en="Showing 12 of 500+ delivered projects" data-ar="عرض 12 من 500+ مشروع منجز">Showing 12 of 500+ delivered projects</p>
-  <a href="contact.html" class="btn btn-outline" data-en="Request Full Portfolio PDF" data-ar="اطلب ملف الأعمال الكامل PDF">Request Full Portfolio PDF</a>
 </div>
 
-<!-- CTA -->
-<section class="cta-banner" aria-label="Start similar project">
-  <div class="container">
-    <h2 class="reveal" data-en="Seen Something That<br>Inspires You?" data-ar="رأيت شيئاً<br>يلهمك؟">Seen Something That<br>Inspires You?</h2>
-    <p class="reveal" data-en="Share a reference project and let us build something even better for your development." data-ar="شارك مشروعاً مرجعياً ودعنا نبني شيئاً أفضل لتطويرك.">Share a reference project and let us build something even better for your development.</p>
-    <div class="cta-buttons reveal">
-      <a href="contact.html" class="btn btn-gold" data-en="Start Your Project" data-ar="ابدأ مشروعك">Start Your Project</a>
-      <a href="services.html" class="btn btn-outline" data-en="Explore Services" data-ar="اكتشف الخدمات">Explore Services</a>
+<!-- ═══════════ CINEMATIC FILMS ═══════════ -->
+<section id="cinematic" data-section="cinematic" style="background:var(--black);">
+  <div class="section-divider">
+    <div class="sd-icon">▶</div>
+    <div>
+      <h2 data-en="3D Cinematic <em>Films</em>" data-ar="الأفلام <em>السينمائية</em> ثلاثية الأبعاد">3D Cinematic <em>Films</em></h2>
+      <p data-en="Award-worthy 3D animation productions — from concept to final render" data-ar="إنتاجات أنيميشن ثلاثية الأبعاد تستحق الجوائز — من المفهوم إلى الإخراج النهائي">Award-worthy 3D animation productions — from concept to final render</p>
     </div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="videos-grid" style="padding:0 3px;">
+
+    <!-- Featured: Jeddah Forum -->
+    <div class="video-card featured-vid reveal" data-video="vYbn-9ramsI" data-title="Jeddah Forum" role="button" tabindex="0" aria-label="Play Jeddah Forum film">
+      <img src="https://img.youtube.com/vi/vYbn-9ramsI/maxresdefault.jpg" alt="Jeddah Forum 3D Animation" loading="lazy">
+      <div class="video-card-overlay">
+        <div class="play-btn-outer"><div class="play-btn-inner">▶</div></div>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-tag" data-en="3D Animation · Branding · Commercial" data-ar="أنيميشن ثلاثي الأبعاد · هوية · تجاري">3D Animation · Branding · Commercial</div>
+        <div class="video-card-name large" data-en="Jeddah Forum" data-ar="منتدى جدة">Jeddah Forum</div>
+      </div>
+      <span class="autoplay-badge" data-en="● Featured" data-ar="● مميز">● Featured</span>
+    </div>
+
+    <!-- Rafal Pavilions -->
+    <div class="video-card reveal" data-video="ilWeCush3ew" data-title="Rafal Pavilions — VIP Offices" role="button" tabindex="0" aria-label="Play Rafal Pavilions film">
+      <img src="https://img.youtube.com/vi/ilWeCush3ew/maxresdefault.jpg" alt="Rafal Pavilions VIP Offices" loading="lazy">
+      <div class="video-card-overlay">
+        <div class="play-btn-outer"><div class="play-btn-inner">▶</div></div>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-tag" data-en="3D Animation · Residential" data-ar="أنيميشن ثلاثي الأبعاد · سكني">3D Animation · Residential</div>
+        <div class="video-card-name" data-en="Rafal Pavilions — VIP Offices" data-ar="رفال بافيليونز — مكاتب VIP">Rafal Pavilions — VIP Offices</div>
+      </div>
+    </div>
+
+    <!-- Makkah Market Center -->
+    <div class="video-card reveal" data-video="GlbvI0DRXE4" data-title="Makkah Market Center" role="button" tabindex="0" aria-label="Play Makkah Market Center film">
+      <img src="https://img.youtube.com/vi/GlbvI0DRXE4/maxresdefault.jpg" alt="Makkah Market Center" loading="lazy">
+      <div class="video-card-overlay">
+        <div class="play-btn-outer"><div class="play-btn-inner">▶</div></div>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-tag" data-en="3D Animation · Commercial · Makkah" data-ar="أنيميشن ثلاثي الأبعاد · تجاري · مكة">3D Animation · Commercial · Makkah</div>
+        <div class="video-card-name" data-en="Makkah Market Center" data-ar="مركز سوق مكة">Makkah Market Center</div>
+      </div>
+    </div>
+
+    <!-- Alrajhi Naseem -->
+    <div class="video-card reveal" data-video="ALz6GdeITYc" data-title="Alrajhi Naseem Al-Haram" role="button" tabindex="0" aria-label="Play Alrajhi Naseem Al-Haram film">
+      <img src="https://img.youtube.com/vi/ALz6GdeITYc/maxresdefault.jpg" alt="Alrajhi Naseem Al-Haram" loading="lazy">
+      <div class="video-card-overlay">
+        <div class="play-btn-outer"><div class="play-btn-inner">▶</div></div>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-tag" data-en="3D Animation · Hospitality · Holy City" data-ar="أنيميشن ثلاثي الأبعاد · ضيافة · المدينة المقدسة">3D Animation · Hospitality · Holy City</div>
+        <div class="video-card-name" data-en="Alrajhi Naseem Al-Haram" data-ar="الراجحي نسيم الحرام">Alrajhi Naseem Al-Haram</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<footer class="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-bottom" style="border-top:none;padding:40px 0;">
-      <div class="footer-copy" data-en="© 2025 3D Graphics House. All rights reserved." data-ar="© 2025 3D جرافيكس هاوس. جميع الحقوق محفوظة.">© 2025 3D Graphics House. All rights reserved.</div>
-      <div class="footer-legal">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
+<!-- ═══════════ AUTOPLAY SECTION — Rafal Pavilions ═══════════ -->
+<div class="autoplay-section" id="autoplayEmbed" aria-label="Autoplay project preview">
+  <iframe
+    id="autoplayIframe"
+    data-src="https://www.youtube.com/embed/ilWeCush3ew?autoplay=1&mute=1&loop=1&playlist=ilWeCush3ew&controls=0&rel=0&modestbranding=1&playsinline=1"
+    src=""
+    title="Rafal Pavilions autoplay preview"
+    allow="autoplay; encrypted-media"
+    loading="lazy">
+  </iframe>
+  <div class="autoplay-overlay" aria-hidden="true"></div>
+  <div class="autoplay-caption">
+    <div class="tag" data-en="Now Playing — 3D Animation" data-ar="يُعرض الآن — أنيميشن ثلاثي الأبعاد">Now Playing — 3D Animation</div>
+    <h3 data-en="Rafal Pavilions<br>VIP Offices" data-ar="رفال بافيليونز<br>مكاتب VIP">Rafal Pavilions<br>VIP Offices</h3>
+  </div>
+</div>
+
+<!-- ═══════════ MAQUETTE GALLERY ═══════════ -->
+<section id="maquette" data-section="maquette" style="background:var(--black);">
+  <div class="section-divider">
+    <div class="sd-icon">⬡</div>
+    <div>
+      <h2 data-en="Precision <em>Maquette</em>" data-ar="ماكيت <em>دقيق</em>">Precision <em>Maquette</em></h2>
+      <p data-en="Handcrafted architectural scale models — showcased at the world's most prestigious events" data-ar="نماذج معمارية مجسمة مصنوعة يدوياً — معروضة في أرقى الفعاليات العالمية">Handcrafted architectural scale models — showcased at the world's most prestigious events</p>
+    </div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="maquette-grid" style="padding:0 3px 3px;">
+
+    <!-- Muslim World League Event — Featured -->
+    <div class="maquette-card wide tall reveal" role="article" aria-label="Muslim World League Makkah Charter event">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.56.jpeg" alt="Muslim World League Makkah Charter" loading="lazy">
+      <div class="maquette-card-info">
+        <span class="maquette-event-badge" data-en="● Live Event" data-ar="● فعالية مباشرة">● Live Event</span>
+        <div class="maquette-card-sub" data-en="Architectural Maquette · International Showcase" data-ar="ماكيت معماري · عرض دولي">Architectural Maquette · International Showcase</div>
+        <div class="maquette-card-name" data-en="Muslim World League — Makkah Charter" data-ar="رابطة العالم الإسلامي — وثيقة مكة المكرمة">Muslim World League — Makkah Charter</div>
       </div>
     </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Makkah Charter event photo 2">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.51-1.jpeg" alt="Makkah Charter event" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub" data-en="International Event Showcase" data-ar="عرض دولي">International Event Showcase</div>
+        <div class="maquette-card-name" data-en="Makkah Charter Celebration" data-ar="احتفالية وثيقة مكة المكرمة">Makkah Charter Celebration</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Makkah Charter event photo 3">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.53.jpeg" alt="Makkah Charter maquette detail" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub" data-en="Scale Model · Detail View" data-ar="نموذج مجسم · تفاصيل">Scale Model · Detail View</div>
+        <div class="maquette-card-name" data-en="Precision Craftsmanship" data-ar="حرفية دقيقة">Precision Craftsmanship</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Makkah Charter event photo 4">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.44-1.jpeg" alt="Event showcase" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub" data-en="Makkah Charter · 2025" data-ar="وثيقة مكة المكرمة · 2025">Makkah Charter · 2025</div>
+        <div class="maquette-card-name" data-en="Official Showcase" data-ar="العرض الرسمي">Official Showcase</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Makkah Charter event photo 5">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.44-2.jpeg" alt="Architectural model" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub">Scale Model Detail</div>
+        <div class="maquette-card-name">Architectural Detail</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.45-2.jpeg" alt="Model showcase" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub">Event Photography</div>
+        <div class="maquette-card-name">Live Installation</div>
+      </div>
+    </div>
+
+    <!-- Anan Escan Co. -->
+    <div class="maquette-card wide reveal" role="article" aria-label="Anan Escan Co maquette">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/Anan-Escan-Co.01.jpeg" alt="Anan Escan Co maquette" loading="lazy">
+      <div class="maquette-card-info">
+        <span class="maquette-event-badge" data-en="Client Project" data-ar="مشروع عميل">Client Project</span>
+        <div class="maquette-card-sub" data-en="Architectural Maquette · Precision Craftsmanship" data-ar="ماكيت معماري · حرفية دقيقة">Architectural Maquette · Precision Craftsmanship</div>
+        <div class="maquette-card-name" data-en="Anan Escan Co." data-ar="أنان إسكان للتطوير">Anan Escan Co.</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Anan Escan detail 2">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/anan-escan2.jpeg" alt="Anan Escan model detail" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub">Anan Escan · Detail</div>
+        <div class="maquette-card-name" data-en="Model Detail View" data-ar="تفاصيل النموذج">Model Detail View</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Anan Escan detail 3">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/anan-escan3.jpeg" alt="Anan Escan model" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub">Anan Escan · View 3</div>
+        <div class="maquette-card-name" data-en="Structural Detail" data-ar="تفصيل هيكلي">Structural Detail</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Anan Escan detail 4">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/anan-escan4.jpeg" alt="Anan Escan complete model" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub">Anan Escan · Final</div>
+        <div class="maquette-card-name" data-en="Completed Model" data-ar="النموذج المكتمل">Completed Model</div>
+      </div>
+    </div>
+
   </div>
+</section>
+
+<!-- ═══════════ MEDIA PRODUCTION ═══════════ -->
+<section id="media" data-section="media" style="background:var(--black); margin-top:3px;">
+  <div class="section-divider">
+    <div class="sd-icon">◉</div>
+    <div>
+      <h2 data-en="Media <em>Production</em>" data-ar="<em>إنتاج</em> إعلامي">Media <em>Production</em></h2>
+      <p data-en="Cinematic filming — capturing reality with the precision of a master cinematographer" data-ar="تصوير سينمائي — التقاط الواقع بدقة المصور السينمائي المحترف">Cinematic filming — capturing reality with the precision of a master cinematographer</p>
+    </div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="media-grid" style="padding:0 3px 3px;">
+
+    <div class="media-card reveal" role="article" aria-label="Al-Khayyat Red Bricks Factory">
+      <img src="assets/images/portfolio/birds-eye-view.jpg" alt="Al-Khayyat Red Bricks Factory filming" loading="lazy">
+      <div class="media-card-content">
+        <div class="media-card-type" data-en="Cinematic Production · Industrial" data-ar="إنتاج سينمائي · صناعي">Cinematic Production · Industrial</div>
+        <div class="media-card-title" data-en="Al-Khayyat Red Bricks Factory" data-ar="مصنع الخياط للطوب الأحمر">Al-Khayyat Red Bricks Factory</div>
+        <div class="media-card-desc" data-en="Cinematic film capturing impressive growth and innovation using advanced filming and editing techniques." data-ar="فيلم سينمائي يجسد النمو المتميز والابتكار باستخدام تقنيات التصوير والمونتاج المتقدمة.">Cinematic film capturing impressive growth and innovation using advanced filming and editing techniques.</div>
+        <a href="contact.html" class="media-card-cta" data-en="Start Similar Project →" data-ar="ابدأ مشروعاً مشابهاً →">Start Similar Project →</a>
+      </div>
+    </div>
+
+    <div class="media-card reveal" role="article" aria-label="Al-Ahli Saudi Club">
+      <img src="assets/images/portfolio/interior-render.jpg" alt="Al-Ahli Saudi Club event filming" loading="lazy">
+      <div class="media-card-content">
+        <div class="media-card-type" data-en="Event Coverage · Sports" data-ar="تغطية فعاليات · رياضي">Event Coverage · Sports</div>
+        <div class="media-card-title" data-en="Al-Ahli Saudi Club" data-ar="النادي الأهلي السعودي">Al-Ahli Saudi Club</div>
+        <div class="media-card-desc" data-en="Filmed and edited event highlights — capturing the energy, elegance, and spirit of a premiere sporting occasion." data-ar="تصوير وتحرير أبرز مشاهد الفعالية — التقاط الطاقة والأناقة وروح المناسبة الرياضية المرموقة.">Filmed and edited event highlights — capturing the energy, elegance, and spirit of a premiere sporting occasion.</div>
+        <a href="contact.html" class="media-card-cta" data-en="Start Similar Project →" data-ar="ابدأ مشروعاً مشابهاً →">Start Similar Project →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ VISUALIZATION STILLS ═══════════ -->
+<section id="visualization" data-section="visualization" style="background:var(--black); margin-top:3px;">
+  <div class="section-divider">
+    <div class="sd-icon">◈</div>
+    <div>
+      <h2 data-en="Photorealistic <em>Visualization</em>" data-ar="إظهار <em>فوتوريالستي</em>">Photorealistic <em>Visualization</em></h2>
+      <p data-en="Still renders that blur the line between imagination and reality" data-ar="إظهارات ثابتة تطمس الحدود بين الخيال والواقع">Still renders that blur the line between imagination and reality</p>
+    </div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="maquette-grid" style="padding:0 3px 3px;">
+
+    <div class="maquette-card wide reveal" role="article" aria-label="Birds Eye Aerial Visualization">
+      <img src="assets/images/portfolio/birds-eye-view.jpg" alt="Aerial birds eye view" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub" data-en="Aerial Visualization · Master Plan" data-ar="إظهار جوي · مخطط رئيسي">Aerial Visualization · Master Plan</div>
+        <div class="maquette-card-name" data-en="Birds Eye Aerial Views" data-ar="مناظر جوية من الأعلى">Birds Eye Aerial Views</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Wahat Alsalam">
+      <img src="assets/images/portfolio/wahat-alsalam.jpg" alt="Wahat Alsalam" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub" data-en="Residential · Exterior Visualization" data-ar="سكني · إظهار خارجي">Residential · Exterior Visualization</div>
+        <div class="maquette-card-name" data-en="Wahat Alsalam" data-ar="واحة السلام">Wahat Alsalam</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Aloula Nakheel Views">
+      <img src="assets/images/portfolio/aloula-nakheel.jpg" alt="Aloula Nakheel Views" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub" data-en="Residential · Landscape" data-ar="سكني · مناظر طبيعية">Residential · Landscape</div>
+        <div class="maquette-card-name" data-en="Aloula — Al-Nakheel Views" data-ar="العلا — مناظر النخيل">Aloula — Al-Nakheel Views</div>
+      </div>
+    </div>
+
+    <div class="maquette-card reveal" role="article" aria-label="Interior Renders">
+      <img src="assets/images/portfolio/interior-render.jpg" alt="Luxury Interior Visualization" loading="lazy">
+      <div class="maquette-card-info">
+        <div class="maquette-card-sub" data-en="Interior · Luxury" data-ar="داخلي · فاخر">Interior · Luxury</div>
+        <div class="maquette-card-name" data-en="Luxury Interior Renders" data-ar="إظهارات داخلية فاخرة">Luxury Interior Renders</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="portfolio-cta reveal">
+  <h2 data-en="Your Project,<br>Our <em>Obsession</em>" data-ar="مشروعك،<br><em>شغفنا</em>">Your Project,<br>Our <em>Obsession</em></h2>
+  <p data-en="From a single render to a full cinematic production — we approach every brief with the same obsessive attention to detail." data-ar="من إظهار واحد إلى إنتاج سينمائي كامل — نتعامل مع كل موجز بنفس الاهتمام الشديد بالتفاصيل.">From a single render to a full cinematic production — we approach every brief with the same obsessive attention to detail.</p>
+  <div class="portfolio-cta-btns">
+    <a href="contact.html" class="btn btn-gold" data-en="Start Your Project" data-ar="ابدأ مشروعك">Start Your Project</a>
+    <a href="https://www.youtube.com/user/3dghouse/videos" target="_blank" rel="noopener" class="btn btn-outline" data-en="▶ View YouTube Channel" data-ar="▶ قناة يوتيوب">▶ View YouTube Channel</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--black);border-top:1px solid var(--border);padding:48px 40px;text-align:center;">
+  <a href="index.html" style="display:inline-block;margin-bottom:20px;">
+    <img src="assets/images/logo.png" alt="3D Graphics House" style="height:40px;opacity:0.7;">
+  </a>
+  <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:24px;">
+    <a href="index.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Home" data-ar="الرئيسية">Home</a>
+    <a href="about.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="About" data-ar="من نحن">About</a>
+    <a href="services.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Services" data-ar="الخدمات">Services</a>
+    <a href="news.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="News" data-ar="الأخبار">News</a>
+    <a href="contact.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Contact" data-ar="تواصل">Contact</a>
+  </div>
+  <p style="font-size:0.72rem;color:var(--text-dim);opacity:0.5;">© 2025 3D Graphics House. All rights reserved. Saudi Arabia · Gulf · Jordan</p>
 </footer>
 
-<div class="float-whatsapp">
-  <a href="https://wa.me/966XXXXXXXXX" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
-</div>
-<a href="contact.html" class="sticky-quote-btn"><span data-en="GET FREE QUOTE" data-ar="احصل على عرض مجاني">GET FREE QUOTE</span></a>
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/966XXXXXXXXX" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.83L0 24l6.32-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.365l-.36-.214-3.732.884.915-3.63-.235-.374A9.818 9.818 0 0112 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.421-4.398 9.818-9.818 9.818z"/></svg>
+</a>
 
+<script src="js/main.js" defer></script>
 <script>
-  // Portfolio filter enhancement
-  document.addEventListener('DOMContentLoaded', () => {
-    const btns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.portfolio-card');
-    const countEl = document.getElementById('projectCount');
-    const emptyEl = document.getElementById('portfolioEmpty');
+  // ── Video Lightbox ──────────────────────────────────
+  const videos = [
+    { id: 'vYbn-9ramsI', title: 'Jeddah Forum' },
+    { id: 'ilWeCush3ew', title: 'Rafal Pavilions — VIP Offices' },
+    { id: 'GlbvI0DRXE4', title: 'Makkah Market Center' },
+    { id: 'ALz6GdeITYc', title: 'Alrajhi Naseem Al-Haram' },
+  ];
+  let currentVideoIdx = 0;
 
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        let visible = 0;
-        cards.forEach(card => {
-          const match = filter === 'all' || card.dataset.category === filter;
-          card.style.display = match ? 'block' : 'none';
-          if (match) visible++;
-        });
-        if (countEl) countEl.textContent = visible + ' Projects';
-        if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+  const lb = document.getElementById('videoLightbox');
+  const lbIframe = document.getElementById('lbIframe');
+  const lbTitle = document.getElementById('lbTitle');
+
+  function openVideo(id, title) {
+    currentVideoIdx = videos.findIndex(v => v.id === id);
+    lbIframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+    lbTitle.textContent = title || '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVideo() {
+    lb.classList.remove('open');
+    lbIframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeVideo);
+  lb.addEventListener('click', e => { if(e.target === lb) closeVideo(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeVideo(); });
+
+  document.getElementById('lbNext').addEventListener('click', () => {
+    currentVideoIdx = (currentVideoIdx + 1) % videos.length;
+    const v = videos[currentVideoIdx];
+    openVideo(v.id, v.title);
+  });
+  document.getElementById('lbPrev').addEventListener('click', () => {
+    currentVideoIdx = (currentVideoIdx - 1 + videos.length) % videos.length;
+    const v = videos[currentVideoIdx];
+    openVideo(v.id, v.title);
+  });
+
+  // Click on video cards / filmstrip items
+  document.querySelectorAll('[data-video]').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.dataset.video;
+      const title = el.dataset.title || '';
+      if(id) openVideo(id, title);
+    });
+    el.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.click();
+      }
+    });
+  });
+
+  // ── Image Lightbox ──────────────────────────────────
+  const imgLb = document.getElementById('imgLightbox');
+  const imgLbSrc = document.getElementById('imgLbSrc');
+
+  document.querySelectorAll('.maquette-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const img = card.querySelector('img');
+      if(!img) return;
+      imgLbSrc.src = img.src;
+      imgLbSrc.alt = img.alt;
+      imgLb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  document.getElementById('imgLbClose').addEventListener('click', () => {
+    imgLb.classList.remove('open');
+    imgLbSrc.src = '';
+    document.body.style.overflow = '';
+  });
+  imgLb.addEventListener('click', e => { if(e.target === imgLb) { imgLb.classList.remove('open'); document.body.style.overflow=''; } });
+
+  // ── Autoplay on Scroll (Intersection Observer) ──────
+  const autoplayIframe = document.getElementById('autoplayIframe');
+  const autoplayObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && !autoplayIframe.src) {
+        autoplayIframe.src = autoplayIframe.dataset.src;
+        autoplayObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  autoplayObs.observe(document.getElementById('autoplayEmbed'));
+
+  // ── Filter Sections ──────────────────────────────────
+  document.querySelectorAll('.f-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('[data-section]').forEach(section => {
+        if(filter === 'all' || section.dataset.section === filter) {
+          section.style.display = '';
+        } else {
+          section.style.display = 'none';
+        }
       });
     });
   });
 </script>
-<script src="js/main.js" defer></script>
 </body>
 </html>
