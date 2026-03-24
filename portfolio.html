@@ -56,6 +56,28 @@
       object-fit: cover;
       transition: transform 0.7s ease;
     }
+    .portfolio-card-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 56px;
+      height: 56px;
+      background: rgba(201,164,82,0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #080808;
+      z-index: 2;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .portfolio-card:hover .portfolio-card-play {
+      background: #c9a452;
+      transform: translate(-50%,-50%) scale(1.15);
+    }
     .portfolio-card-placeholder {
       width: 100%;
       height: 100%;
@@ -146,7 +168,7 @@
 <nav class="navbar" role="navigation">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
-      <div class="nav-logo-mark">3DG</div>
+      <img src="assets/images/logo.png" alt="3D Graphics House" style="height:44px;width:auto;">
       <div class="nav-logo-text">
         <span data-en="3D Graphics House" data-ar="3D جرافيكس هاوس">3D Graphics House</span>
         <span data-en="VISUAL INTELLIGENCE" data-ar="الذكاء البصري">VISUAL INTELLIGENCE</span>
@@ -193,13 +215,11 @@
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <div class="filter-row" style="margin-bottom:0;flex:1;">
         <button class="filter-btn active" data-filter="all" data-en="All Projects" data-ar="جميع المشاريع">All Projects</button>
+        <button class="filter-btn" data-filter="animation" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</button>
+        <button class="filter-btn" data-filter="visualization" data-en="Visualization" data-ar="إظهار معماري">Visualization</button>
+        <button class="filter-btn" data-filter="interactive" data-en="Interactive · Maquette" data-ar="تفاعلي · ماكيت">Interactive · Maquette</button>
         <button class="filter-btn" data-filter="residential" data-en="Residential" data-ar="سكني">Residential</button>
         <button class="filter-btn" data-filter="commercial" data-en="Commercial" data-ar="تجاري">Commercial</button>
-        <button class="filter-btn" data-filter="hospitality" data-en="Hospitality" data-ar="ضيافة">Hospitality</button>
-        <button class="filter-btn" data-filter="government" data-en="Government" data-ar="حكومي">Government</button>
-        <button class="filter-btn" data-filter="interior" data-en="Interior" data-ar="داخلي">Interior</button>
-        <button class="filter-btn" data-filter="animation" data-en="Animation" data-ar="أنيميشن">Animation</button>
-        <button class="filter-btn" data-filter="interactive" data-en="Interactive" data-ar="تفاعلي">Interactive</button>
       </div>
       <span class="portfolio-count" id="projectCount" aria-live="polite">12 Projects</span>
     </div>
@@ -210,131 +230,106 @@
 <section style="background:var(--black);padding:4px 0;" aria-label="Portfolio projects">
   <div class="portfolio-masonry" id="portfolioGrid">
 
-    <div class="portfolio-card featured reveal" data-category="residential" role="article" aria-label="Panorama Towers project">
-      <div class="portfolio-card-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" style="opacity:0.15;"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-        Panorama Towers · Exterior
-      </div>
+    <!-- 1. Jeddah Forum — Featured Animation (real YouTube project) -->
+    <div class="portfolio-card featured reveal" data-category="animation" role="article" aria-label="Jeddah Forum project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/jeddah-forum.jpg" alt="Jeddah Forum 3D Animation" loading="lazy">
+      <div class="portfolio-card-play">▶</div>
       <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Residential · Exterior Visualization" data-ar="سكني · إظهار خارجي">Residential · Exterior Visualization</div>
-        <div class="portfolio-card-name" data-en="Panorama Towers, Riyadh" data-ar="أبراج بانوراما، الرياض">Panorama Towers, Riyadh</div>
-        <div class="portfolio-card-meta" data-en="48 luxury residential units · High-rise development" data-ar="48 وحدة سكنية فاخرة · تطوير ناطحات سحاب">48 luxury residential units · High-rise development</div>
+        <div class="portfolio-card-tag" data-en="3D Animation · Commercial" data-ar="أنيميشن ثلاثي الأبعاد · تجاري">3D Animation · Commercial</div>
+        <div class="portfolio-card-name" data-en="Jeddah Forum" data-ar="منتدى جدة">Jeddah Forum</div>
+        <div class="portfolio-card-meta" data-en="Cinematic 3D animation · Commercial complex" data-ar="أنيميشن سينمائي ثلاثي الأبعاد · مجمع تجاري">Cinematic 3D animation · Commercial complex</div>
+        <a href="https://www.youtube.com/watch?v=vYbn-9ramsI" target="_blank" rel="noopener" class="portfolio-card-cta" data-en="Watch on YouTube →" data-ar="شاهد على يوتيوب →">Watch on YouTube →</a>
+      </div>
+    </div>
+
+    <!-- 2. Rafal Pavilions -->
+    <div class="portfolio-card reveal reveal-delay-1" data-category="animation" role="article" aria-label="Rafal Pavilions project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/rafal-pavilions.jpg" alt="Rafal Pavilions VIP Offices" loading="lazy">
+      <div class="portfolio-card-play">▶</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="3D Animation · Residential" data-ar="أنيميشن ثلاثي الأبعاد · سكني">3D Animation · Residential</div>
+        <div class="portfolio-card-name" data-en="Rafal Pavilions — VIP Offices" data-ar="رفال بافيليونز — مكاتب VIP">Rafal Pavilions — VIP Offices</div>
+        <div class="portfolio-card-meta" data-en="Luxury pavilions 3D walkthrough" data-ar="جولة ثلاثية الأبعاد لأجنحة فاخرة">Luxury pavilions 3D walkthrough</div>
+        <a href="https://www.youtube.com/watch?v=ilWeCush3ew" target="_blank" rel="noopener" class="portfolio-card-cta" data-en="Watch on YouTube →" data-ar="شاهد على يوتيوب →">Watch on YouTube →</a>
+      </div>
+    </div>
+
+    <!-- 3. Makkah Market Center -->
+    <div class="portfolio-card reveal" data-category="animation" role="article" aria-label="Makkah Market Center project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/makkah-market.jpg" alt="Makkah Market Center" loading="lazy">
+      <div class="portfolio-card-play">▶</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="3D Animation · Commercial" data-ar="أنيميشن ثلاثي الأبعاد · تجاري">3D Animation · Commercial</div>
+        <div class="portfolio-card-name" data-en="Makkah Market Center" data-ar="مركز سوق مكة">Makkah Market Center</div>
+        <div class="portfolio-card-meta" data-en="Commercial center full 3D cinematic" data-ar="أنيميشن سينمائي كامل لمركز تجاري">Commercial center full 3D cinematic</div>
+        <a href="https://www.youtube.com/watch?v=GlbvI0DRXE4" target="_blank" rel="noopener" class="portfolio-card-cta" data-en="Watch on YouTube →" data-ar="شاهد على يوتيوب →">Watch on YouTube →</a>
+      </div>
+    </div>
+
+    <!-- 4. Alrajhi Naseem Al-Haram -->
+    <div class="portfolio-card reveal reveal-delay-1" data-category="animation" role="article" aria-label="Alrajhi Naseem Al-Haram project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/alrajhi-naseem.jpg" alt="Alrajhi Naseem Al-Haram" loading="lazy">
+      <div class="portfolio-card-play">▶</div>
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="3D Animation · Hospitality" data-ar="أنيميشن ثلاثي الأبعاد · ضيافة">3D Animation · Hospitality</div>
+        <div class="portfolio-card-name" data-en="Alrajhi Naseem Al-Haram" data-ar="الراجحي نسيم الحرام">Alrajhi Naseem Al-Haram</div>
+        <div class="portfolio-card-meta" data-en="Luxury residential project near Holy Mosque" data-ar="مشروع سكني فاخر بالقرب من الحرم">Luxury residential project near Holy Mosque</div>
+        <a href="https://youtu.be/ALz6GdeITYc" target="_blank" rel="noopener" class="portfolio-card-cta" data-en="Watch on YouTube →" data-ar="شاهد على يوتيوب →">Watch on YouTube →</a>
+      </div>
+    </div>
+
+    <!-- 5. Birds Eye View — Featured Visualization -->
+    <div class="portfolio-card featured reveal reveal-delay-2" data-category="visualization" role="article" aria-label="Birds eye view project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/birds-eye-view.jpg" alt="Aerial Birds Eye View Visualization" loading="lazy">
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-tag" data-en="Aerial Visualization · Master Plan" data-ar="إظهار جوي · مخطط رئيسي">Aerial Visualization · Master Plan</div>
+        <div class="portfolio-card-name" data-en="Birds Eye Aerial Views" data-ar="إظهارات الطيران الجوي">Birds Eye Aerial Views</div>
+        <div class="portfolio-card-meta" data-en="High-altitude photorealistic aerial renders" data-ar="إظهارات جوية فوتوواقعية عالية الارتفاع">High-altitude photorealistic aerial renders</div>
         <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar Project →" data-ar="ابدأ مشروعاً مشابهاً →">Start Similar Project →</a>
       </div>
     </div>
 
-    <div class="portfolio-card reveal reveal-delay-1" data-category="interior" role="article" aria-label="Al Nakheel Villa interior project">
-      <div class="portfolio-card-placeholder">Interior · Al Nakheel Villa</div>
+    <!-- 6. Wahat Alsalam -->
+    <div class="portfolio-card reveal" data-category="visualization" role="article" aria-label="Wahat Alsalam project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/wahat-alsalam.jpg" alt="Wahat Alsalam Residential" loading="lazy">
       <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Interior Visualization" data-ar="إظهار داخلي">Interior Visualization</div>
-        <div class="portfolio-card-name" data-en="Al Nakheel Villa, Jeddah" data-ar="فيلا النخيل، جدة">Al Nakheel Villa, Jeddah</div>
-        <div class="portfolio-card-meta" data-en="12-room luxury villa · Full interior package" data-ar="فيلا فاخرة 12 غرفة · حزمة داخلية كاملة">12-room luxury villa · Full interior package</div>
+        <div class="portfolio-card-tag" data-en="Residential · Exterior Visualization" data-ar="سكني · إظهار خارجي">Residential · Exterior Visualization</div>
+        <div class="portfolio-card-name" data-en="Wahat Alsalam" data-ar="واحة السلام">Wahat Alsalam</div>
+        <div class="portfolio-card-meta" data-en="Multiple-angle photorealistic renders" data-ar="إظهارات فوتوواقعية من زوايا متعددة">Multiple-angle photorealistic renders</div>
         <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar →" data-ar="ابدأ مشابهاً →">Start Similar →</a>
       </div>
     </div>
 
-    <div class="portfolio-card reveal" data-category="commercial" role="article" aria-label="The Square commercial project">
-      <div class="portfolio-card-placeholder">Commercial · The Square</div>
+    <!-- 7. Aloula Al-Nakheel -->
+    <div class="portfolio-card reveal reveal-delay-1" data-category="visualization" role="article" aria-label="Aloula Al-Nakheel project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/aloula-nakheel.jpg" alt="Aloula Al-Nakheel Views" loading="lazy">
       <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Commercial · Exterior" data-ar="تجاري · خارجي">Commercial · Exterior</div>
-        <div class="portfolio-card-name" data-en="The Square, Riyadh" data-ar="ذا سكوير، الرياض">The Square, Riyadh</div>
-        <div class="portfolio-card-meta" data-en="Mixed-use commercial hub · 3 towers" data-ar="مركز تجاري متعدد الاستخدامات · 3 أبراج">Mixed-use commercial hub · 3 towers</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+        <div class="portfolio-card-tag" data-en="Residential · Landscape Visualization" data-ar="سكني · إظهار المناظر الطبيعية">Residential · Landscape Visualization</div>
+        <div class="portfolio-card-name" data-en="Aloula — Al-Nakheel Views" data-ar="العلا — مناظر النخيل">Aloula — Al-Nakheel Views</div>
+        <div class="portfolio-card-meta" data-en="Luxury compound full visualization package" data-ar="حزمة إظهار كاملة لمجمع فاخر">Luxury compound full visualization package</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar →" data-ar="ابدأ مشابهاً →">Start Similar →</a>
       </div>
     </div>
 
-    <div class="portfolio-card reveal reveal-delay-1" data-category="hospitality" role="article" aria-label="Red Sea Resort project">
-      <div class="portfolio-card-placeholder">Hospitality · Red Sea Resort</div>
+    <!-- 8. Architectural Scale Model / Maquette -->
+    <div class="portfolio-card reveal reveal-delay-2" data-category="interactive" role="article" aria-label="Maquette scale model project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/maquette-model.jpg" alt="Architectural Scale Model Maquette" loading="lazy">
       <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Hospitality · Aerial Visualization" data-ar="ضيافة · إظهار جوي">Hospitality · Aerial Visualization</div>
-        <div class="portfolio-card-name" data-en="Red Sea Resort Complex" data-ar="مجمع منتجع البحر الأحمر">Red Sea Resort Complex</div>
-        <div class="portfolio-card-meta" data-en="280-key 5-star resort · Aerial & interior renders" data-ar="منتجع 5 نجوم 280 غرفة · إظهار جوي وداخلي">280-key 5-star resort · Aerial &amp; interior renders</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+        <div class="portfolio-card-tag" data-en="Interactive · Scale Model · Maquette" data-ar="تفاعلي · نموذج مجسم · ماكيت">Interactive · Scale Model · Maquette</div>
+        <div class="portfolio-card-name" data-en="Architectural Scale Maquette" data-ar="النموذج المعماري المجسم">Architectural Scale Maquette</div>
+        <div class="portfolio-card-meta" data-en="Handcrafted precision architectural model" data-ar="نموذج معماري دقيق مصنوع يدوياً">Handcrafted precision architectural model</div>
+        <a href="contact.html?ref=imaquette" class="portfolio-card-cta" data-en="Request Demo →" data-ar="اطلب عرضاً →">Request Demo →</a>
       </div>
     </div>
 
-    <div class="portfolio-card featured reveal reveal-delay-2" data-category="government" role="article" aria-label="Smart City master plan project">
-      <div class="portfolio-card-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" style="opacity:0.15;"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
-        Government · Smart City Master Plan
-      </div>
+    <!-- 9. Interior Render -->
+    <div class="portfolio-card reveal" data-category="visualization" role="article" aria-label="Interior visualization project">
+      <img class="portfolio-card-img" src="assets/images/portfolio/interior-render.jpg" alt="Luxury Interior Visualization" loading="lazy">
       <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Government · Smart City · Aerial Visualization" data-ar="حكومي · مدينة ذكية · إظهار جوي">Government · Smart City · Aerial Visualization</div>
-        <div class="portfolio-card-name" data-en="Alsafwa Smart City Master Plan" data-ar="مخطط مدينة الصفوة الذكية الرئيسي">Alsafwa Smart City Master Plan</div>
-        <div class="portfolio-card-meta" data-en="12km² master development · Full aerial visualization suite" data-ar="12 كم² تطوير رئيسي · حزمة إظهار جوي كاملة">12km² master development · Full aerial visualization suite</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal" data-category="interactive" role="article" aria-label="i-Maquette project">
-      <div class="portfolio-card-placeholder">
-        Interactive · i-Maquette
-      </div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Interactive · i-Maquette · Turriva" data-ar="تفاعلي · i-Maquette · Turriva">Interactive · i-Maquette · Turriva</div>
-        <div class="portfolio-card-name" data-en="Riyadh Heights i-Maquette" data-ar="i-Maquette مرتفعات الرياض">Riyadh Heights i-Maquette</div>
-        <div class="portfolio-card-meta" data-en="Touch-enabled sales center model · 2.4m × 1.8m" data-ar="نموذج مركز مبيعات بتقنية اللمس · 2.4م × 1.8م">Touch-enabled sales center model · 2.4m × 1.8m</div>
-        <a href="contact.html?ref=imaquette" class="portfolio-card-cta">Request Demo →</a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal reveal-delay-1" data-category="animation" role="article" aria-label="Walkthrough animation project">
-      <div class="portfolio-card-placeholder">Animation · Walkthrough</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Architectural Animation" data-ar="أنيميشن معماري">Architectural Animation</div>
-        <div class="portfolio-card-name" data-en="Crown Tower Walkthrough" data-ar="جولة برج كراون">Crown Tower Walkthrough</div>
-        <div class="portfolio-card-meta" data-en="4-minute cinematic walkthrough animation" data-ar="أنيميشن جولة سينمائية مدة 4 دقائق">4-minute cinematic walkthrough animation</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal reveal-delay-2" data-category="residential" role="article" aria-label="Garden Villas project">
-      <div class="portfolio-card-placeholder">Residential · Garden Villas</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Residential · Exterior & Interior" data-ar="سكني · خارجي وداخلي">Residential · Exterior &amp; Interior</div>
-        <div class="portfolio-card-name" data-en="Garden Villas, Al Khobar" data-ar="فلل الحدائق، الخبر">Garden Villas, Al Khobar</div>
-        <div class="portfolio-card-meta" data-en="32 villa compound · Complete visualization package" data-ar="مجمع 32 فيلا · حزمة إظهار كاملة">32 villa compound · Complete visualization package</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal" data-category="commercial" role="article" aria-label="Business Bay towers project">
-      <div class="portfolio-card-placeholder">Commercial · Business Bay</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Commercial · Office Towers" data-ar="تجاري · أبراج مكتبية">Commercial · Office Towers</div>
-        <div class="portfolio-card-name" data-en="Business Bay Towers, Riyadh" data-ar="أبراج بيزنس باي، الرياض">Business Bay Towers, Riyadh</div>
-        <div class="portfolio-card-meta" data-en="3-tower commercial complex · 180,000 m²" data-ar="مجمع تجاري 3 أبراج · 180,000 م²">3-tower commercial complex · 180,000 m²</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal reveal-delay-1" data-category="interior" role="article" aria-label="Luxury lobby interior project">
-      <div class="portfolio-card-placeholder">Interior · Luxury Lobby</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Interior · Hospitality" data-ar="داخلي · ضيافة">Interior · Hospitality</div>
-        <div class="portfolio-card-name" data-en="The Palace Hotel Lobby" data-ar="لوبي فندق البالاس">The Palace Hotel Lobby</div>
-        <div class="portfolio-card-meta" data-en="5-star hotel interior suite · 28 spaces" data-ar="حزمة داخلية فندق 5 نجوم · 28 مساحة">5-star hotel interior suite · 28 spaces</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal reveal-delay-2" data-category="hospitality" role="article" aria-label="Desert resort project">
-      <div class="portfolio-card-placeholder">Hospitality · Desert Resort</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Hospitality · Eco-Resort" data-ar="ضيافة · منتجع بيئي">Hospitality · Eco-Resort</div>
-        <div class="portfolio-card-name" data-en="Wadi Desert Eco-Resort" data-ar="منتجع وادي البيئي">Wadi Desert Eco-Resort</div>
-        <div class="portfolio-card-meta" data-en="60 tented villa resort · Full visualization & animation" data-ar="منتجع 60 خيمة فيلا · إظهار وأنيميشن كامل">60 tented villa resort · Full visualization &amp; animation</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal" data-category="interactive" role="article" aria-label="VR sales center project">
-      <div class="portfolio-card-placeholder">Interactive · VR Sales Center</div>
-      <div class="portfolio-card-overlay">
-        <div class="portfolio-card-tag" data-en="Interactive · VR · 360° Tours" data-ar="تفاعلي · VR · جولات 360">Interactive · VR · 360° Tours</div>
-        <div class="portfolio-card-name" data-en="Amwaj Sales Center VR Experience" data-ar="تجربة VR لمركز مبيعات أمواج">Amwaj Sales Center VR Experience</div>
-        <div class="portfolio-card-meta" data-en="Full VR tour suite · 8 unit types" data-ar="حزمة جولة VR كاملة · 8 أنواع وحدات">Full VR tour suite · 8 unit types</div>
-        <a href="contact.html?ref=portfolio" class="portfolio-card-cta">Start Similar →</a>
+        <div class="portfolio-card-tag" data-en="Interior · Luxury Visualization" data-ar="داخلي · إظهار فاخر">Interior · Luxury Visualization</div>
+        <div class="portfolio-card-name" data-en="Luxury Interior Renders" data-ar="إظهارات داخلية فاخرة">Luxury Interior Renders</div>
+        <div class="portfolio-card-meta" data-en="Full photorealistic interior visualization package" data-ar="حزمة إظهار داخلي فوتوواقعي كاملة">Full photorealistic interior visualization package</div>
+        <a href="contact.html?ref=portfolio" class="portfolio-card-cta" data-en="Start Similar →" data-ar="ابدأ مشابهاً →">Start Similar →</a>
       </div>
     </div>
 
