@@ -1,0 +1,11 @@
+{
+  "name": "3d-graphics-house",
+  "version": "1.0.0",
+  "description": "3D Graphics House - Architectural Visualization Website",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx serve ."
+  },
+  "keywords": ["static", "html"],
+  "author": "3D Graphics House"
+}
