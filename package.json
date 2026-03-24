@@ -2,14 +2,12 @@
   "name": "3d-graphics-house",
   "version": "1.0.0",
   "description": "3D Graphics House - Architectural Visualization Website",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo 'Static site ready'"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "keywords": ["static", "html"],
-  "author": "3D Graphics House"
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
 }
