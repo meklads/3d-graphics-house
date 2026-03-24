@@ -1,15 +1,18 @@
 Options -Indexes
 DirectoryIndex index.html
 
-# Clean URLs — remove .html extension
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^.]+)$ $1.html [L]
 
-# Redirect /index to /
-RewriteRule ^index\.html$ / [R=301,L]
-
-# Force HTTPS
+# 1. Force HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. Redirect /index.html → / (no "index" in URL)
+RewriteRule ^index\.html$ / [R=301,L]
+RewriteRule ^index$ / [R=301,L]
+
+# 3. Clean URLs — add .html for extensionless requests
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]

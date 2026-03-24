@@ -77,10 +77,10 @@ function initMobileNav() {
 
 /* ─── Scroll Reveal Animations ────────────────────────── */
 function initScrollReveal() {
-  const targets = $$('.reveal');
+  const targets = $$('.reveal, .reveal-left, .reveal-right, .reveal-scale');
   if (!targets.length) return;
 
-  // Enable CSS animations now that JS is running
+  // Enable CSS hidden state now that JS is running
   document.body.classList.add('js-ready');
 
   const io = new IntersectionObserver(entries => {
@@ -90,7 +90,7 @@ function initScrollReveal() {
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.10, rootMargin: '0px 0px -50px 0px' });
 
   targets.forEach(el => io.observe(el));
 }

@@ -301,14 +301,27 @@
      HERO
 ══════════════════════════════════════════════════════════ -->
 <section class="hero" id="hero" aria-label="Hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid-overlay"></div>
+
+  <!-- Full-screen YouTube background video -->
+  <div class="hero-video-bg" aria-hidden="true">
+    <iframe
+      src="https://www.youtube.com/embed/vYbn-9ramsI?autoplay=1&mute=1&loop=1&playlist=vYbn-9ramsI&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      frameborder="0"
+      title="Hero Background Video">
+    </iframe>
+  </div>
+  <!-- Centre dark overlay -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <!-- 4-corner black fog vignette -->
+  <div class="hero-vignette" aria-hidden="true"></div>
 
   <div class="container">
     <div class="hero-content">
       <div class="hero-eyebrow">
         <span class="hero-eyebrow-dot"></span>
-        <span data-en="Saudi Arabia · Jordan · Gulf Region" data-ar="المملكة العربية السعودية · الأردن · منطقة الخليج">Saudi Arabia · Jordan · Gulf Region</span>
+        <span data-en="Saudi Arabia · Oman · Gulf Region" data-ar="المملكة العربية السعودية · سلطنة عُمان · منطقة الخليج">Saudi Arabia · Oman · Gulf Region</span>
       </div>
 
       <h1 class="hero-title">
@@ -330,22 +343,6 @@
           ▶ Watch Showreel
         </button>
         <a href="portfolio.html" class="btn btn-ghost" data-en="Explore Our Work →" data-ar="اطّلع على أعمالنا →">Explore Our Work <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Hero Visual -->
-  <div class="hero-visual" aria-hidden="true">
-    <div class="hero-visual-inner">
-      <div class="hero-visual-placeholder">
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="20" width="48" height="32" rx="2" stroke="#c9a452" stroke-width="1.5"/>
-          <path d="M8 20L32 8L56 20" stroke="#c9a452" stroke-width="1.5"/>
-          <rect x="24" y="36" width="16" height="16" rx="1" stroke="#c9a452" stroke-width="1"/>
-          <line x1="16" y1="28" x2="20" y2="28" stroke="#c9a452" stroke-width="1"/>
-          <line x1="44" y1="28" x2="48" y2="28" stroke="#c9a452" stroke-width="1"/>
-        </svg>
-        <span style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;">Replace with Hero Image/Video</span>
       </div>
     </div>
   </div>
@@ -408,7 +405,7 @@
 <section class="section about-preview" id="about" aria-label="About 3D Graphics House">
   <div class="container">
     <div class="about-grid">
-      <div class="about-visual reveal">
+      <div class="about-visual reveal-left">
         <div class="about-img-placeholder" aria-label="About us image placeholder">
           <span style="font-size:0.78rem;letter-spacing:0.1em;color:var(--text-dim);">COMPANY IMAGE</span>
         </div>
@@ -426,8 +423,8 @@
         <p class="about-text reveal" data-en="For 15 years, 3D Graphics House has been the trusted partner of Saudi Arabia's most prestigious corporations and real estate developers — delivering landmark projects that define the Kingdom's built environment. From Riyadh's skyline to the Gulf's most ambitious developments, we turn architectural vision into breathtaking reality." data-ar="لمدة 15 عاماً، كانت 3D Graphics House الشريك الموثوق لكبرى شركات المملكة العربية السعودية ومطوريها العقاريين — تُنجز مشاريع بارزة تُشكّل البيئة المبنية في المملكة. من أفق الرياض إلى أكثر تطورات الخليج طموحاً، نحوّل الرؤية المعمارية إلى واقع مبهر.">
           For 15 years, 3D Graphics House has been the trusted partner of Saudi Arabia's most prestigious corporations and real estate developers — delivering landmark projects that define the Kingdom's built environment. From Riyadh's skyline to the Gulf's most ambitious developments, we turn architectural vision into breathtaking reality.
         </p>
-        <p class="about-text reveal" data-en="Now expanding across the Gulf with a new regional office in Amman, Jordan, we are bridging the physical and digital worlds through our AI-powered subsidiary, Turriva — because the future of visualization is not just beautiful, it's intelligent." data-ar="نتوسع الآن عبر الخليج بمكتب إقليمي جديد في عمّان، الأردن، لنربط العالم المادي بالرقمي من خلال شركتنا التقنية المدعومة بالذكاء الاصطناعي، Turriva — لأن مستقبل الإظهار لن يكون جميلاً فحسب، بل ذكياً.">
-          Now expanding across the Gulf with a new regional office in Amman, Jordan, we are bridging the physical and digital worlds through our AI-powered subsidiary, Turriva — because the future of visualization is not just beautiful, it's intelligent.
+        <p class="about-text reveal" data-en="Now expanding across the Gulf with a new regional office in Muscat, Sultanate of Oman, we are bridging the physical and digital worlds through our AI-powered subsidiary, Turriva — because the future of visualization is not just beautiful, it's intelligent." data-ar="نتوسع الآن عبر الخليج بمكتب إقليمي جديد في مسقط، سلطنة عُمان، لنربط العالم المادي بالرقمي من خلال شركتنا التقنية المدعومة بالذكاء الاصطناعي، Turriva — لأن مستقبل الإظهار لن يكون جميلاً فحسب، بل ذكياً.">
+          Now expanding across the Gulf with a new regional office in Muscat, Sultanate of Oman, we are bridging the physical and digital worlds through our AI-powered subsidiary, Turriva — because the future of visualization is not just beautiful, it's intelligent.
         </p>
 
         <div class="about-highlights">
@@ -445,7 +442,7 @@
           </div>
           <div class="highlight-row reveal reveal-delay-3">
             <span class="highlight-dot"></span>
-            <span data-en="Regional presence: Saudi Arabia (HQ) + Jordan (Regional Office)" data-ar="حضور إقليمي: السعودية (المقر الرئيسي) + الأردن (المكتب الإقليمي)">Regional presence: Saudi Arabia (HQ) + Jordan (Regional Office)</span>
+            <span data-en="Regional presence: Saudi Arabia (HQ) + Sultanate of Oman (Regional Office)" data-ar="حضور إقليمي: السعودية (المقر الرئيسي) + سلطنة عُمان (المكتب الإقليمي)">Regional presence: Saudi Arabia (HQ) + Sultanate of Oman (Regional Office)</span>
           </div>
         </div>
 
@@ -678,8 +675,8 @@
         <div class="reason-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
-        <div class="reason-title" data-en="Regional Presence: KSA + Jordan" data-ar="حضور إقليمي: السعودية + الأردن">Regional Presence: KSA + Jordan</div>
-        <p class="reason-desc" data-en="Headquarters in Saudi Arabia with a regional office in Amman — positioned to serve clients across the Gulf with local expertise and regional reach." data-ar="المقر الرئيسي في السعودية ومكتب إقليمي في عمّان — لخدمة عملاء الخليج بخبرة محلية وامتداد إقليمي.">Headquarters in Saudi Arabia with a regional office in Amman — positioned to serve clients across the Gulf with local expertise and regional reach.</p>
+        <div class="reason-title" data-en="Regional Presence: KSA + Oman" data-ar="حضور إقليمي: السعودية + الأردن">Regional Presence: KSA + Oman</div>
+        <p class="reason-desc" data-en="Headquarters in Saudi Arabia with a regional office in Muscat — positioned to serve clients across the Gulf with local expertise and regional reach." data-ar="المقر الرئيسي في السعودية ومكتب إقليمي في مسقط — لخدمة عملاء الخليج بخبرة محلية وامتداد إقليمي.">Headquarters in Saudi Arabia with a regional office in Muscat — positioned to serve clients across the Gulf with local expertise and regional reach.</p>
       </div>
     </div>
   </div>
@@ -1077,10 +1074,10 @@
       <div>
         <div class="footer-col-title" data-en="Contact" data-ar="تواصل">Contact</div>
         <ul class="footer-links" role="list">
-          <li><span class="footer-link" data-en="🇸🇦 Riyadh, Saudi Arabia (HQ)" data-ar="🇸🇦 الرياض، المملكة العربية السعودية (المقر)">🇸🇦 Riyadh, Saudi Arabia (HQ)</span></li>
-          <li><span class="footer-link" data-en="🇯🇴 Amman, Jordan (Regional)" data-ar="🇯🇴 عمّان، الأردن (إقليمي)">🇯🇴 Amman, Jordan (Regional)</span></li>
-          <li><a href="tel:+966" class="footer-link">+966 XX XXX XXXX (KSA)</a></li>
-          <li><a href="tel:+962" class="footer-link">+962 XX XXX XXXX (JO)</a></li>
+          <li><span class="footer-link" data-en="🇸🇦 Jeddah, Saudi Arabia (HQ)" data-ar="🇸🇦 جدة، المملكة العربية السعودية (المقر)">🇸🇦 Jeddah, Saudi Arabia (HQ)</span></li>
+          <li><span class="footer-link" data-en="🇴🇲 Muscat, Sultanate of Oman" data-ar="🇴🇲 مسقط، سلطنة عُمان">🇴🇲 Muscat, Sultanate of Oman</span></li>
+          <li><a href="tel:+966502786513" class="footer-link">+966 502 786 513 (KSA)</a></li>
+          <li><a href="tel:+96891326735" class="footer-link">+968 913 267 35 (Oman)</a></li>
           <li><a href="mailto:hello@3dgraphicshouse.com" class="footer-link">hello@3dgraphicshouse.com</a></li>
         </ul>
       </div>
@@ -1103,7 +1100,7 @@
 ══════════════════════════════════════════════════════════ -->
 <div class="float-whatsapp" aria-label="WhatsApp contact">
   <div class="whatsapp-label" data-en="Chat on WhatsApp" data-ar="تواصل عبر واتساب">Chat on WhatsApp</div>
-  <a href="https://wa.me/966XXXXXXXXX" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
+  <a href="https://wa.me/966502786513" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
