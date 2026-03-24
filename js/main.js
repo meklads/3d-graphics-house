@@ -401,12 +401,21 @@ function initPageLoader() {
   const loader = $('.page-loader');
   if (!loader) return;
 
-  window.addEventListener('load', () => {
+  const hideLoader = () => {
     setTimeout(() => {
       loader.style.opacity = '0';
-      setTimeout(() => loader.remove(), 600);
-    }, 800);
-  });
+      setTimeout(() => { if (loader.parentNode) loader.remove(); }, 600);
+    }, 600);
+  };
+
+  // If page already loaded, hide immediately
+  if (document.readyState === 'complete') {
+    hideLoader();
+  } else {
+    window.addEventListener('load', hideLoader);
+    // Fallback: force-remove after 3 seconds no matter what
+    setTimeout(hideLoader, 3000);
+  }
 }
 
 /* ─── Sticky Quote Button Pulse ───────────────────────── */
