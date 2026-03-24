@@ -80,6 +80,9 @@ function initScrollReveal() {
   const targets = $$('.reveal');
   if (!targets.length) return;
 
+  // Enable CSS animations now that JS is running
+  document.body.classList.add('js-ready');
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
