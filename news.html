@@ -354,6 +354,10 @@
     body[dir="rtl"] .news-hero-label::before { display: none; }
     body[dir="rtl"] .news-hero-label::after { content:''; width:28px; height:1px; background:var(--gold); }
     body[dir="rtl"] .blog-header-line { background: linear-gradient(270deg, var(--border), transparent); }
+
+    /* ── Force all content visible — no JS dependency ── */
+    .featured-project, .news-card, .news-video-card,
+    .blog-card, .newsletter-section { opacity:1 !important; transform:none !important; }
   </style>
   <!-- Prevent flash of wrong theme -->
   <script>
@@ -423,7 +427,7 @@
 </section>
 
 <!-- ═══════════ FEATURED: MAKKAH CHARTER ═══════════ -->
-<article class="featured-project reveal" aria-label="Muslim World League featured project">
+<article class="featured-project" aria-label="Muslim World League featured project">
   <div class="featured-project-gallery">
     <img class="fp-main-img" id="fpMainImg"
       src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.56.jpeg"
@@ -473,7 +477,7 @@
   <div class="news-grid">
 
     <!-- Jeddah Forum — Video Card -->
-    <div class="news-video-card reveal" data-video="vYbn-9ramsI" data-title="Jeddah Forum" role="button" tabindex="0" aria-label="Play Jeddah Forum">
+    <div class="news-video-card" data-video="vYbn-9ramsI" data-title="Jeddah Forum" role="button" tabindex="0" aria-label="Play Jeddah Forum">
       <img src="https://img.youtube.com/vi/vYbn-9ramsI/maxresdefault.jpg" alt="Jeddah Forum 3D Film" loading="lazy">
       <div class="nvc-play">▶</div>
       <div class="nvc-overlay">
@@ -484,7 +488,7 @@
     </div>
 
     <!-- Anan Escan Maquette -->
-    <div class="news-card reveal" role="article" aria-label="Anan Escan Co maquette project">
+    <div class="news-card" role="article" aria-label="Anan Escan Co maquette project">
       <img class="news-card-img" src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/Anan-Escan-Co.01.jpeg" alt="Anan Escan Co Maquette" loading="lazy">
       <div class="news-card-body">
         <div class="news-card-type" data-en="Architectural Maquette · 2025" data-ar="ماكيت معماري · 2025">Architectural Maquette · 2025</div>
@@ -498,7 +502,7 @@
     </div>
 
     <!-- Alrajhi Naseem Video -->
-    <div class="news-card reveal" role="article" aria-label="Alrajhi Naseem Al-Haram" style="cursor:pointer;" data-video="ALz6GdeITYc" data-title="Alrajhi Naseem Al-Haram">
+    <div class="news-card" role="article" aria-label="Alrajhi Naseem Al-Haram" style="cursor:pointer;" data-video="ALz6GdeITYc" data-title="Alrajhi Naseem Al-Haram">
       <div style="position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0a0a;">
         <img style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;filter:brightness(0.75);" src="https://img.youtube.com/vi/ALz6GdeITYc/maxresdefault.jpg" alt="Alrajhi Naseem Al-Haram" loading="lazy">
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
@@ -517,7 +521,7 @@
     </div>
 
     <!-- Rafal Pavilions Video -->
-    <div class="news-card reveal" role="article" style="cursor:pointer;" data-video="ilWeCush3ew" data-title="Rafal Pavilions — VIP Offices">
+    <div class="news-card" role="article" style="cursor:pointer;" data-video="ilWeCush3ew" data-title="Rafal Pavilions — VIP Offices">
       <div style="position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0a0a;">
         <img style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;filter:brightness(0.75);" src="https://img.youtube.com/vi/ilWeCush3ew/maxresdefault.jpg" alt="Rafal Pavilions" loading="lazy">
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
@@ -536,7 +540,7 @@
     </div>
 
     <!-- Makkah Market Video -->
-    <div class="news-card reveal" role="article" style="cursor:pointer;" data-video="GlbvI0DRXE4" data-title="Makkah Market Center">
+    <div class="news-card" role="article" style="cursor:pointer;" data-video="GlbvI0DRXE4" data-title="Makkah Market Center">
       <div style="position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0a0a;">
         <img style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75);" src="https://img.youtube.com/vi/GlbvI0DRXE4/maxresdefault.jpg" alt="Makkah Market Center" loading="lazy">
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
@@ -566,7 +570,7 @@
   </div>
   <div class="blog-grid">
 
-    <a href="https://3dgraphicshouse.com/video-production-timeline/" target="_blank" rel="noopener" class="blog-card reveal" style="text-decoration:none;display:block;">
+    <a href="https://3dgraphicshouse.com/video-production-timeline/" target="_blank" rel="noopener" class="blog-card" style="text-decoration:none;display:block;">
       <div class="blog-num">01</div>
       <div class="blog-cat" data-en="Production · Strategy" data-ar="إنتاج · استراتيجية">Production · Strategy</div>
       <div class="blog-title" data-en="Accelerate Your Video Production Timeline" data-ar="سرّع الجدول الزمني لإنتاج الفيديو">Accelerate Your Video Production Timeline</div>
@@ -577,7 +581,7 @@
       </div>
     </a>
 
-    <a href="https://3dgraphicshouse.com/video-campaign-ideas/" target="_blank" rel="noopener" class="blog-card reveal" style="text-decoration:none;display:block;">
+    <a href="https://3dgraphicshouse.com/video-campaign-ideas/" target="_blank" rel="noopener" class="blog-card" style="text-decoration:none;display:block;">
       <div class="blog-num">02</div>
       <div class="blog-cat" data-en="Marketing · Video" data-ar="تسويق · فيديو">Marketing · Video</div>
       <div class="blog-title" data-en="Dynamic Video Campaign Ideas That Convert" data-ar="أفكار حملات فيديو ديناميكية تُحوّل">Dynamic Video Campaign Ideas That Convert</div>
@@ -588,7 +592,7 @@
       </div>
     </a>
 
-    <a href="https://3dgraphicshouse.com/digital-marketing/" target="_blank" rel="noopener" class="blog-card reveal" style="text-decoration:none;display:block;">
+    <a href="https://3dgraphicshouse.com/digital-marketing/" target="_blank" rel="noopener" class="blog-card" style="text-decoration:none;display:block;">
       <div class="blog-num">03</div>
       <div class="blog-cat" data-en="Digital · Strategy" data-ar="رقمي · استراتيجية">Digital · Strategy</div>
       <div class="blog-title" data-en="The All-Inclusive Digital Marketing Manual" data-ar="الدليل الشامل للتسويق الرقمي">The All-Inclusive Digital Marketing Manual</div>
@@ -603,7 +607,7 @@
 </section>
 
 <!-- ═══════════ NEWSLETTER ═══════════ -->
-<section class="newsletter-section reveal" aria-label="Newsletter signup">
+<section class="newsletter-section" aria-label="Newsletter signup">
   <h2 data-en="Stay <em>Updated</em>" data-ar="ابقَ <em>على اطلاع</em>">Stay <em>Updated</em></h2>
   <p data-en="Be the first to see our new projects, events, and creative insights — straight to your inbox." data-ar="كن أول من يرى مشاريعنا الجديدة وفعالياتنا ورؤانا الإبداعية — مباشرة إلى بريدك الإلكتروني.">Be the first to see our new projects, events, and creative insights — straight to your inbox.</p>
   <form class="newsletter-form" onsubmit="return false;">
