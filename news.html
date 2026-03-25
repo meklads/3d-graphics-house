@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>News & Latest Projects — 3D Graphics House</title>
+  <title>News & Projects — 3D Graphics House</title>
   <meta name="description" content="Latest projects, events, and updates from 3D Graphics House — Saudi Arabia's premier architectural visualization studio." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
-    /* ── NEWS HERO ──────────────────────────────────────── */
+    /* ── PAGE HERO ── */
     .news-hero {
-      min-height: 50vh;
-      display: flex; align-items: flex-end;
+      min-height: 52vh;
+      display: flex;
+      align-items: flex-end;
       padding: 120px 0 64px;
       position: relative;
       overflow: hidden;
@@ -33,13 +34,14 @@
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse at center, black, transparent 80%);
     }
-    .news-hero-label {
-      font-size: 0.7rem; letter-spacing: 0.22em;
-      color: var(--gold); text-transform: uppercase;
-      margin-bottom: 16px;
+    .news-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
       display: flex; align-items: center; gap: 12px;
     }
-    .news-hero-label::before { content:''; width:28px; height:1px; background:var(--gold); }
+    .news-eyebrow::before { content:''; width:28px; height:1px; background:var(--gold); }
+    body[dir="rtl"] .news-eyebrow::before { display:none; }
+    body[dir="rtl"] .news-eyebrow::after  { content:''; width:28px; height:1px; background:var(--gold); }
     .news-hero h1 {
       font-family: var(--font-display);
       font-size: clamp(2.8rem, 6vw, 5.5rem);
@@ -47,357 +49,243 @@
       margin-bottom: 20px;
     }
     .news-hero h1 em { font-style: italic; color: var(--gold); }
-    .news-hero-sub {
-      font-size: 0.9rem; color: var(--text-dim);
-      max-width: 520px; line-height: 1.7;
-    }
-    .news-date-badge {
-      display: inline-block;
-      background: rgba(201,164,82,0.1);
-      border: 1px solid rgba(201,164,82,0.25);
-      color: var(--gold);
-      font-size: 0.65rem; letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      margin-bottom: 20px;
-    }
+    .news-hero-sub { font-size: 0.9rem; color: var(--text-dim); max-width: 520px; line-height: 1.7; }
 
-    /* ── FEATURED PROJECT ───────────────────────────────── */
-    .featured-project {
+    /* ── FEATURED PROJECT ── */
+    .featured-wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 520px;
       background: var(--black);
     }
-    .featured-project-gallery {
-      position: relative;
-      overflow: hidden;
-      background: #0a0a0a;
+    .featured-gallery {
+      position: relative; overflow: hidden; background: #0a0a0a;
     }
-    .fp-main-img {
-      width: 100%; height: 100%;
-      object-fit: cover;
+    .featured-main-img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
       transition: transform 0.8s ease;
     }
-    .featured-project:hover .fp-main-img { transform: scale(1.04); }
-    .fp-thumb-strip {
-      position: absolute;
-      bottom: 16px; left: 16px; right: 16px;
-      display: flex; gap: 6px;
+    .featured-wrap:hover .featured-main-img { transform: scale(1.04); }
+    .featured-thumbs {
+      position: absolute; bottom: 16px; left: 16px; right: 16px;
+      display: flex; gap: 6px; flex-wrap: wrap;
     }
-    .fp-thumb {
-      width: 64px; height: 48px;
-      object-fit: cover;
-      opacity: 0.55;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.3s;
-      flex-shrink: 0;
+    .featured-thumb {
+      width: 58px; height: 44px; object-fit: cover;
+      opacity: 0.5; cursor: pointer; border: 1px solid transparent;
+      transition: all 0.25s; flex-shrink: 0;
     }
-    .fp-thumb:hover, .fp-thumb.active { opacity: 1; border-color: var(--gold); }
-    .featured-project-content {
+    .featured-thumb:hover, .featured-thumb.active { opacity: 1; border-color: var(--gold); }
+    .featured-content {
       padding: 56px 48px;
       display: flex; flex-direction: column; justify-content: center;
       background: var(--anthracite);
     }
-    .fp-category {
-      font-size: 0.68rem; letter-spacing: 0.2em;
-      color: var(--gold); text-transform: uppercase;
-      margin-bottom: 8px;
+    .featured-badge {
+      display: inline-block; background: rgba(201,164,82,0.12);
+      border: 1px solid rgba(201,164,82,0.3); color: var(--gold);
+      font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 4px 14px; margin-bottom: 20px; width: fit-content;
     }
-    .fp-title {
-      font-family: var(--font-display);
-      font-size: 2.8rem; font-weight: 300; color: #fff;
-      line-height: 1.1; margin-bottom: 16px;
+    .featured-cat { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+    .featured-title {
+      font-family: var(--font-display); font-size: 2.6rem; font-weight: 300;
+      color: #fff; line-height: 1.1; margin-bottom: 16px;
     }
-    .fp-title em { font-style: italic; color: var(--gold); }
-    .fp-desc {
-      font-size: 0.88rem; color: var(--text-dim);
-      line-height: 1.8; margin-bottom: 28px;
-      max-width: 420px;
+    .featured-title em { font-style: italic; color: var(--gold); }
+    .featured-desc { font-size: 0.88rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 24px; max-width: 420px; }
+    .featured-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .featured-tag {
+      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid var(--border); color: rgba(255,255,255,0.4); padding: 4px 12px;
     }
-    .fp-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
-    .fp-tag {
-      font-size: 0.65rem; letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      color: rgba(255,255,255,0.4);
-      padding: 4px 12px;
-    }
-    .fp-meta {
-      display: flex; gap: 32px; margin-top: auto;
-      padding-top: 24px;
+    .featured-meta {
+      display: flex; gap: 32px; padding-top: 24px;
       border-top: 1px solid var(--border);
     }
-    .fp-meta-item-label {
-      font-size: 0.62rem; letter-spacing: 0.12em;
-      color: var(--text-dim); text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .fp-meta-item-val {
-      font-size: 0.82rem; color: rgba(255,255,255,0.75);
-    }
+    .featured-meta-label { font-size: 0.6rem; letter-spacing: 0.12em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
+    .featured-meta-val  { font-size: 0.82rem; color: rgba(255,255,255,0.75); }
 
-    /* ── NEWS GRID ──────────────────────────────────────── */
+    /* ── NEWS GRID ── */
     .news-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 2fr 1fr 1fr;
       gap: 2px;
       background: var(--black);
+      padding: 2px;
     }
     .news-card {
       background: var(--anthracite);
-      transition: transform 0.3s ease;
-      cursor: pointer;
       overflow: hidden;
+      transition: transform 0.3s;
+      cursor: pointer;
     }
     .news-card:hover { transform: translateY(-4px); }
     .news-card-img {
-      width: 100%;
-      aspect-ratio: 16/10;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s ease, filter 0.4s ease;
+      width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
+      transition: transform 0.6s, filter 0.4s;
       filter: brightness(0.85);
     }
-    .news-card:hover .news-card-img { transform: scale(1.05); filter: brightness(0.7); }
-    .news-card-body { padding: 24px; }
-    .news-card-type {
-      font-size: 0.62rem; letter-spacing: 0.15em;
-      color: var(--gold); text-transform: uppercase;
-      margin-bottom: 8px;
+    .news-card:hover .news-card-img { transform: scale(1.05); filter: brightness(0.6); }
+    .news-card-video {
+      position: relative; aspect-ratio: 16/10; overflow: hidden; background: #0a0a0a;
     }
+    .news-card-video img { width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.75);transition:transform 0.6s,filter 0.4s; }
+    .news-card:hover .news-card-video img { transform:scale(1.05);filter:brightness(0.5); }
+    .play-btn {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .play-circle {
+      width: 52px; height: 52px; border-radius: 50%; background: rgba(201,164,82,0.88);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: #080808; transition: all 0.3s;
+    }
+    .news-card:hover .play-circle { background: var(--gold); transform: scale(1.1); }
+    .news-card-body { padding: 22px 24px 24px; }
+    .news-card-type { font-size: 0.62rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 7px; }
     .news-card-title {
-      font-family: var(--font-display);
-      font-size: 1.25rem; font-weight: 300; color: #fff;
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 300; color: #fff;
       line-height: 1.3; margin-bottom: 10px;
     }
-    .news-card-desc {
-      font-size: 0.77rem; color: var(--text-dim);
-      line-height: 1.65; margin-bottom: 18px;
-    }
+    .news-card-desc { font-size: 0.76rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 16px; }
     .news-card-footer {
       display: flex; align-items: center; justify-content: space-between;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
+      padding-top: 14px; border-top: 1px solid var(--border);
     }
-    .news-card-date {
-      font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.08em;
-    }
-    .news-card-arrow {
-      font-size: 0.72rem; color: var(--gold);
-      transition: transform 0.2s;
-    }
+    .news-card-date { font-size: 0.65rem; color: var(--text-dim); }
+    .news-card-arrow { font-size: 0.8rem; color: var(--gold); transition: transform 0.2s; }
     .news-card:hover .news-card-arrow { transform: translateX(4px); }
 
-    /* ── VIDEO NEWS CARD ────────────────────────────────── */
-    .news-video-card {
-      position: relative;
+    /* ── VIDEO HERO CARD (spans 2 cols) ── */
+    .video-hero-card {
+      position: relative; overflow: hidden; background: #0a0a0a; cursor: pointer;
       grid-column: span 2;
-      cursor: pointer;
-      overflow: hidden;
-      background: #0a0a0a;
     }
-    .news-video-card img {
-      width: 100%;
-      aspect-ratio: 21/9;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.7s ease, filter 0.5s;
-      filter: brightness(0.7);
+    .video-hero-card img {
+      width: 100%; aspect-ratio: 21/9; object-fit: cover; display: block;
+      filter: brightness(0.65); transition: transform 0.7s, filter 0.5s;
     }
-    .news-video-card:hover img { transform: scale(1.04); filter: brightness(0.5); }
-    .nvc-overlay {
+    .video-hero-card:hover img { transform: scale(1.04); filter: brightness(0.45); }
+    .vhc-overlay {
       position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
+      display: flex; flex-direction: column; justify-content: flex-end;
       padding: 32px;
-      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 55%);
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 55%);
     }
-    .nvc-play {
-      position: absolute;
-      top: 50%; left: 50%;
+    .vhc-play {
+      position: absolute; top: 50%; left: 50%;
       transform: translate(-50%,-50%);
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: rgba(201,164,82,0.85);
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(201,164,82,0.88);
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px; color: #080808;
-      transition: all 0.3s;
+      font-size: 22px; color: #080808; transition: all 0.3s;
     }
-    .news-video-card:hover .nvc-play { background: var(--gold); transform: translate(-50%,-50%) scale(1.1); }
-    .nvc-type { font-size: 0.65rem; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
-    .nvc-title { font-family: var(--font-display); font-size: 2rem; color: #fff; font-weight: 300; margin-bottom: 8px; }
-    .nvc-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); max-width: 480px; }
+    .video-hero-card:hover .vhc-play { background: var(--gold); transform: translate(-50%,-50%) scale(1.1); }
+    .vhc-type { font-size: 0.65rem; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+    .vhc-title { font-family: var(--font-display); font-size: 2rem; color: #fff; font-weight: 300; margin-bottom: 6px; }
+    .vhc-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); max-width: 480px; }
 
-    /* ── BLOG SECTION ───────────────────────────────────── */
+    /* ── BLOG SECTION ── */
     .blog-header {
       display: flex; align-items: center; gap: 20px;
       padding: 64px 40px 32px;
       border-top: 1px solid var(--border);
     }
-    .blog-header h2 {
-      font-family: var(--font-display);
-      font-size: 2.2rem; font-weight: 300; color: #fff;
-    }
+    .blog-header h2 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 300; color: #fff; }
     .blog-header h2 em { color: var(--gold); font-style: italic; }
     .blog-header-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      padding: 0 2px 2px;
-    }
+    body[dir="rtl"] .blog-header-line { background: linear-gradient(270deg, var(--border), transparent); }
+    .blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; padding: 0 2px 2px; }
     .blog-card {
-      background: var(--anthracite);
-      padding: 32px;
-      transition: background 0.3s;
-      cursor: pointer;
+      background: var(--anthracite); padding: 32px;
+      transition: background 0.3s; text-decoration: none; display: block;
     }
-    .blog-card:hover { background: rgba(201,164,82,0.05); }
-    .blog-num {
-      font-family: var(--font-display);
-      font-size: 3rem; color: rgba(201,164,82,0.15);
-      line-height: 1; margin-bottom: 16px;
-    }
-    .blog-cat {
-      font-size: 0.62rem; letter-spacing: 0.18em;
-      color: var(--gold); text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .blog-title {
-      font-family: var(--font-display);
-      font-size: 1.3rem; color: #fff; font-weight: 300;
-      line-height: 1.4; margin-bottom: 12px;
-    }
-    .blog-excerpt {
-      font-size: 0.78rem; color: var(--text-dim);
-      line-height: 1.65; margin-bottom: 20px;
-    }
-    .blog-meta {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.65rem; color: var(--text-dim);
-      border-top: 1px solid var(--border); padding-top: 16px;
-    }
-    .blog-read-more {
-      font-size: 0.7rem; letter-spacing: 0.1em;
-      color: var(--gold); text-transform: uppercase;
-      transition: letter-spacing 0.3s;
-    }
-    .blog-card:hover .blog-read-more { letter-spacing: 0.16em; }
+    .blog-card:hover { background: rgba(201,164,82,0.06); }
+    .blog-num { font-family: var(--font-display); font-size: 3rem; color: rgba(201,164,82,0.12); line-height:1; margin-bottom:16px; }
+    .blog-cat { font-size: 0.62rem; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
+    .blog-title { font-family: var(--font-display); font-size: 1.3rem; color: #fff; font-weight: 300; line-height: 1.4; margin-bottom: 12px; }
+    .blog-excerpt { font-size: 0.78rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 20px; }
+    .blog-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.65rem; color: var(--text-dim); border-top: 1px solid var(--border); padding-top: 16px; }
+    .blog-read { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; transition: letter-spacing 0.3s; }
+    .blog-card:hover .blog-read { letter-spacing: 0.16em; }
 
-    /* ── NEWSLETTER ─────────────────────────────────────── */
-    .newsletter-section {
+    /* ── NEWSLETTER ── */
+    .newsletter {
       background: linear-gradient(135deg, rgba(201,164,82,0.07) 0%, transparent 70%);
       border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 72px 40px;
-      text-align: center;
+      padding: 80px 40px; text-align: center;
     }
-    .newsletter-section h2 {
-      font-family: var(--font-display);
-      font-size: 2.4rem; font-weight: 300; color: #fff;
-      margin-bottom: 12px;
-    }
-    .newsletter-section h2 em { color: var(--gold); font-style: italic; }
-    .newsletter-section p {
-      color: var(--text-dim); max-width: 440px;
-      margin: 0 auto 32px; font-size: 0.88rem;
-    }
-    .newsletter-form {
-      display: flex; gap: 0; max-width: 440px; margin: 0 auto;
-    }
-    .newsletter-form input {
-      flex: 1;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-right: none;
-      color: #fff;
-      font-size: 0.82rem;
-      padding: 14px 20px;
-      outline: none;
-      font-family: var(--font-body);
+    .newsletter h2 { font-family: var(--font-display); font-size: 2.4rem; font-weight: 300; color: #fff; margin-bottom: 12px; }
+    .newsletter h2 em { color: var(--gold); font-style: italic; }
+    .newsletter p { color: var(--text-dim); max-width: 440px; margin: 0 auto 32px; font-size: 0.88rem; }
+    .nl-form { display: flex; max-width: 420px; margin: 0 auto; }
+    .nl-form input {
+      flex: 1; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-right: none;
+      color: #fff; font-size: 0.82rem; padding: 14px 20px;
+      outline: none; font-family: var(--font-body);
       transition: border-color 0.3s;
     }
-    .newsletter-form input:focus { border-color: rgba(201,164,82,0.5); }
-    .newsletter-form input::placeholder { color: var(--text-dim); }
-    .newsletter-form button {
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 500;
-      padding: 14px 24px;
-      cursor: pointer;
+    .nl-form input:focus { border-color: rgba(201,164,82,0.5); }
+    .nl-form input::placeholder { color: var(--text-dim); }
+    .nl-form button {
+      background: var(--gold); color: var(--black); border: none;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 500; padding: 14px 24px; cursor: pointer; white-space: nowrap;
       transition: background 0.3s;
-      white-space: nowrap;
     }
-    .newsletter-form button:hover { background: #e0b85a; }
+    .nl-form button:hover { background: #e0b85a; }
 
-    /* ── RESPONSIVE ─────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .featured-project { grid-template-columns: 1fr; }
-      .featured-project-content { padding: 32px 24px; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .news-grid { grid-template-columns: 1fr 1fr; }
+      .video-hero-card { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      .featured-wrap { grid-template-columns: 1fr; }
+      .featured-content { padding: 32px 24px; }
       .news-grid { grid-template-columns: 1fr; }
-      .news-video-card { grid-column: span 1; }
+      .video-hero-card { grid-column: span 1; }
       .blog-grid { grid-template-columns: 1fr; }
-      .newsletter-form { flex-direction: column; }
-      .newsletter-form input { border-right: 1px solid var(--border); }
+      .nl-form { flex-direction: column; }
+      .nl-form input { border-right: 1px solid var(--border); border-bottom: none; }
     }
-    @media (max-width: 600px) {
-      .fp-title { font-size: 2rem; }
-      .news-hero h1 { font-size: 2.4rem; }
-      .blog-header { flex-direction: column; align-items: flex-start; }
-    }
-    body[dir="rtl"] .news-hero-label::before { display: none; }
-    body[dir="rtl"] .news-hero-label::after { content:''; width:28px; height:1px; background:var(--gold); }
-    body[dir="rtl"] .blog-header-line { background: linear-gradient(270deg, var(--border), transparent); }
-
-    /* ── Force all content visible — no JS dependency ── */
-    .featured-project, .news-card, .news-video-card,
-    .blog-card, .newsletter-section { opacity:1 !important; transform:none !important; }
   </style>
-  <!-- Prevent flash of wrong theme -->
+  <!-- Prevent flash of wrong theme/lang -->
   <script>
     (function(){
-      try{
-        var t=localStorage.getItem('gh_theme')||'dark';
-        document.documentElement.setAttribute('data-theme',t);
-      }catch(e){}
+      try{ var t=localStorage.getItem('gh_theme')||'dark'; document.documentElement.setAttribute('data-theme',t); }catch(e){}
     })();
   </script>
 </head>
 <body>
 
-<!-- Video Lightbox -->
-<div class="lightbox" id="videoLightbox" role="dialog" aria-modal="true" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:9999;align-items:center;justify-content:center;flex-direction:column;">
+<!-- ═══ VIDEO LIGHTBOX ═══ -->
+<div id="newsLightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:9999;align-items:center;justify-content:center;flex-direction:column;" role="dialog" aria-modal="true">
   <div style="position:relative;width:min(900px,92vw);aspect-ratio:16/9;background:#000;">
-    <button id="lbClose" style="position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;" aria-label="Close">✕</button>
-    <iframe id="lbIframe" src="" title="Video" allowfullscreen allow="autoplay; encrypted-media" style="width:100%;height:100%;border:0;"></iframe>
+    <button id="nlbClose" style="position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;" aria-label="Close">✕</button>
+    <iframe id="nlbFrame" src="" title="Video" allowfullscreen allow="autoplay;encrypted-media" style="width:100%;height:100%;border:0;"></iframe>
   </div>
-  <p id="lbTitle" style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:300;color:rgba(255,255,255,0.5);"></p>
 </div>
 
-<!-- NAVBAR -->
+<!-- ═══ NAVBAR ═══ -->
 <nav class="navbar" role="navigation">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
       <img src="assets/images/logo.png" alt="3D Graphics House" class="nav-logo-img">
     </a>
     <ul class="nav-links" role="list">
-      <li><a href="index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a></li>
-      <li><a href="about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a></li>
-      <li><a href="services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
+      <li><a href="index.html"   class="nav-link" data-en="Home"      data-ar="الرئيسية">Home</a></li>
+      <li><a href="about.html"   class="nav-link" data-en="About"     data-ar="من نحن">About</a></li>
+      <li><a href="services.html" class="nav-link" data-en="Services"  data-ar="الخدمات">Services</a></li>
       <li><a href="portfolio.html" class="nav-link" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
-      <li><a href="news.html" class="nav-link active" data-en="News" data-ar="الأخبار">News</a></li>
-      <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+      <li><a href="news.html"    class="nav-link active" data-en="News" data-ar="الأخبار">News</a></li>
+      <li><a href="contact.html" class="nav-link" data-en="Contact"   data-ar="تواصل">Contact</a></li>
     </ul>
     <div class="nav-actions">
       <button class="lang-toggle" aria-label="Switch language">عربي</button>
       <a href="contact.html" class="btn btn-gold" data-en="Request a Proposal" data-ar="طلب عرض مشروع">Request a Proposal</a>
-      <button class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">☾</button>
+      <button class="theme-toggle" aria-label="Toggle theme">☾</button>
       <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -405,95 +293,100 @@
 <div class="mobile-nav" role="dialog" aria-modal="true">
   <button class="mobile-nav-close">✕</button>
   <ul role="list">
-    <li><a href="index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a></li>
-    <li><a href="about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a></li>
-    <li><a href="services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
+    <li><a href="index.html"    class="nav-link" data-en="Home"      data-ar="الرئيسية">Home</a></li>
+    <li><a href="about.html"    class="nav-link" data-en="About"     data-ar="من نحن">About</a></li>
+    <li><a href="services.html" class="nav-link" data-en="Services"  data-ar="الخدمات">Services</a></li>
     <li><a href="portfolio.html" class="nav-link" data-en="Portfolio" data-ar="الأعمال">Portfolio</a></li>
-    <li><a href="news.html" class="nav-link active" data-en="News" data-ar="الأخبار">News</a></li>
-    <li><a href="contact.html" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+    <li><a href="news.html"     class="nav-link active" data-en="News" data-ar="الأخبار">News</a></li>
+    <li><a href="contact.html"  class="nav-link" data-en="Contact"   data-ar="تواصل">Contact</a></li>
   </ul>
 </div>
 
-<!-- ═══════════ HERO ═══════════ -->
+<!-- ═══ HERO ═══ -->
 <section class="news-hero" aria-label="News hero">
-  <div class="news-hero-bg" aria-hidden="true"></div>
+  <div class="news-hero-bg"  aria-hidden="true"></div>
   <div class="news-hero-grid" aria-hidden="true"></div>
   <div class="container" style="position:relative;z-index:1;">
-    <div class="news-date-badge" data-en="Latest Updates — 2025 / 2026" data-ar="آخر التحديثات — 2025 / 2026">Latest Updates — 2025 / 2026</div>
-    <div class="news-hero-label" data-en="News & Projects" data-ar="الأخبار والمشاريع">News & Projects</div>
+    <div style="display:inline-block;background:rgba(201,164,82,0.1);border:1px solid rgba(201,164,82,0.25);color:var(--gold);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:4px 14px;margin-bottom:20px;"
+         data-en="Latest Updates — 2025 / 2026" data-ar="آخر التحديثات — 2025 / 2026">Latest Updates — 2025 / 2026</div>
+    <div class="news-eyebrow" data-en="News &amp; Projects" data-ar="الأخبار والمشاريع">News &amp; Projects</div>
     <h1 data-en="What We've<br><em>Been Building</em>" data-ar="ما الذي<br><em>كنا نبنيه</em>">What We've<br><em>Been Building</em></h1>
-    <p class="news-hero-sub" data-en="From world-class events to landmark architecture — stay updated with our latest projects, events, and creative milestones." data-ar="من فعاليات عالمية إلى معالم معمارية — ابقَ على اطلاع بأحدث مشاريعنا وفعالياتنا وإنجازاتنا الإبداعية.">From world-class events to landmark architecture — stay updated with our latest projects, events, and creative milestones.</p>
+    <p class="news-hero-sub"
+       data-en="From world-class events to landmark architecture — the latest projects, milestones, and creative achievements from 3D Graphics House."
+       data-ar="من فعاليات عالمية إلى معالم معمارية — آخر مشاريعنا وإنجازاتنا الإبداعية.">From world-class events to landmark architecture — the latest projects, milestones, and creative achievements from 3D Graphics House.</p>
   </div>
 </section>
 
-<!-- ═══════════ FEATURED: MAKKAH CHARTER ═══════════ -->
-<article class="featured-project" aria-label="Muslim World League featured project">
-  <div class="featured-project-gallery">
-    <img class="fp-main-img" id="fpMainImg"
+<!-- ═══ FEATURED: MAKKAH CHARTER ═══ -->
+<article class="featured-wrap" aria-label="Muslim World League Makkah Charter">
+  <div class="featured-gallery">
+    <img class="featured-main-img" id="featMainImg"
       src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.56.jpeg"
-      alt="Muslim World League Makkah Charter event" loading="lazy">
-    <div class="fp-thumb-strip">
-      <img class="fp-thumb active" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.56.jpeg" alt="View 1" loading="lazy">
-      <img class="fp-thumb" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.51-1.jpeg" alt="View 2" loading="lazy">
-      <img class="fp-thumb" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.53.jpeg" alt="View 3" loading="lazy">
-      <img class="fp-thumb" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.44-1.jpeg" alt="View 4" loading="lazy">
-      <img class="fp-thumb" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.44-2.jpeg" alt="View 5" loading="lazy">
-      <img class="fp-thumb" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.45-2.jpeg" alt="View 6" loading="lazy">
-      <img class="fp-thumb" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.48.jpeg" alt="View 7" loading="lazy">
-      <img class="fp-thumb" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.45.jpeg" alt="View 8" loading="lazy">
-      <img class="fp-thumb" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.25.16.jpeg" alt="View 9" loading="lazy">
+      alt="Muslim World League — Makkah Charter Celebration">
+    <div class="featured-thumbs">
+      <img class="featured-thumb active" onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.56.jpeg"  alt="View 1">
+      <img class="featured-thumb"        onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.51-1.jpeg" alt="View 2">
+      <img class="featured-thumb"        onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.53.jpeg"   alt="View 3">
+      <img class="featured-thumb"        onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.44-1.jpeg" alt="View 4">
+      <img class="featured-thumb"        onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.44-2.jpeg" alt="View 5">
+      <img class="featured-thumb"        onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.45-2.jpeg" alt="View 6">
+      <img class="featured-thumb"        onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.48.jpeg"   alt="View 7">
+      <img class="featured-thumb"        onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.45.jpeg"   alt="View 8">
+      <img class="featured-thumb"        onclick="switchFeat(this)" src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.25.16.jpeg"   alt="View 9">
     </div>
   </div>
-  <div class="featured-project-content">
-    <div class="news-date-badge" data-en="● Just Published — March 2026" data-ar="● نُشر للتو — مارس 2026">● Just Published — March 2026</div>
-    <div class="fp-category" data-en="Architectural Maquette · International Event" data-ar="ماكيت معماري · فعالية دولية">Architectural Maquette · International Event</div>
-    <h2 class="fp-title" data-en="Muslim World League —<br><em>Makkah Charter</em>" data-ar="رابطة العالم الإسلامي —<br><em>وثيقة مكة المكرمة</em>">Muslim World League —<br><em>Makkah Charter</em></h2>
-    <p class="fp-desc" data-en="3D Graphics House showcased a selection of our finest scale models at the prestigious Makkah Charter Celebration event under the patronage of Muslim World League — a defining moment of craft excellence on an international stage." data-ar="عرضت 3D Graphics House مجموعة مختارة من أفضل نماذجها المجسمة في احتفالية وثيقة مكة المكرمة المرموقة تحت رعاية رابطة العالم الإسلامي — لحظة فارقة في الحرفية على المسرح الدولي.">3D Graphics House showcased a selection of our finest scale models at the prestigious Makkah Charter Celebration event under the patronage of Muslim World League — a defining moment of craft excellence on an international stage.</p>
-    <div class="fp-tags">
-      <span class="fp-tag" data-en="Scale Model" data-ar="نموذج مجسم">Scale Model</span>
-      <span class="fp-tag" data-en="International Event" data-ar="فعالية دولية">International Event</span>
-      <span class="fp-tag" data-en="Muslim World League" data-ar="رابطة العالم الإسلامي">Muslim World League</span>
-      <span class="fp-tag" data-en="Makkah" data-ar="مكة المكرمة">Makkah</span>
+  <div class="featured-content">
+    <div class="featured-badge" data-en="● Just Published — March 2026" data-ar="● نُشر للتو — مارس 2026">● Just Published — March 2026</div>
+    <div class="featured-cat" data-en="Architectural Maquette · International Event" data-ar="ماكيت معماري · فعالية دولية">Architectural Maquette · International Event</div>
+    <h2 class="featured-title" data-en="Muslim World League —<br><em>Makkah Charter</em>" data-ar="رابطة العالم الإسلامي —<br><em>وثيقة مكة المكرمة</em>">Muslim World League —<br><em>Makkah Charter</em></h2>
+    <p class="featured-desc"
+       data-en="3D Graphics House showcased a selection of our finest scale models at the prestigious Makkah Charter Celebration under the patronage of the Muslim World League — a defining moment of craft excellence on an international stage."
+       data-ar="عرضت 3D Graphics House مجموعة مختارة من أفضل نماذجها المجسمة في احتفالية وثيقة مكة المكرمة تحت رعاية رابطة العالم الإسلامي.">3D Graphics House showcased a selection of our finest scale models at the prestigious Makkah Charter Celebration under the patronage of the Muslim World League — a defining moment of craft excellence on an international stage.</p>
+    <div class="featured-tags">
+      <span class="featured-tag" data-en="Scale Model"        data-ar="نموذج مجسم">Scale Model</span>
+      <span class="featured-tag" data-en="International Event" data-ar="فعالية دولية">International Event</span>
+      <span class="featured-tag" data-en="Muslim World League" data-ar="رابطة العالم الإسلامي">Muslim World League</span>
+      <span class="featured-tag" data-en="Makkah"             data-ar="مكة المكرمة">Makkah</span>
     </div>
-    <div class="fp-meta">
+    <div class="featured-meta">
       <div>
-        <div class="fp-meta-item-label" data-en="Category" data-ar="الفئة">Category</div>
-        <div class="fp-meta-item-val" data-en="Architectural Maquette" data-ar="ماكيت معماري">Architectural Maquette</div>
+        <div class="featured-meta-label" data-en="Category" data-ar="الفئة">Category</div>
+        <div class="featured-meta-val"   data-en="Architectural Maquette" data-ar="ماكيت معماري">Architectural Maquette</div>
       </div>
       <div>
-        <div class="fp-meta-item-label" data-en="Client" data-ar="العميل">Client</div>
-        <div class="fp-meta-item-val" data-en="Muslim World League" data-ar="رابطة العالم الإسلامي">Muslim World League</div>
+        <div class="featured-meta-label" data-en="Client" data-ar="العميل">Client</div>
+        <div class="featured-meta-val"   data-en="Muslim World League" data-ar="رابطة العالم الإسلامي">Muslim World League</div>
       </div>
       <div>
-        <div class="fp-meta-item-label" data-en="Year" data-ar="السنة">Year</div>
-        <div class="fp-meta-item-val">2026</div>
+        <div class="featured-meta-label" data-en="Year" data-ar="السنة">Year</div>
+        <div class="featured-meta-val">2026</div>
       </div>
     </div>
   </div>
 </article>
 
-<!-- ═══════════ NEWS GRID ═══════════ -->
-<div style="background:var(--black);padding:3px 3px 0;">
+<!-- ═══ NEWS GRID ═══ -->
+<div style="background:var(--black);">
   <div class="news-grid">
 
-    <!-- Jeddah Forum — Video Card -->
-    <div class="news-video-card" data-video="vYbn-9ramsI" data-title="Jeddah Forum" role="button" tabindex="0" aria-label="Play Jeddah Forum">
-      <img src="https://img.youtube.com/vi/vYbn-9ramsI/maxresdefault.jpg" alt="Jeddah Forum 3D Film" loading="lazy">
-      <div class="nvc-play">▶</div>
-      <div class="nvc-overlay">
-        <div class="nvc-type" data-en="3D Cinematic Film · Commercial" data-ar="فيلم سينمائي ثلاثي الأبعاد · تجاري">3D Cinematic Film · Commercial</div>
-        <div class="nvc-title" data-en="Jeddah Forum" data-ar="منتدى جدة">Jeddah Forum</div>
-        <div class="nvc-desc" data-en="Full 3D animation movie, brand design, catalog and all graphics for this landmark commercial development." data-ar="فيلم أنيميشن ثلاثي الأبعاد كامل، تصميم هوية، كتالوج وجميع الجرافيكس لهذا التطوير التجاري البارز.">Full 3D animation movie, brand design, catalog and all graphics for this landmark commercial development.</div>
+    <!-- Jeddah Forum — wide video card -->
+    <div class="video-hero-card" data-video="vYbn-9ramsI" data-title="Jeddah Forum" tabindex="0" role="button" aria-label="Play Jeddah Forum">
+      <img src="https://img.youtube.com/vi/vYbn-9ramsI/maxresdefault.jpg" alt="Jeddah Forum 3D Film">
+      <div class="vhc-play">▶</div>
+      <div class="vhc-overlay">
+        <div class="vhc-type" data-en="3D Cinematic Film · Commercial" data-ar="فيلم سينمائي ثلاثي الأبعاد · تجاري">3D Cinematic Film · Commercial</div>
+        <div class="vhc-title" data-en="Jeddah Forum" data-ar="منتدى جدة">Jeddah Forum</div>
+        <div class="vhc-desc" data-en="Full 3D animation, brand design, catalog and all graphics for this landmark commercial development." data-ar="أنيميشن ثلاثي الأبعاد كامل، هوية تجارية، كتالوج وجميع الجرافيكس لهذا التطوير التجاري البارز.">Full 3D animation, brand design, catalog and all graphics for this landmark commercial development.</div>
       </div>
     </div>
 
-    <!-- Anan Escan Maquette -->
-    <div class="news-card" role="article" aria-label="Anan Escan Co maquette project">
+    <!-- Anan Escan -->
+    <div class="news-card" role="article">
       <img class="news-card-img" src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/Anan-Escan-Co.01.jpeg" alt="Anan Escan Co Maquette" loading="lazy">
       <div class="news-card-body">
         <div class="news-card-type" data-en="Architectural Maquette · 2025" data-ar="ماكيت معماري · 2025">Architectural Maquette · 2025</div>
         <div class="news-card-title" data-en="Anan Escan Co. — Precision Maquette" data-ar="أنان إسكان — ماكيت دقيق">Anan Escan Co. — Precision Maquette</div>
-        <div class="news-card-desc" data-en="Three high-quality architectural maquettes showcasing precision craftsmanship and exceptional attention to every structural detail." data-ar="ثلاثة نماذج معمارية عالية الجودة تعرض الحرفية الدقيقة والاهتمام الاستثنائي بكل تفصيلة هيكلية.">Three high-quality architectural maquettes showcasing precision craftsmanship and exceptional attention to every structural detail.</div>
+        <div class="news-card-desc" data-en="Three high-quality architectural maquettes showcasing precision craftsmanship and exceptional attention to every structural detail." data-ar="ثلاثة نماذج معمارية عالية الجودة تعرض الحرفية الدقيقة والاهتمام الاستثنائي بكل تفصيلة هيكلية.">Three high-quality architectural maquettes — precision craftsmanship and exceptional attention to structural detail.</div>
         <div class="news-card-footer">
           <span class="news-card-date">March 2025</span>
           <span class="news-card-arrow">→</span>
@@ -501,58 +394,52 @@
       </div>
     </div>
 
-    <!-- Alrajhi Naseem Video -->
-    <div class="news-card" role="article" aria-label="Alrajhi Naseem Al-Haram" style="cursor:pointer;" data-video="ALz6GdeITYc" data-title="Alrajhi Naseem Al-Haram">
-      <div style="position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0a0a;">
-        <img style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;filter:brightness(0.75);" src="https://img.youtube.com/vi/ALz6GdeITYc/maxresdefault.jpg" alt="Alrajhi Naseem Al-Haram" loading="lazy">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div style="width:52px;height:52px;border-radius:50%;background:rgba(201,164,82,0.85);display:flex;align-items:center;justify-content:center;font-size:16px;color:#080808;">▶</div>
-        </div>
+    <!-- Alrajhi Naseem -->
+    <div class="news-card" data-video="ALz6GdeITYc" data-title="Alrajhi Naseem Al-Haram" role="button" tabindex="0" style="cursor:pointer;" aria-label="Play Alrajhi Naseem">
+      <div class="news-card-video">
+        <img src="https://img.youtube.com/vi/ALz6GdeITYc/maxresdefault.jpg" alt="Alrajhi Naseem Al-Haram" loading="lazy">
+        <div class="play-btn"><div class="play-circle">▶</div></div>
       </div>
       <div class="news-card-body">
         <div class="news-card-type" data-en="3D Animation · Hospitality" data-ar="أنيميشن ثلاثي الأبعاد · ضيافة">3D Animation · Hospitality</div>
         <div class="news-card-title" data-en="Alrajhi Naseem Al-Haram" data-ar="الراجحي نسيم الحرام">Alrajhi Naseem Al-Haram</div>
-        <div class="news-card-desc" data-en="Luxury residential project near the Holy Mosque — a cinematic 3D animation showcasing premium living near the most sacred site." data-ar="مشروع سكني فاخر بالقرب من الحرم المكي — أنيميشن ثلاثي الأبعاد يعرض الحياة الراقية بالقرب من أقدس البقاع.">Luxury residential project near the Holy Mosque — a cinematic 3D animation.</div>
+        <div class="news-card-desc" data-en="Cinematic 3D animation for a luxury residential project near the Holy Mosque." data-ar="أنيميشن سينمائي ثلاثي الأبعاد لمشروع سكني فاخر بالقرب من الحرم المكي.">Cinematic 3D animation for a luxury residential project near the Holy Mosque.</div>
         <div class="news-card-footer">
-          <span class="news-card-date" data-en="Watch Film →" data-ar="شاهد الفيلم →">Watch Film →</span>
+          <span class="news-card-date" data-en="Watch Film" data-ar="شاهد الفيلم">Watch Film</span>
           <span class="news-card-arrow">▶</span>
         </div>
       </div>
     </div>
 
-    <!-- Rafal Pavilions Video -->
-    <div class="news-card" role="article" style="cursor:pointer;" data-video="ilWeCush3ew" data-title="Rafal Pavilions — VIP Offices">
-      <div style="position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0a0a;">
-        <img style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;filter:brightness(0.75);" src="https://img.youtube.com/vi/ilWeCush3ew/maxresdefault.jpg" alt="Rafal Pavilions" loading="lazy">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div style="width:52px;height:52px;border-radius:50%;background:rgba(201,164,82,0.85);display:flex;align-items:center;justify-content:center;font-size:16px;color:#080808;">▶</div>
-        </div>
+    <!-- Rafal Pavilions -->
+    <div class="news-card" data-video="ilWeCush3ew" data-title="Rafal Pavilions — VIP Offices" role="button" tabindex="0" style="cursor:pointer;" aria-label="Play Rafal Pavilions">
+      <div class="news-card-video">
+        <img src="https://img.youtube.com/vi/ilWeCush3ew/maxresdefault.jpg" alt="Rafal Pavilions VIP Offices" loading="lazy">
+        <div class="play-btn"><div class="play-circle">▶</div></div>
       </div>
       <div class="news-card-body">
         <div class="news-card-type" data-en="3D Animation · Residential" data-ar="أنيميشن ثلاثي الأبعاد · سكني">3D Animation · Residential</div>
         <div class="news-card-title" data-en="Rafal Pavilions — VIP Offices" data-ar="رفال بافيليونز — مكاتب VIP">Rafal Pavilions — VIP Offices</div>
-        <div class="news-card-desc" data-en="Luxury pavilions 3D 3D walkthrough animation — capturing the elegance of Rafal's prestigious VIP office concept." data-ar="أنيميشن جولة ثلاثية الأبعاد لأجنحة فاخرة — يجسد أناقة مفهوم مكاتب VIP المرموق في رفال.">Luxury pavilions 3D 3D walkthrough animation.</div>
+        <div class="news-card-desc" data-en="3D walkthrough capturing the elegance of Rafal's prestigious VIP office concept." data-ar="جولة ثلاثية الأبعاد تجسد أناقة مفهوم مكاتب VIP المرموق في رفال.">3D walkthrough capturing the elegance of Rafal's prestigious VIP office concept.</div>
         <div class="news-card-footer">
-          <span class="news-card-date" data-en="Watch Film →" data-ar="شاهد الفيلم →">Watch Film →</span>
+          <span class="news-card-date" data-en="Watch Film" data-ar="شاهد الفيلم">Watch Film</span>
           <span class="news-card-arrow">▶</span>
         </div>
       </div>
     </div>
 
-    <!-- Makkah Market Video -->
-    <div class="news-card" role="article" style="cursor:pointer;" data-video="GlbvI0DRXE4" data-title="Makkah Market Center">
-      <div style="position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0a0a;">
-        <img style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75);" src="https://img.youtube.com/vi/GlbvI0DRXE4/maxresdefault.jpg" alt="Makkah Market Center" loading="lazy">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div style="width:52px;height:52px;border-radius:50%;background:rgba(201,164,82,0.85);display:flex;align-items:center;justify-content:center;font-size:16px;color:#080808;">▶</div>
-        </div>
+    <!-- Makkah Market -->
+    <div class="news-card" data-video="GlbvI0DRXE4" data-title="Makkah Market Center" role="button" tabindex="0" style="cursor:pointer;" aria-label="Play Makkah Market Center">
+      <div class="news-card-video">
+        <img src="https://img.youtube.com/vi/GlbvI0DRXE4/maxresdefault.jpg" alt="Makkah Market Center" loading="lazy">
+        <div class="play-btn"><div class="play-circle">▶</div></div>
       </div>
       <div class="news-card-body">
-        <div class="news-card-type" data-en="3D Animation · Commercial · Makkah" data-ar="أنيميشن ثلاثي الأبعاد · تجاري · مكة">3D Animation · Commercial · Makkah</div>
+        <div class="news-card-type" data-en="3D Animation · Commercial" data-ar="أنيميشن ثلاثي الأبعاد · تجاري">3D Animation · Commercial</div>
         <div class="news-card-title" data-en="Makkah Market Center" data-ar="مركز سوق مكة">Makkah Market Center</div>
-        <div class="news-card-desc" data-en="A full cinematic 3D production for this major commercial center development in the heart of Makkah." data-ar="إنتاج سينمائي ثلاثي الأبعاد كامل لهذا المشروع التجاري الكبير في قلب مكة المكرمة.">A full cinematic 3D production for this major commercial center in Makkah.</div>
+        <div class="news-card-desc" data-en="Full cinematic 3D production for a major commercial center in the heart of Makkah." data-ar="إنتاج سينمائي ثلاثي الأبعاد كامل لمركز تجاري كبير في قلب مكة المكرمة.">Full cinematic 3D production for a major commercial center in the heart of Makkah.</div>
         <div class="news-card-footer">
-          <span class="news-card-date" data-en="Watch Film →" data-ar="شاهد الفيلم →">Watch Film →</span>
+          <span class="news-card-date" data-en="Watch Film" data-ar="شاهد الفيلم">Watch Film</span>
           <span class="news-card-arrow">▶</span>
         </div>
       </div>
@@ -561,73 +448,71 @@
   </div>
 </div>
 
-<!-- ═══════════ BLOG / INSIGHTS ═══════════ -->
-<section style="background:var(--black);" aria-label="Blog and Insights">
+<!-- ═══ BLOG / INSIGHTS ═══ -->
+<section style="background:var(--black);" aria-label="Insights and Knowledge">
   <div class="blog-header">
     <h2 data-en="Insights &amp; <em>Knowledge</em>" data-ar="رؤى <em>ومعرفة</em>">Insights &amp; <em>Knowledge</em></h2>
     <div class="blog-header-line"></div>
-    <a href="https://3dgraphicshouse.com/blog/" target="_blank" rel="noopener" class="btn btn-outline" style="white-space:nowrap;font-size:0.72rem;" data-en="All Articles →" data-ar="جميع المقالات →">All Articles →</a>
+    <a href="https://3dgraphicshouse.com/blog/" target="_blank" rel="noopener"
+       class="btn btn-outline" style="white-space:nowrap;font-size:0.72rem;"
+       data-en="All Articles →" data-ar="جميع المقالات →">All Articles →</a>
   </div>
   <div class="blog-grid">
-
-    <a href="https://3dgraphicshouse.com/video-production-timeline/" target="_blank" rel="noopener" class="blog-card" style="text-decoration:none;display:block;">
+    <a href="https://3dgraphicshouse.com/video-production-timeline/" target="_blank" rel="noopener" class="blog-card">
       <div class="blog-num">01</div>
       <div class="blog-cat" data-en="Production · Strategy" data-ar="إنتاج · استراتيجية">Production · Strategy</div>
       <div class="blog-title" data-en="Accelerate Your Video Production Timeline" data-ar="سرّع الجدول الزمني لإنتاج الفيديو">Accelerate Your Video Production Timeline</div>
-      <div class="blog-excerpt" data-en="In today's fast-paced digital landscape, live-action video has become a cornerstone of effective business marketing. Learn how to move from brief to final delivery — faster, without sacrificing quality." data-ar="في المشهد الرقمي المتسارع اليوم، أصبح الفيديو الحي ركيزة أساسية في تسويق الأعمال. تعلّم كيف تنتقل من الموجز إلى التسليم بشكل أسرع دون المساس بالجودة.">In today's fast-paced digital landscape, live-action video has become a cornerstone of effective business marketing. Learn how to accelerate your production without sacrificing quality.</div>
+      <div class="blog-excerpt" data-en="In today's fast-paced digital landscape, live-action video has become a cornerstone of effective business marketing. Learn how to move from brief to final delivery faster, without sacrificing quality." data-ar="تعلّم كيف تنتقل من الموجز إلى التسليم بشكل أسرع دون المساس بالجودة.">In today's fast-paced digital landscape, live-action video has become a cornerstone of effective business marketing. Learn how to move from brief to final delivery faster, without sacrificing quality.</div>
       <div class="blog-meta">
         <span>Ibrahim Radwan · March 2024</span>
-        <span class="blog-read-more" data-en="Read →" data-ar="اقرأ →">Read →</span>
+        <span class="blog-read" data-en="Read →" data-ar="اقرأ →">Read →</span>
       </div>
     </a>
-
-    <a href="https://3dgraphicshouse.com/video-campaign-ideas/" target="_blank" rel="noopener" class="blog-card" style="text-decoration:none;display:block;">
+    <a href="https://3dgraphicshouse.com/video-campaign-ideas/" target="_blank" rel="noopener" class="blog-card">
       <div class="blog-num">02</div>
       <div class="blog-cat" data-en="Marketing · Video" data-ar="تسويق · فيديو">Marketing · Video</div>
       <div class="blog-title" data-en="Dynamic Video Campaign Ideas That Convert" data-ar="أفكار حملات فيديو ديناميكية تُحوّل">Dynamic Video Campaign Ideas That Convert</div>
-      <div class="blog-excerpt" data-en="Elevate your marketing with 7 powerful video campaign strategies — from explainer videos and testimonials to live streaming and 3D animated walkthroughs that captivate audiences." data-ar="ارفع مستوى تسويقك بـ7 استراتيجيات قوية لحملات الفيديو — من مقاطع الشرح والشهادات إلى البث المباشر والجولات ثلاثية الأبعاد التي تأسر الجمهور.">Elevate your marketing with 7 powerful video campaign strategies — from explainer videos and testimonials to 3D animated walkthroughs that captivate audiences.</div>
+      <div class="blog-excerpt" data-en="Elevate your marketing with 7 powerful video campaign strategies — from explainer videos and testimonials to live streaming and 3D animated walkthroughs." data-ar="ارفع مستوى تسويقك بـ7 استراتيجيات قوية: من مقاطع الشرح والشهادات إلى الجولات ثلاثية الأبعاد.">Elevate your marketing with 7 powerful video campaign strategies — from explainer videos and testimonials to live streaming and 3D animated walkthroughs.</div>
       <div class="blog-meta">
         <span>March 2024</span>
-        <span class="blog-read-more" data-en="Read →" data-ar="اقرأ →">Read →</span>
+        <span class="blog-read" data-en="Read →" data-ar="اقرأ →">Read →</span>
       </div>
     </a>
-
-    <a href="https://3dgraphicshouse.com/digital-marketing/" target="_blank" rel="noopener" class="blog-card" style="text-decoration:none;display:block;">
+    <a href="https://3dgraphicshouse.com/digital-marketing/" target="_blank" rel="noopener" class="blog-card">
       <div class="blog-num">03</div>
       <div class="blog-cat" data-en="Digital · Strategy" data-ar="رقمي · استراتيجية">Digital · Strategy</div>
       <div class="blog-title" data-en="The All-Inclusive Digital Marketing Manual" data-ar="الدليل الشامل للتسويق الرقمي">The All-Inclusive Digital Marketing Manual</div>
-      <div class="blog-excerpt" data-en="Unveiling modern digital marketing strategies for the real-estate and architectural sectors — SEO, content marketing, social media, PPC, and email campaigns to maximize visibility and conversions." data-ar="كشف استراتيجيات التسويق الرقمي الحديثة لقطاعي العقارات والمعمار — SEO وتسويق المحتوى ووسائل التواصل الاجتماعي وPPC وحملات البريد الإلكتروني لتعظيم الظهور والتحويل.">Unveiling modern digital marketing strategies for real-estate and architectural sectors — SEO, content marketing, social media, and more to maximize your visibility.</div>
+      <div class="blog-excerpt" data-en="Unveiling modern digital marketing strategies for the real-estate and architectural sectors — SEO, content marketing, social media, PPC, and email campaigns to maximize visibility." data-ar="استراتيجيات التسويق الرقمي الحديثة لقطاعي العقارات والمعمار — لتعظيم الظهور والتحويل.">Unveiling modern digital marketing strategies for the real-estate and architectural sectors — SEO, content marketing, social media, PPC, and email campaigns to maximize visibility.</div>
       <div class="blog-meta">
         <span>March 2024</span>
-        <span class="blog-read-more" data-en="Read →" data-ar="اقرأ →">Read →</span>
+        <span class="blog-read" data-en="Read →" data-ar="اقرأ →">Read →</span>
       </div>
     </a>
-
   </div>
 </section>
 
-<!-- ═══════════ NEWSLETTER ═══════════ -->
-<section class="newsletter-section" aria-label="Newsletter signup">
+<!-- ═══ NEWSLETTER ═══ -->
+<section class="newsletter" aria-label="Newsletter">
   <h2 data-en="Stay <em>Updated</em>" data-ar="ابقَ <em>على اطلاع</em>">Stay <em>Updated</em></h2>
-  <p data-en="Be the first to see our new projects, events, and creative insights — straight to your inbox." data-ar="كن أول من يرى مشاريعنا الجديدة وفعالياتنا ورؤانا الإبداعية — مباشرة إلى بريدك الإلكتروني.">Be the first to see our new projects, events, and creative insights — straight to your inbox.</p>
-  <form class="newsletter-form" onsubmit="return false;">
-    <input type="email" placeholder="Your email address" data-en-placeholder="Your email address" data-ar-placeholder="بريدك الإلكتروني" />
+  <p data-en="Be the first to see our new projects, events, and creative insights — straight to your inbox." data-ar="كن أول من يرى مشاريعنا الجديدة وفعالياتنا ورؤانا الإبداعية.">Be the first to see our new projects, events, and creative insights — straight to your inbox.</p>
+  <form class="nl-form" onsubmit="return false;">
+    <input type="email" placeholder="Your email address" data-en-placeholder="Your email address" data-ar-placeholder="بريدك الإلكتروني">
     <button type="submit" data-en="Subscribe" data-ar="اشترك">Subscribe</button>
   </form>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer style="background:var(--black);border-top:1px solid var(--border);padding:48px 40px;text-align:center;">
   <a href="index.html" style="display:inline-block;margin-bottom:20px;">
     <img src="assets/images/logo.png" alt="3D Graphics House" class="nav-logo-img">
   </a>
   <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:24px;">
-    <a href="index.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Home" data-ar="الرئيسية">Home</a>
-    <a href="about.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="About" data-ar="من نحن">About</a>
-    <a href="services.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Services" data-ar="الخدمات">Services</a>
+    <a href="index.html"    style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Home"      data-ar="الرئيسية">Home</a>
+    <a href="about.html"   style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="About"     data-ar="من نحن">About</a>
+    <a href="services.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Services"  data-ar="الخدمات">Services</a>
     <a href="portfolio.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Portfolio" data-ar="الأعمال">Portfolio</a>
-    <a href="news.html" style="font-size:0.75rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="News" data-ar="الأخبار">News</a>
-    <a href="contact.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Contact" data-ar="تواصل">Contact</a>
+    <a href="news.html"    style="font-size:0.75rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;"     data-en="News"      data-ar="الأخبار">News</a>
+    <a href="contact.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Contact"   data-ar="تواصل">Contact</a>
   </div>
   <p style="font-size:0.72rem;color:var(--text-dim);opacity:0.5;">© 2025 3D Graphics House. All rights reserved. Saudi Arabia · Gulf · Oman</p>
 </footer>
@@ -637,78 +522,65 @@
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.83L0 24l6.32-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.365l-.36-.214-3.732.884.915-3.63-.235-.374A9.818 9.818 0 0112 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.421-4.398 9.818-9.818 9.818z"/></svg>
 </a>
 
+<!-- ═══ FAILSAFE: theme + lang (runs immediately, no dependency) ═══ -->
 <script>
-/* Failsafe init — ensures lang/theme toggle work even if main.js has timing issues */
 (function(){
-  var tt=document.querySelector('.theme-toggle');
+  /* Theme toggle */
+  var tt = document.querySelector('.theme-toggle');
   if(tt){
-    var th=document.documentElement.getAttribute('data-theme')||'dark';
-    tt.innerHTML=th==='light'?'&#9790;':'&#9728;';
-    tt.onclick=function(){
-      var cur=document.documentElement.getAttribute('data-theme')||'dark';
-      var next=cur==='dark'?'light':'dark';
-      document.documentElement.setAttribute('data-theme',next);
-      tt.innerHTML=next==='light'?'&#9790;':'&#9728;';
-      try{localStorage.setItem('gh_theme',next);}catch(e){}
+    var th = document.documentElement.getAttribute('data-theme')||'dark';
+    tt.innerHTML = th==='light' ? '&#9790;' : '&#9728;';
+    tt.onclick = function(){
+      var cur  = document.documentElement.getAttribute('data-theme')||'dark';
+      var next = cur==='dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      tt.innerHTML = next==='light' ? '&#9790;' : '&#9728;';
+      try{ localStorage.setItem('gh_theme', next); }catch(e){}
     };
   }
-  var lt=document.querySelector('.lang-toggle');
+  /* Language toggle */
+  var lt = document.querySelector('.lang-toggle');
   if(lt && !lt.__ghLang){
-    lt.__ghLang=true;
-    lt.onclick=function(){
-      var isAr=document.documentElement.lang!=='ar';
-      document.documentElement.lang=isAr?'ar':'en';
-      document.body.dir=isAr?'rtl':'ltr';
-      lt.textContent=isAr?'EN':'عربي';
-      try{localStorage.setItem('gh_lang',isAr?'ar':'en');}catch(e){}
+    lt.__ghLang = true;
+    lt.onclick = function(){
+      var isAr = document.documentElement.lang !== 'ar';
+      document.documentElement.lang  = isAr ? 'ar' : 'en';
+      document.body.dir              = isAr ? 'rtl' : 'ltr';
+      lt.textContent                 = isAr ? 'EN' : 'عربي';
+      try{ localStorage.setItem('gh_lang', isAr?'ar':'en'); }catch(e){}
       document.querySelectorAll('[data-en]').forEach(function(el){
-        el.innerHTML=isAr?(el.dataset.ar||el.dataset.en):el.dataset.en;
+        el.innerHTML = isAr ? (el.dataset.ar||el.dataset.en) : el.dataset.en;
       });
-      document.body.style.fontFamily=isAr?'var(--font-arabic)':'';
+      document.body.style.fontFamily = isAr ? 'var(--font-arabic)' : '';
     };
-    try{if(localStorage.getItem('gh_lang')==='ar')lt.onclick();}catch(e){}
+    try{ if(localStorage.getItem('gh_lang')==='ar') lt.onclick(); }catch(e){}
+  }
+  /* Thumbnail switcher */
+  window.switchFeat = function(thumb){
+    document.querySelectorAll('.featured-thumb').forEach(function(t){ t.classList.remove('active'); });
+    thumb.classList.add('active');
+    var mainImg = document.getElementById('featMainImg');
+    if(mainImg) mainImg.src = thumb.src;
+  };
+  /* Video lightbox */
+  var lb    = document.getElementById('newsLightbox');
+  var frame = document.getElementById('nlbFrame');
+  var close = document.getElementById('nlbClose');
+  if(lb && frame && close){
+    document.querySelectorAll('[data-video]').forEach(function(el){
+      el.addEventListener('click', function(){
+        frame.src = 'https://www.youtube.com/embed/' + el.dataset.video + '?autoplay=1&rel=0';
+        lb.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+      el.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') el.click(); });
+    });
+    close.addEventListener('click', function(){ lb.style.display='none'; frame.src=''; document.body.style.overflow=''; });
+    lb.addEventListener('click', function(e){ if(e.target===lb){ lb.style.display='none'; frame.src=''; document.body.style.overflow=''; }});
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&lb.style.display!=='none'){ lb.style.display='none'; frame.src=''; document.body.style.overflow=''; }});
   }
 })();
 </script>
 <script src="js/main.js"></script>
-<script>
-  // Featured project thumbnail switcher
-  document.querySelectorAll('.fp-thumb').forEach(thumb => {
-    thumb.addEventListener('click', () => {
-      document.querySelectorAll('.fp-thumb').forEach(t => t.classList.remove('active'));
-      thumb.classList.add('active');
-      document.getElementById('fpMainImg').src = thumb.src;
-    });
-  });
-
-  // Video lightbox
-  const lb = document.getElementById('videoLightbox');
-  const lbIframe = document.getElementById('lbIframe');
-  const lbTitle = document.getElementById('lbTitle');
-
-  function openVideo(id, title) {
-    lbIframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
-    lbTitle.textContent = title || '';
-    lb.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeVideo() {
-    lb.style.display = 'none';
-    lbIframe.src = '';
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('lbClose').addEventListener('click', closeVideo);
-  lb.addEventListener('click', e => { if(e.target === lb) closeVideo(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeVideo(); });
-
-  document.querySelectorAll('[data-video]').forEach(el => {
-    el.addEventListener('click', () => {
-      const id = el.dataset.video;
-      const title = el.dataset.title || '';
-      if(id) openVideo(id, title);
-    });
-  });
-</script>
 </body>
 </html>
