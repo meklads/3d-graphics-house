@@ -32,6 +32,155 @@
     }
     .showreel-close:hover { color: #c9a452; }
 
+    /* ── Hero Split Layout ── */
+    .hero-split {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      background: #080808;
+    }
+    /* LEFT — video panel */
+    .hero-split-video {
+      position: relative;
+      flex: 0 0 58%;
+      overflow: hidden;
+      background: #040404;
+    }
+    .hero-split-video video {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 100%; height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    /* Gradient fade on right edge of video into dark panel */
+    .hero-split-video::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right,
+        rgba(4,4,4,0.08) 0%,
+        rgba(4,4,4,0.08) 60%,
+        rgba(8,8,8,0.70) 85%,
+        rgba(8,8,8,1) 100%
+      );
+      pointer-events: none;
+    }
+    /* RIGHT — content panel */
+    .hero-split-panel {
+      flex: 0 0 42%;
+      background: #080808;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 80px 64px 160px 48px;
+      position: relative;
+      z-index: 2;
+    }
+    /* Thin gold accent line on left edge of panel */
+    .hero-split-panel::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 22%; height: 56%;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        transparent,
+        rgba(201,164,82,0.55) 30%,
+        rgba(201,164,82,0.55) 70%,
+        transparent
+      );
+    }
+    .hero-split-inner {
+      max-width: 460px;
+      width: 100%;
+    }
+    .hero-split-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-split-eyebrow-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .hero-split-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 3.5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.07;
+      color: #f0ebe3;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.35s forwards;
+    }
+    .hero-split-title em {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .hero-split-sub {
+      font-size: 0.93rem;
+      line-height: 1.72;
+      color: rgba(185,175,160,0.75);
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+    .hero-split-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.65s forwards;
+    }
+    /* Scroll indicator pinned to bottom of video panel */
+    .hero-split-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 5;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.2s forwards;
+    }
+    .hero-split-scroll .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    .hero-split-scroll span {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      writing-mode: vertical-lr;
+    }
+    /* Responsive: stack vertically on tablet/mobile */
+    @media (max-width: 900px) {
+      .hero-split { flex-direction: column; height: auto; min-height: 100vh; }
+      .hero-split-video { flex: 0 0 55vw; min-height: 55vw; width: 100%; }
+      .hero-split-video::after { background: linear-gradient(to bottom, rgba(4,4,4,0.05), rgba(8,8,8,0.7) 80%, rgba(8,8,8,1)); }
+      .hero-split-panel { flex: 1; padding: 48px 32px 120px; width: 100%; }
+      .hero-split-panel::before { display: none; }
+      .hero-split-scroll { left: 20px; bottom: 24px; }
+    }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
     .cost-estimator {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -323,46 +472,19 @@
 <!-- ═══════════════════════════════════════════════════════
      HERO
 ══════════════════════════════════════════════════════════ -->
-<section class="hero" id="hero" aria-label="Hero">
+<section class="hero-split" id="hero" aria-label="Hero">
 
-  <!-- Cinematic full-screen video background -->
-  <div class="hero-video-wrap" aria-hidden="true">
-    <video id="heroVid" class="hero-video-bg" autoplay muted playsinline preload="auto" poster="assets/images/hero/hero-bg.jpg">
-      <source src="assets/images/hero/GH-demo-reel-2025.mp4" type="video/mp4">
+  <!-- LEFT — Cinematic video panel -->
+  <div class="hero-split-video" aria-hidden="true">
+    <video id="heroVid" autoplay muted playsinline loop preload="auto" poster="assets/images/hero/hero-bg.jpg">
+      <source src="assets/images/hero/3D-Architectural-visualisation.mp4" type="video/mp4">
     </video>
   </div>
   <script>
   (function(){
-    var START = 4;   /* 0:04 */
-    var END   = 53;  /* 0:53 */
-
-    function initHeroVideo(){
-      var v = document.getElementById('heroVid');
-      if(!v) return;
-
-      function seek(){
-        v.currentTime = START;
-        v.muted = true;
-        v.play().catch(function(){});
-      }
-
-      /* Loop segment */
-      v.addEventListener('timeupdate', function(){
-        if(v.currentTime >= END || v.currentTime < START - 0.5){
-          v.currentTime = START;
-        }
-      });
-
-      /* Seek to START — handle both: metadata already loaded OR not yet */
-      if(v.readyState >= 1){
-        seek();
-      } else {
-        v.addEventListener('loadedmetadata', seek, { once: true });
-        /* Extra fallback: canplay fires later */
-        v.addEventListener('canplay', function(){ if(v.currentTime < START){ seek(); } }, { once: true });
-      }
-
-      /* If autoplay blocked, retry on first touch/click */
+    /* Ensure autoplay after user gesture if blocked */
+    var v = document.getElementById('heroVid');
+    if(v){
       ['click','touchstart'].forEach(function(evt){
         document.addEventListener(evt, function once(){
           v.muted = true;
@@ -371,57 +493,46 @@
         }, { once: true });
       });
     }
-
-    /* Run after DOM is ready */
-    if(document.readyState === 'loading'){
-      document.addEventListener('DOMContentLoaded', initHeroVideo);
-    } else {
-      initHeroVideo();
-    }
   })();
   </script>
-  <!-- Centre dark overlay -->
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <!-- 4-corner black fog vignette -->
-  <div class="hero-vignette" aria-hidden="true"></div>
 
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-dot"></span>
-        <span data-en="Saudi Arabia · Oman · Gulf Region" data-ar="المملكة العربية السعودية · سلطنة عُمان · منطقة الخليج">Saudi Arabia · Oman · Gulf Region</span>
-      </div>
-
-      <h1 class="hero-title">
-        <span data-en="Where Vision<br>Meets <em>Reality</em>" data-ar="حيث تلتقي الرؤية<br>بـ<em>الواقع</em>">
-          Where Vision<br>Meets <em>Reality</em>
-        </span>
-      </h1>
-
-      <p class="hero-subtitle" data-en="15 years of proven excellence in Saudi Arabia — from concept to experience. Photorealistic visualization, cinematic media, and AI-powered solutions for the region's most ambitious projects." data-ar="15 عاماً من التميز الموثّق في المملكة العربية السعودية — من الفكرة إلى التجربة. إظهار فوتوريالستي، إنتاج سينمائي، وحلول ذكاء اصطناعي لأكثر مشاريع المنطقة طموحاً.">
-        15 years of proven excellence in Saudi Arabia — from concept to experience. Photorealistic visualization, cinematic media, and AI-powered solutions for the region's most ambitious projects.
-      </p>
-
-      <div class="hero-ctas">
-        <a href="contact.html" class="btn btn-gold" data-en="Start Your Project" data-ar="ابدأ مشروعك">
-          Start Your Project
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <button class="btn btn-outline showreel-trigger" data-en="▶ Watch Showreel" data-ar="▶ شاهد أعمالنا">
-          ▶ Watch Showreel
-        </button>
-        <a href="portfolio.html" class="btn btn-ghost" data-en="Explore Our Work →" data-ar="اطّلع على أعمالنا →">Explore Our Work <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scroll indicator -->
-  <div class="hero-scroll-indicator" aria-hidden="true">
+  <!-- Subtle scroll indicator inside video panel -->
+  <div class="hero-split-scroll" aria-hidden="true">
     <div class="scroll-line"></div>
     <span>SCROLL</span>
   </div>
 
-  <!-- Trust Bar -->
+  <!-- RIGHT — Content panel -->
+  <div class="hero-split-panel">
+    <div class="hero-split-inner">
+
+      <div class="hero-split-eyebrow">
+        <span class="hero-split-eyebrow-dot"></span>
+        <span data-en="Architectural Visualization · Saudi Arabia" data-ar="التصور المعماري · المملكة العربية السعودية">Architectural Visualization · Saudi Arabia</span>
+      </div>
+
+      <h1 class="hero-split-title" data-en="Where Vision<br>Meets <em>Reality</em>" data-ar="حيث تلتقي الرؤية<br>بـ<em>الواقع</em>">
+        Where Vision<br>Meets <em>Reality</em>
+      </h1>
+
+      <p class="hero-split-sub" data-en="15 years of proven excellence — from concept to experience. Photorealistic visualization, cinematic media, and AI-powered solutions for the region's most ambitious projects." data-ar="15 عاماً من التميز الموثّق — من الفكرة إلى التجربة. تصور فوتوريالستي، إنتاج سينمائي، وحلول ذكاء اصطناعي لأكثر مشاريع المنطقة طموحاً.">
+        15 years of proven excellence — from concept to experience. Photorealistic visualization, cinematic media, and AI-powered solutions for the region's most ambitious projects.
+      </p>
+
+      <div class="hero-split-ctas">
+        <a href="contact.html" class="btn btn-gold" data-en="Start Your Project" data-ar="ابدأ مشروعك">
+          Start Your Project
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="btn btn-outline showreel-trigger" data-en="▶ Showreel" data-ar="▶ شاهد أعمالنا">
+          ▶ Showreel
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Trust Bar — full width at bottom -->
   <div class="hero-trust-bar" role="complementary" aria-label="Key statistics">
     <div class="container">
       <div class="trust-bar-inner">
