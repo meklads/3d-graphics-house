@@ -164,7 +164,7 @@
     .ba-before { z-index: 1; }
     .ba-after {
       z-index: 2;
-      clip-path: inset(0 50% 0 0);
+      clip-path: inset(0 0 0 50%);
     }
     .ba-before-label, .ba-after-label {
       position: absolute;
@@ -184,27 +184,40 @@
       top: 0; bottom: 0;
       left: 50%;
       z-index: 3;
-      width: 3px;
-      background: var(--gold);
+      width: 44px;               /* wide hit area — centred on the line */
+      margin-left: -22px;
+      background: transparent;
       cursor: ew-resize;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .ba-handle::before {
-      content: '◀ ▶';
+    .ba-handle::after {          /* the visible gold line */
+      content: '';
+      position: absolute;
+      inset: 0 auto;
+      left: 50%; width: 2px;
+      background: var(--gold);
+      transform: translateX(-50%);
+    }
+    .ba-handle::before {         /* the drag circle */
+      content: '⟺';
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       background: var(--gold);
       color: var(--black);
-      font-size: 0.6rem;
-      padding: 8px 10px;
+      font-size: 1rem;
+      font-weight: 700;
       border-radius: 50%;
-      white-space: nowrap;
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      z-index: 1;
     }
     .ba-placeholder {
       width: 100%;

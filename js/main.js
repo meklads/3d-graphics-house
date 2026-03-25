@@ -90,9 +90,23 @@ function initScrollReveal() {
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.10, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
-  targets.forEach(el => io.observe(el));
+  targets.forEach(el => {
+    // If already above the fold at load time → make visible immediately
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) {
+      el.classList.add('visible');
+    } else {
+      io.observe(el);
+    }
+  });
+
+  // Safety net: after 1.5s reveal anything still hidden
+  setTimeout(() => {
+    $$('.reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible), .reveal-scale:not(.visible)')
+      .forEach(el => el.classList.add('visible'));
+  }, 1500);
 }
 
 /* ─── Animated Stat Counters ──────────────────────────── */
@@ -180,21 +194,25 @@ function initBeforeAfter() {
 
     const setPosition = (x) => {
       const rect = slider.getBoundingClientRect();
-      const pct = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+      const pct = Math.max(2, Math.min(98, ((x - rect.left) / rect.width) * 100));
       handle.style.left = pct + '%';
-      // Clip AFTER from the RIGHT so dragging right = more AFTER visible
-      afterLayer.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+      // BEFORE on LEFT (0..pct%), AFTER on RIGHT (pct%..100%)
+      afterLayer.style.clipPath = `inset(0 0 0 ${pct}%)`;
     };
 
-    on(handle, 'mousedown', () => dragging = true);
+    // Allow dragging from anywhere on the slider (not just the handle)
+    on(slider, 'mousedown', e => { dragging = true; setPosition(e.clientX); });
     on(document, 'mousemove', e => dragging && setPosition(e.clientX));
     on(document, 'mouseup', () => dragging = false);
 
-    on(handle, 'touchstart', () => dragging = true, { passive: true });
+    on(slider, 'touchstart', e => {
+      dragging = true;
+      setPosition(e.touches[0].clientX);
+    }, { passive: true });
     on(document, 'touchmove', e => dragging && setPosition(e.touches[0].clientX), { passive: true });
     on(document, 'touchend', () => dragging = false);
 
-    // Init at 50% — use rAF so layout is complete
+    // Init at 50%
     requestAnimationFrame(() => {
       setPosition(slider.getBoundingClientRect().left + slider.offsetWidth / 2);
     });
