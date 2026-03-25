@@ -11,6 +11,7 @@ export default defineConfig({
         services:  resolve(__dirname, 'services.html'),
         portfolio: resolve(__dirname, 'portfolio.html'),
         contact:   resolve(__dirname, 'contact.html'),
+        news:      resolve(__dirname, 'news.html'),
       }
     }
   }
