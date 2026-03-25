@@ -868,6 +868,39 @@
     });
   });
 </script>
-<script src="js/main.js" defer></script>
+<script>
+/* Failsafe init — ensures lang/theme toggle work even if main.js has timing issues */
+(function(){
+  var tt=document.querySelector('.theme-toggle');
+  if(tt){
+    var th=document.documentElement.getAttribute('data-theme')||'dark';
+    tt.innerHTML=th==='light'?'&#9790;':'&#9728;';
+    tt.onclick=function(){
+      var cur=document.documentElement.getAttribute('data-theme')||'dark';
+      var next=cur==='dark'?'light':'dark';
+      document.documentElement.setAttribute('data-theme',next);
+      tt.innerHTML=next==='light'?'&#9790;':'&#9728;';
+      try{localStorage.setItem('gh_theme',next);}catch(e){}
+    };
+  }
+  var lt=document.querySelector('.lang-toggle');
+  if(lt && !lt.__ghLang){
+    lt.__ghLang=true;
+    lt.onclick=function(){
+      var isAr=document.documentElement.lang!=='ar';
+      document.documentElement.lang=isAr?'ar':'en';
+      document.body.dir=isAr?'rtl':'ltr';
+      lt.textContent=isAr?'EN':'عربي';
+      try{localStorage.setItem('gh_lang',isAr?'ar':'en');}catch(e){}
+      document.querySelectorAll('[data-en]').forEach(function(el){
+        el.innerHTML=isAr?(el.dataset.ar||el.dataset.en):el.dataset.en;
+      });
+      document.body.style.fontFamily=isAr?'var(--font-arabic)':'';
+    };
+    try{if(localStorage.getItem('gh_lang')==='ar')lt.onclick();}catch(e){}
+  }
+})();
+</script>
+<script src="js/main.js"></script>
 </body>
 </html>

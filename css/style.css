@@ -478,25 +478,28 @@ body[dir="rtl"] .nav-link::after { left: auto; right: 0; }
   padding-bottom: 100px;
 }
 
-/* Video background */
-.hero-video-bg {
+/* Cinematic static image background with Ken Burns zoom */
+.hero-bg-image {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: var(--black);
+  background-image: url('../assets/images/hero/hero-bg.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  transform-origin: center center;
+  animation: heroBgZoom 24s ease-in-out infinite alternate;
 }
-.hero-video-bg iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 177.78vh;  /* 16:9 aspect ratio */
-  min-width: 100%;
-  height: 56.25vw;  /* 16:9 */
-  min-height: 100%;
-  transform: translate(-50%, -50%) scale(1.06);
-  border: none;
-  pointer-events: none;
+
+@keyframes heroBgZoom {
+  from {
+    transform: scale(1.0);
+    background-position: 55% 40%;
+  }
+  to {
+    transform: scale(1.1);
+    background-position: 50% 45%;
+  }
 }
 
 /* Centre darkening overlay */

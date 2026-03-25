@@ -312,16 +312,8 @@
 ══════════════════════════════════════════════════════════ -->
 <section class="hero" id="hero" aria-label="Hero">
 
-  <!-- Full-screen YouTube background video -->
-  <div class="hero-video-bg" aria-hidden="true">
-    <iframe
-      src="https://www.youtube.com/embed/DB1Tyzgpm4E?autoplay=1&mute=1&loop=1&playlist=DB1Tyzgpm4E&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-      frameborder="0"
-      title="Hero Background Video">
-    </iframe>
-  </div>
+  <!-- Cinematic full-screen background image -->
+  <div class="hero-bg-image" aria-hidden="true"></div>
   <!-- Centre dark overlay -->
   <div class="hero-overlay" aria-hidden="true"></div>
   <!-- 4-corner black fog vignette -->
@@ -486,8 +478,8 @@
         <img src="assets/images/sections/after.jpg" alt="3DGH photorealistic rendering" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="ba-handle" aria-label="Drag to compare"></div>
-      <div class="ba-before-label" data-en="Standard" data-ar="عادي">Standard</div>
-      <div class="ba-after-label" data-en="3DGH Quality" data-ar="جودة جرافيكس هاوس">3DGH Quality</div>
+      <div class="ba-before-label" data-en="CAD Drawing" data-ar="رسم كاد">CAD Drawing</div>
+      <div class="ba-after-label" data-en="3DGH Render" data-ar="إظهار جرافيكس هاوس">3DGH Render</div>
     </div>
   </div>
 </section>
@@ -1129,6 +1121,39 @@
 
 
 <!-- Scripts -->
-<script src="js/main.js" defer></script>
+<script>
+/* Failsafe init — ensures lang/theme toggle work even if main.js has timing issues */
+(function(){
+  var tt=document.querySelector('.theme-toggle');
+  if(tt){
+    var th=document.documentElement.getAttribute('data-theme')||'dark';
+    tt.innerHTML=th==='light'?'&#9790;':'&#9728;';
+    tt.onclick=function(){
+      var cur=document.documentElement.getAttribute('data-theme')||'dark';
+      var next=cur==='dark'?'light':'dark';
+      document.documentElement.setAttribute('data-theme',next);
+      tt.innerHTML=next==='light'?'&#9790;':'&#9728;';
+      try{localStorage.setItem('gh_theme',next);}catch(e){}
+    };
+  }
+  var lt=document.querySelector('.lang-toggle');
+  if(lt && !lt.__ghLang){
+    lt.__ghLang=true;
+    lt.onclick=function(){
+      var isAr=document.documentElement.lang!=='ar';
+      document.documentElement.lang=isAr?'ar':'en';
+      document.body.dir=isAr?'rtl':'ltr';
+      lt.textContent=isAr?'EN':'عربي';
+      try{localStorage.setItem('gh_lang',isAr?'ar':'en');}catch(e){}
+      document.querySelectorAll('[data-en]').forEach(function(el){
+        el.innerHTML=isAr?(el.dataset.ar||el.dataset.en):el.dataset.en;
+      });
+      document.body.style.fontFamily=isAr?'var(--font-arabic)':'';
+    };
+    try{if(localStorage.getItem('gh_lang')==='ar')lt.onclick();}catch(e){}
+  }
+})();
+</script>
+<script src="js/main.js"></script>
 </body>
 </html>

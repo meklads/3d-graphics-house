@@ -182,7 +182,8 @@ function initBeforeAfter() {
       const rect = slider.getBoundingClientRect();
       const pct = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
       handle.style.left = pct + '%';
-      afterLayer.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      // Clip AFTER from the RIGHT so dragging right = more AFTER visible
+      afterLayer.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
     };
 
     on(handle, 'mousedown', () => dragging = true);
@@ -193,8 +194,10 @@ function initBeforeAfter() {
     on(document, 'touchmove', e => dragging && setPosition(e.touches[0].clientX), { passive: true });
     on(document, 'touchend', () => dragging = false);
 
-    // Init at 50%
-    setPosition(slider.getBoundingClientRect().left + slider.offsetWidth / 2);
+    // Init at 50% — use rAF so layout is complete
+    requestAnimationFrame(() => {
+      setPosition(slider.getBoundingClientRect().left + slider.offsetWidth / 2);
+    });
   });
 }
 
@@ -462,7 +465,7 @@ function initStickyQuote() {
 }
 
 /* ─── Init ────────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => {
+function _ghInit() {
   initThemeToggle();      // Must run first to avoid FOUC
   initNavbar();
   initMobileNav();
@@ -501,15 +504,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $$('img[data-src]').forEach(img => lazyIO.observe(img));
   }
-});
-
-/* ─── CSS Injection for quote pulse ──────────────────── */
-const style = document.createElement('style');
-style.textContent = `
-@keyframes quotePulse {
-  0% { box-shadow: 0 0 0 0 rgba(201,164,82,0.5); }
-  70% { box-shadow: 0 0 0 12px rgba(201,164,82,0); }
-  100% { box-shadow: 0 0 0 0 rgba(201,164,82,0); }
 }
-`;
-document.head.appendChild(style);
+
+/* ─── readyState-aware init (defer + DOMContentLoaded timing fix) ─────── */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _ghInit);
+} else {
+  _ghInit(); // DOM already parsed when script runs
+}
