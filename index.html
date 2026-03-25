@@ -314,10 +314,34 @@
 
   <!-- Cinematic full-screen video background -->
   <div class="hero-video-wrap" aria-hidden="true">
-    <video class="hero-video-bg" autoplay muted loop playsinline preload="auto" poster="assets/images/hero/hero-bg.jpg">
+    <video id="heroVid" class="hero-video-bg" autoplay muted playsinline preload="auto" poster="assets/images/hero/hero-bg.jpg">
       <source src="assets/images/hero/GH-demo-reel-2025.mp4" type="video/mp4">
     </video>
   </div>
+  <script>
+  (function(){
+    var START = 4;    /* 0:04 */
+    var END   = 53;   /* 0:53 */
+    var v = document.getElementById('heroVid');
+    if(!v) return;
+    /* Jump to START once metadata is ready */
+    v.addEventListener('loadedmetadata', function(){
+      v.currentTime = START;
+      v.play().catch(function(){});
+    });
+    /* Loop: when we hit END jump back to START */
+    v.addEventListener('timeupdate', function(){
+      if(v.currentTime >= END){
+        v.currentTime = START;
+      }
+    });
+    /* Fallback: if autoplay was blocked, try again on first user interaction */
+    document.addEventListener('click', function tryPlay(){
+      v.play().catch(function(){});
+      document.removeEventListener('click', tryPlay);
+    }, { once: true });
+  })();
+  </script>
   <!-- Centre dark overlay -->
   <div class="hero-overlay" aria-hidden="true"></div>
   <!-- 4-corner black fog vignette -->
