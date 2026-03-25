@@ -238,6 +238,15 @@
       .cost-estimator { padding: 24px; }
     }
   </style>
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function(){
+      try{
+        var t=localStorage.getItem('gh_theme')||'dark';
+        document.documentElement.setAttribute('data-theme',t);
+      }catch(e){}
+    })();
+  </script>
 </head>
 <body>
 
@@ -259,7 +268,8 @@
 <nav class="navbar" role="navigation" aria-label="Main navigation">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo" aria-label="3D Graphics House Home">
-      <img src="assets/images/logo.png" alt="3D Graphics House" style="height:49px;width:auto;">
+      <img src="assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
     </a>
 
     <ul class="nav-links" role="list">
@@ -275,6 +285,7 @@
     <div class="nav-actions">
       <button class="lang-toggle" aria-label="Switch language">عربي</button>
       <a href="contact.html" class="btn btn-gold" data-en="Request a Proposal" data-ar="طلب عرض مشروع">Request a Proposal</a>
+      <button class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">☾</button>
       <button class="hamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -305,7 +316,7 @@
   <!-- Full-screen YouTube background video -->
   <div class="hero-video-bg" aria-hidden="true">
     <iframe
-      src="https://www.youtube.com/embed/vYbn-9ramsI?autoplay=1&mute=1&loop=1&playlist=vYbn-9ramsI&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0"
+      src="https://www.youtube.com/embed/ALz6GdeITYc?autoplay=1&mute=1&loop=1&playlist=ALz6GdeITYc&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0"
       allow="autoplay; encrypted-media"
       allowfullscreen
       frameborder="0"
@@ -345,6 +356,12 @@
         <a href="portfolio.html" class="btn btn-ghost" data-en="Explore Our Work →" data-ar="اطّلع على أعمالنا →">Explore Our Work <span class="arrow">→</span></a>
       </div>
     </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll-indicator" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
   </div>
 
   <!-- Trust Bar -->
@@ -1030,7 +1047,8 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo" style="margin-bottom:0;" aria-label="3D Graphics House">
-          <img src="assets/images/logo.png" alt="3D Graphics House" style="height:49px;width:auto;">
+          <img src="assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
         </a>
         <p data-en="Saudi Arabia's premier architectural visualization, media production, and AI-powered interactive technology company. 15 years of proven excellence." data-ar="شركة الإظهار المعماري وإنتاج الإعلام والتقنيات التفاعلية الذكية الرائدة في المملكة العربية السعودية. 15 عاماً من التميز الموثّق.">Saudi Arabia's premier architectural visualization, media production, and AI-powered interactive technology company. 15 years of proven excellence.</p>
         <div class="contact-social" style="margin-top:24px;">

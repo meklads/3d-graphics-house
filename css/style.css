@@ -6,7 +6,7 @@
 /* ---------- Google Fonts Import ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700;900&display=swap');
 
-/* ---------- CSS Variables ---------- */
+/* ---------- CSS Variables — Dark (default) ---------- */
 :root {
   --black:         #080808;
   --anthracite:    #111111;
@@ -39,6 +39,70 @@
   --section-pad:   120px;
   --container:     1320px;
 }
+
+/* ---------- Light Theme Override ---------- */
+[data-theme="light"] {
+  --black:        #f2ede5;
+  --anthracite:   #e8e2d8;
+  --card-bg:      #ffffff;
+  --card-hover:   #f8f4ee;
+  --border:       rgba(80, 60, 20, 0.12);
+  --border-hover: rgba(201, 164, 82, 0.5);
+  --gold-pale:    rgba(201, 164, 82, 0.10);
+  --text:         #1f1a13;
+  --text-muted:   #5c4f38;
+  --text-dim:     #9a8a72;
+  --white:        #1a1410;
+  --overlay:      rgba(30, 25, 15, 0.65);
+}
+/* Keep hero always dark so video & vignette look correct */
+[data-theme="light"] .hero {
+  background: #080808;
+}
+[data-theme="light"] .hero-content h1,
+[data-theme="light"] .hero-content em,
+[data-theme="light"] .hero-eyebrow,
+[data-theme="light"] .hero-subtitle,
+[data-theme="light"] .hero-trust-bar { color: inherit; }
+
+/* Navbar in light mode */
+[data-theme="light"] .navbar {
+  background: rgba(242, 237, 229, 0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(80, 60, 20, 0.10);
+}
+[data-theme="light"] .navbar.scrolled {
+  background: rgba(242, 237, 229, 0.99);
+}
+[data-theme="light"] .nav-link { color: var(--text-muted); }
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active { color: var(--white); }
+[data-theme="light"] .nav-logo-text span { color: var(--white) !important; }
+
+/* Footer stays dark */
+[data-theme="light"] .footer { background: #100e0a; color: #e8e2d9; }
+[data-theme="light"] .footer * { color: inherit; }
+[data-theme="light"] .footer .footer-link { color: rgba(232, 226, 217, 0.55); }
+[data-theme="light"] .footer .footer-link:hover { color: var(--gold); }
+
+/* Mobile nav in light mode */
+[data-theme="light"] .mobile-nav { background: rgba(242, 237, 229, 0.98); }
+[data-theme="light"] .mobile-nav .nav-link { color: var(--white); }
+
+/* Cards in light mode */
+[data-theme="light"] .pillar-card,
+[data-theme="light"] .portfolio-card,
+[data-theme="light"] .insight-card,
+[data-theme="light"] .cost-estimator {
+  background: var(--card-bg);
+  border-color: var(--border);
+}
+[data-theme="light"] .pillar-title,
+[data-theme="light"] .insight-title { color: var(--white); }
+
+/* Partners row light */
+[data-theme="light"] .partners-row { background: var(--anthracite); }
+[data-theme="light"] .partner-logo-item { color: var(--text-muted); border-color: var(--border); }
 
 /* ---------- Reset & Base ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -234,44 +298,63 @@ body[dir="rtl"] .btn-ghost:hover .arrow { transform: translateX(-5px); }
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 12px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+/* Icon part — the cropped PNG is just the graphic mark */
+.nav-logo-icon {
+  height: 36px;
+  width: auto;
+  display: block;
   flex-shrink: 0;
 }
 
-.nav-logo-mark {
-  width: 44px;
-  height: 44px;
-  background: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--black);
-  letter-spacing: -0.02em;
-}
-
+/* Text part — "3D GRAPHICS HOUSE" */
 .nav-logo-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  line-height: 1;
 }
 
-.nav-logo-text span:first-child {
+.nav-logo-text span {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  color: var(--white);
-  letter-spacing: 0.04em;
+  color: #ffffff;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.nav-logo-text span:last-child {
-  font-size: 0.65rem;
-  font-weight: 500;
+/* Theme toggle button */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  border-color: var(--gold);
   color: var(--gold);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  background: var(--gold-pale);
+}
+[data-theme="light"] .theme-toggle {
+  border-color: rgba(80, 60, 20, 0.2);
+  color: var(--text-muted);
+}
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(201, 164, 82, 0.12);
 }
 
 .nav-links {
@@ -531,6 +614,39 @@ body[dir="rtl"] .nav-link::after { left: auto; right: 0; }
   height: 64px;
   opacity: 0.2;
 }
+
+/* Scroll Indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 100px; /* above trust bar */
+  right: 48px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.8s forwards;
+}
+.hero-scroll-indicator .scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.hero-scroll-indicator span {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+}
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.7; }
+  50% { transform: scaleY(1.3); opacity: 1; }
+}
+@media (max-width: 900px) { .hero-scroll-indicator { display: none; } }
 
 /* Trust Bar */
 .hero-trust-bar {

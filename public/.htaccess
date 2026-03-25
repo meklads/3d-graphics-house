@@ -7,12 +7,23 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# 2. Redirect /index.html → / (no "index" in URL)
+# 2. Redirect /index.html → / (clean root URL)
 RewriteRule ^index\.html$ / [R=301,L]
 RewriteRule ^index$ / [R=301,L]
 
-# 3. Clean URLs — add .html for extensionless requests
+# 3. Remove trailing slashes (except root) — prevents CSS/JS 404s
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^(.+)/$ /$1 [R=301,NE,L]
+
+# 4. Clean URLs — serve .html for extensionless page requests
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^([^/]+)/?$ $1.html [L]
+RewriteRule ^([^/]+)$ $1.html [L]
+
+# Security headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

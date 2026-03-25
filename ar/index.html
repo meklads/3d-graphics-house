@@ -777,6 +777,15 @@
       .hamburger { display: flex; }
     }
   </style>
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function(){
+      try{
+        var t=localStorage.getItem('gh_theme')||'dark';
+        document.documentElement.setAttribute('data-theme',t);
+      }catch(e){}
+    })();
+  </script>
 </head>
 <body>
 
@@ -796,7 +805,8 @@
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <div class="container nav-inner">
-    <button class="hamburger" id="hamburger" aria-label="القائمة"><span></span><span></span><span></span></button>
+    <button class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">☾</button>
+      <button class="hamburger" id="hamburger" aria-label="القائمة"><span></span><span></span><span></span></button>
     <div class="nav-actions">
       <a href="../index.html" class="lang-btn">EN</a>
       <a href="contact.html" class="btn btn-gold" style="padding:10px 22px;font-size:0.78rem;">طلب عرض مشروع</a>
@@ -810,7 +820,9 @@
       <li><a href="index.html" class="nav-link active">الرئيسية</a></li>
     </ul>
     <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
-      <img src="../assets/images/logo.png" alt="3D جرافيكس هاوس">
+      <img src="../assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
     </a>
   </div>
 </nav>
@@ -1218,7 +1230,8 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <img src="../assets/images/logo.png" alt="3D Graphics House" style="height:44px;margin-bottom:16px;">
+        <img src="../assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
         <p class="footer-brand-desc">الشركة الرائدة في الإظهار المعماري ثلاثي الأبعاد، والأنيميشن السينمائي، والنماذج المجسمة الدقيقة في المملكة العربية السعودية والخليج.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/3dgraphicshouse/" target="_blank" class="footer-social-link" aria-label="Instagram">IG</a>

@@ -140,13 +140,23 @@
       .service-cards-grid { grid-template-columns: 1fr; }
     }
   </style>
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function(){
+      try{
+        var t=localStorage.getItem('gh_theme')||'dark';
+        document.documentElement.setAttribute('data-theme',t);
+      }catch(e){}
+    })();
+  </script>
 </head>
 <body>
 
 <nav class="navbar" role="navigation">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
-      <img src="assets/images/logo.png" alt="3D Graphics House" style="height:49px;width:auto;">
+      <img src="assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
     </a>
     <ul class="nav-links" role="list">
       <li><a href="index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a></li>
@@ -159,6 +169,7 @@
     <div class="nav-actions">
       <button class="lang-toggle" aria-label="Switch language">عربي</button>
       <a href="contact.html" class="btn btn-gold" data-en="Request a Proposal" data-ar="طلب عرض مشروع">Request a Proposal</a>
+      <button class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">☾</button>
       <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>

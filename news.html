@@ -355,6 +355,15 @@
     body[dir="rtl"] .news-hero-label::after { content:''; width:28px; height:1px; background:var(--gold); }
     body[dir="rtl"] .blog-header-line { background: linear-gradient(270deg, var(--border), transparent); }
   </style>
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function(){
+      try{
+        var t=localStorage.getItem('gh_theme')||'dark';
+        document.documentElement.setAttribute('data-theme',t);
+      }catch(e){}
+    })();
+  </script>
 </head>
 <body>
 
@@ -371,7 +380,8 @@
 <nav class="navbar" role="navigation">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo" aria-label="3D Graphics House">
-      <img src="assets/images/logo.png" alt="3D Graphics House" style="height:49px;width:auto;">
+      <img src="assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
     </a>
     <ul class="nav-links" role="list">
       <li><a href="index.html" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a></li>
@@ -384,6 +394,7 @@
     <div class="nav-actions">
       <button class="lang-toggle" aria-label="Switch language">عربي</button>
       <a href="contact.html" class="btn btn-gold" data-en="Request a Proposal" data-ar="طلب عرض مشروع">Request a Proposal</a>
+      <button class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">☾</button>
       <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -601,7 +612,8 @@
 <!-- FOOTER -->
 <footer style="background:var(--black);border-top:1px solid var(--border);padding:48px 40px;text-align:center;">
   <a href="index.html" style="display:inline-block;margin-bottom:20px;">
-    <img src="assets/images/logo.png" alt="3D Graphics House" style="height:44px;opacity:0.7;">
+    <img src="assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
   </a>
   <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:24px;">
     <a href="index.html" style="font-size:0.75rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" data-en="Home" data-ar="الرئيسية">Home</a>
@@ -615,7 +627,7 @@
 </footer>
 
 <!-- Floating WhatsApp -->
-<a href="https://wa.me/966502786513" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+<a href="https://wa.me/966502786513" target="_blank" rel="noopener" class="float-whatsapp" aria-label="WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.119.554 4.107 1.523 5.83L0 24l6.32-1.498A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.365l-.36-.214-3.732.884.915-3.63-.235-.374A9.818 9.818 0 0112 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.421-4.398 9.818-9.818 9.818z"/></svg>
 </a>
 

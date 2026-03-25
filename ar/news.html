@@ -227,6 +227,15 @@
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     }
   </style>
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function(){
+      try{
+        var t=localStorage.getItem('gh_theme')||'dark';
+        document.documentElement.setAttribute('data-theme',t);
+      }catch(e){}
+    })();
+  </script>
 </head>
 <body>
 
@@ -235,7 +244,9 @@
     <div class="container">
       <div class="nav-inner">
         <a href="index.html" class="nav-logo">
-          <img src="../assets/images/logo.png" alt="3D Graphics House" />
+          <img src="../assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
         </a>
         <ul class="nav-links">
           <li><a href="index.html" class="nav-link">الرئيسية</a></li>
@@ -249,7 +260,8 @@
           <a href="../news.html" class="lang-btn">EN</a>
           <a href="contact.html" class="btn btn-gold">طلب عرض سعر</a>
         </div>
-        <button class="hamburger" id="hamburger" aria-label="قائمة">
+        <button class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">☾</button>
+      <button class="hamburger" id="hamburger" aria-label="قائمة">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -450,7 +462,8 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="../assets/images/logo.png" alt="3D Graphics House" class="footer-logo" />
+          <img src="../assets/images/logo.png" alt="" class="nav-logo-icon">
+      <div class="nav-logo-text"><span>3D GRAPHICS HOUSE</span></div>
           <p class="footer-desc">الشركة الرائدة في الإظهار المعماري والإنتاج الإعلامي في المملكة العربية السعودية منذ ٢٠٠٨.</p>
         </div>
         <div>

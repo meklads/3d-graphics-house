@@ -272,39 +272,67 @@ function initCostEstimator() {
   $$('select, input', estimator).forEach(el => on(el, 'change', update));
 }
 
+/* ─── Light / Dark Theme Toggle ──────────────────────── */
+function initThemeToggle() {
+  const btn = $('.theme-toggle');
+  if (!btn) return;
+
+  const apply = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('gh_theme', theme); } catch(e) {}
+    // Sun = switch TO light, Moon = switch TO dark
+    btn.innerHTML = theme === 'light' ? '&#9790;' : '&#9728;';
+    btn.title = theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+  };
+
+  // Restore saved preference (default: dark)
+  let saved = 'dark';
+  try { saved = localStorage.getItem('gh_theme') || 'dark'; } catch(e) {}
+  apply(saved);
+
+  on(btn, 'click', () => {
+    const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+    apply(cur === 'dark' ? 'light' : 'dark');
+  });
+}
+
 /* ─── Language Switcher (EN ↔ AR) ─────────────────────── */
 function initLanguageSwitcher() {
   const btn = $('.lang-toggle');
   if (!btn) return;
-
-  const langData = window.LANG_DATA || {};
 
   const applyLang = (lang) => {
     const isAr = lang === 'ar';
     document.documentElement.lang = lang;
     document.body.dir = isAr ? 'rtl' : 'ltr';
     btn.textContent = isAr ? 'EN' : 'عربي';
-    localStorage.setItem('gh_lang', lang);
+    try { localStorage.setItem('gh_lang', lang); } catch(e) {}
 
-    // Swap text nodes using data attributes
+    // Swap all bilingual elements
     $$('[data-en]').forEach(el => {
-      el.innerHTML = isAr ? (el.dataset.ar || el.dataset.en) : el.dataset.en;
+      const enText = el.dataset.en || '';
+      const arText = el.dataset.ar || enText;
+      el.innerHTML = isAr ? arText : enText;
     });
 
-    // Update document title
-    if (langData.title) {
-      document.title = isAr ? langData.title.ar : langData.title.en;
-    }
+    // Swap placeholder attributes too
+    $$('[data-en-placeholder]').forEach(el => {
+      el.placeholder = isAr ? (el.dataset.arPlaceholder || '') : (el.dataset.enPlaceholder || '');
+    });
+
+    // Switch font family on body for AR
+    document.body.style.fontFamily = isAr ? "var(--font-arabic)" : '';
   };
 
   on(btn, 'click', () => {
-    const current = document.body.dir === 'rtl' ? 'ar' : 'en';
+    const current = document.documentElement.lang === 'ar' ? 'ar' : 'en';
     applyLang(current === 'ar' ? 'en' : 'ar');
   });
 
-  // Restore saved lang
-  const saved = localStorage.getItem('gh_lang');
-  if (saved) applyLang(saved);
+  // Restore saved language on page load
+  let saved = 'en';
+  try { saved = localStorage.getItem('gh_lang') || 'en'; } catch(e) {}
+  if (saved === 'ar') applyLang('ar');
 }
 
 /* ─── Smooth Internal Links ───────────────────────────── */
@@ -435,6 +463,7 @@ function initStickyQuote() {
 
 /* ─── Init ────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();      // Must run first to avoid FOUC
   initNavbar();
   initMobileNav();
   initScrollReveal();
