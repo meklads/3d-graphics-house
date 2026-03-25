@@ -65,19 +65,18 @@
 [data-theme="light"] .hero-subtitle,
 [data-theme="light"] .hero-trust-bar { color: inherit; }
 
-/* Navbar in light mode */
+/* Navbar STAYS DARK in light mode — logo is white/gold, needs dark bg */
 [data-theme="light"] .navbar {
-  background: rgba(242, 237, 229, 0.96);
+  background: rgba(12, 10, 8, 0.94);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(80, 60, 20, 0.10);
+  border-bottom: 1px solid rgba(201, 164, 82, 0.12);
 }
 [data-theme="light"] .navbar.scrolled {
-  background: rgba(242, 237, 229, 0.99);
+  background: rgba(12, 10, 8, 0.98);
 }
-[data-theme="light"] .nav-link { color: var(--text-muted); }
+[data-theme="light"] .nav-link { color: rgba(232, 226, 217, 0.65); }
 [data-theme="light"] .nav-link:hover,
-[data-theme="light"] .nav-link.active { color: var(--white); }
-[data-theme="light"] .nav-logo-text span { color: var(--white) !important; }
+[data-theme="light"] .nav-link.active { color: #fff; }
 
 /* Footer stays dark */
 [data-theme="light"] .footer { background: #100e0a; color: #e8e2d9; }
@@ -298,63 +297,48 @@ body[dir="rtl"] .btn-ghost:hover .arrow { transform: translateX(-5px); }
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
   flex-shrink: 0;
   text-decoration: none;
 }
 
-/* Icon part — the cropped PNG is just the graphic mark */
-.nav-logo-icon {
-  height: 36px;
+/* Full logo PNG (150×71) — shows icon + brand text in the image itself */
+.nav-logo-img {
+  height: 46px;
   width: auto;
   display: block;
-  flex-shrink: 0;
-}
-
-/* Text part — "3D GRAPHICS HOUSE" */
-.nav-logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-
-.nav-logo-text span {
-  font-family: var(--font-display);
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  white-space: nowrap;
 }
 
 /* Theme toggle button */
 .theme-toggle {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  width: 34px;
-  height: 34px;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.05rem;
   transition: var(--transition-fast);
   flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(201, 164, 82, 0.18);
 }
 .theme-toggle:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: var(--gold-pale);
+  background: var(--gold);
+  color: var(--black);
+  box-shadow: 0 0 14px rgba(201, 164, 82, 0.35);
 }
 [data-theme="light"] .theme-toggle {
-  border-color: rgba(80, 60, 20, 0.2);
-  color: var(--text-muted);
+  background: rgba(201, 164, 82, 0.12);
+  border-color: var(--gold);
+  color: #7a5c1e;
+  box-shadow: 0 0 8px rgba(201, 164, 82, 0.15);
 }
 [data-theme="light"] .theme-toggle:hover {
-  background: rgba(201, 164, 82, 0.12);
+  background: var(--gold);
+  color: #fff;
 }
 
 .nav-links {
@@ -1803,27 +1787,33 @@ body[dir="rtl"] .float-whatsapp { right: auto; left: 28px; align-items: flex-sta
   position: fixed;
   top: 50%;
   right: 0;
-  transform: translateY(-50%) rotate(90deg);
-  transform-origin: right center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: translateY(-50%) rotate(180deg);
   z-index: 900;
   background: var(--gold);
   color: var(--black);
-  padding: 10px 20px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  padding: 18px 11px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-  transition: background 0.3s ease;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  transition: background 0.3s ease, padding 0.3s ease;
+  white-space: nowrap;
 }
 
-.sticky-quote-btn:hover { background: var(--gold-light); }
+.sticky-quote-btn:hover {
+  background: var(--gold-light);
+  padding-bottom: 26px;
+}
 
 body[dir="rtl"] .sticky-quote-btn {
   right: auto;
   left: 0;
-  transform: translateY(-50%) rotate(-90deg);
-  transform-origin: left center;
+  transform: translateY(-50%) rotate(0deg);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
 }
 
 /* ---------- Keyframe Animations ---------- */
