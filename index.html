@@ -55,44 +55,40 @@
       z-index: 0;
     }
 
-    /* Layer 1 — cinematic bottom-to-top gradient + left side darkening */
+    /* Layer 1 — LEFT-SIDE ONLY text-panel darkening (right side stays 100% clear) */
     .hero-full__fog {
       position: absolute;
       inset: 0;
       z-index: 1;
       background:
-        linear-gradient(to top,
-          rgba(4,4,6,0.96) 0%,
-          rgba(4,4,6,0.70) 22%,
-          rgba(4,4,6,0.28) 48%,
-          transparent 72%
-        ),
-        linear-gradient(105deg,
-          rgba(4,4,6,0.72) 0%,
-          rgba(4,4,6,0.35) 38%,
-          transparent 64%
+        linear-gradient(to right,
+          rgba(4,4,6,0.88) 0%,
+          rgba(4,4,6,0.78) 18%,
+          rgba(4,4,6,0.55) 34%,
+          rgba(4,4,6,0.20) 48%,
+          transparent 58%
         );
       pointer-events: none;
     }
 
-    /* Layer 2 — corner vignettes */
+    /* Layer 2 — ONLY top-left subtle corner vignette for brand readability */
     .hero-full__vignette {
       position: absolute;
       inset: 0;
       z-index: 2;
       background:
-        radial-gradient(ellipse 70% 60% at 0% 0%,   rgba(4,4,6,0.75) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 50% at 100% 0%,  rgba(4,4,6,0.45) 0%, transparent 55%),
-        radial-gradient(ellipse 55% 50% at 100% 100%, rgba(4,4,6,0.35) 0%, transparent 55%);
+        radial-gradient(ellipse 45% 55% at 0% 0%, rgba(4,4,6,0.50) 0%, transparent 50%);
       pointer-events: none;
     }
 
-    /* Layer 3 — film-grain noise texture (pure CSS, subtle) */
+    /* Layer 3 — film-grain noise texture (very subtle, left-side only) */
     .hero-full__grain {
       position: absolute;
       inset: 0;
       z-index: 3;
-      opacity: 0.035;
+      opacity: 0.018;
+      -webkit-mask-image: linear-gradient(to right, black 0%, black 40%, transparent 65%);
+      mask-image: linear-gradient(to right, black 0%, black 40%, transparent 65%);
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
       background-size: 200px 200px;
       pointer-events: none;
@@ -138,6 +134,7 @@
       line-height: 1.0;
       letter-spacing: -0.03em;
       color: #ffffff;
+      text-shadow: 0 2px 32px rgba(4,4,6,0.90), 0 0 60px rgba(4,4,6,0.70);
       margin-bottom: 28px;
       opacity: 0;
       animation: hfadeUp 1.1s cubic-bezier(0.22,1,0.36,1) 0.42s forwards;
@@ -154,8 +151,9 @@
     .hero-full__sub {
       font-size: 0.97rem;
       line-height: 1.75;
-      color: rgba(220, 212, 196, 0.68);
+      color: rgba(220, 212, 196, 0.82);
       max-width: 500px;
+      text-shadow: 0 1px 12px rgba(4,4,6,0.85);
       margin-bottom: 48px;
       opacity: 0;
       animation: hfadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.62s forwards;
