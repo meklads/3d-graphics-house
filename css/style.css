@@ -86,15 +86,10 @@
 [data-theme="light"] .nav-link:hover,
 [data-theme="light"] .nav-link.active { color: #D0A840; }
 
-/* ── Hero: always cinematic dark ── */
-[data-theme="light"] .hero-split { background: #080808; }
-[data-theme="light"] .hero-split-panel { background: #080808; }
-[data-theme="light"] .hero-trust-bar {
-  background: rgba(8, 8, 8, 0.97);
-  border-top-color: rgba(181, 145, 46, 0.22);
-}
-[data-theme="light"] .trust-number { color: #ffffff; }
-[data-theme="light"] .trust-label  { color: rgba(220, 215, 200, 0.55); }
+/* ── Hero: always cinematic dark (full-screen) ── */
+[data-theme="light"] .hero-full { background: #040406; }
+[data-theme="light"] .hero-full__title { color: #ffffff; }
+[data-theme="light"] .hero-full h1 em   { color: var(--gold); }
 
 /* ── Mobile nav ── */
 [data-theme="light"] .mobile-nav {
@@ -132,9 +127,7 @@
 [data-theme="light"] .section-label::before { background: var(--gold); }
 
 /* Hero headings stay white (dark bg) */
-[data-theme="light"] .hero-split-title,
-[data-theme="light"] .hero-split-eyebrow,
-[data-theme="light"] .hero-split-sub { color: inherit; }
+/* hero-full text colors set via inline CSS variables — no override needed */
 
 /* ── Cards ── */
 [data-theme="light"] .pillar-card,
