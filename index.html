@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -446,7 +446,7 @@
     <div class="nav-actions">
       <button class="lang-toggle" aria-label="Switch language">عربي</button>
       <a href="contact.html" class="btn btn-gold" data-en="Request a Proposal" data-ar="طلب عرض مشروع">Request a Proposal</a>
-      <button class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">☾</button>
+      <!-- theme toggle removed — light mode fixed -->
       <button class="hamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -730,66 +730,139 @@
 ══════════════════════════════════════════════════════════ -->
 <section class="section services-preview" id="services" aria-label="Our Services">
   <div class="container">
-    <div class="section-label reveal" data-en="What We Do" data-ar="ما نقدمه">What We Do</div>
-    <h2 class="section-title reveal" data-en="Three Pillars of<br><em>Visual Excellence</em>" data-ar="ثلاثة محاور من<br><em>التميز البصري</em>">Three Pillars of<br><em>Visual Excellence</em></h2>
-    <p class="section-sub reveal" data-en="End-to-end visual intelligence — from photorealistic architecture to AI-powered immersive experiences." data-ar="ذكاء بصري متكامل — من الإظهار المعماري الفوتوريالستي إلى التجارب الغامرة المدعومة بالذكاء الاصطناعي.">End-to-end visual intelligence — from photorealistic architecture to AI-powered immersive experiences.</p>
+    <div class="section-label reveal" data-en="Our Services" data-ar="خدماتنا">Our Services</div>
+    <h2 class="section-title reveal" data-en="Complete Visual<br><em>Intelligence</em>" data-ar="ذكاء بصري<br><em>متكامل</em>">Complete Visual<br><em>Intelligence</em></h2>
+    <p class="section-sub reveal" data-en="From photorealistic architectural stills to immersive AI-powered experiences — nine specialized disciplines, one seamless studio." data-ar="من الصور الفوتوريالستية إلى التجارب الغامرة المدعومة بالذكاء الاصطناعي — تسع تخصصات، استوديو واحد متكامل.">From photorealistic architectural stills to immersive AI-powered experiences — nine specialized disciplines, one seamless studio.</p>
 
-    <div class="service-pillars">
-      <!-- Pillar 1 -->
-      <div class="pillar-card reveal">
-        <div class="pillar-number" aria-hidden="true">01</div>
-        <div class="pillar-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+    <!-- ── Visual Services Grid ── -->
+    <div class="services-visual-grid">
+
+      <!-- 01 — 3D Architectural Rendering (featured) -->
+      <div class="svc-img-card featured reveal">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/Anan-Escan-Co.01.jpeg"
+             alt="3D Architectural Rendering — Anan Escan luxury villa" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">01</span>
+          <div class="svc-img-title" data-en="3D Architectural Rendering" data-ar="الإظهار المعماري ثلاثي الأبعاد">3D Architectural Rendering</div>
+          <p class="svc-img-desc" data-en="Photorealistic exterior &amp; interior stills — indistinguishable from photography. Aerial views, floor plans, dusk renders." data-ar="صور خارجية وداخلية فوتوريالستية لا تُميَّز عن الواقع. مناظير جوية، مخططات، وصور الغسق.">Photorealistic exterior &amp; interior stills — indistinguishable from photography. Aerial views, floor plans, dusk renders.</p>
+          <a href="services.html#visualization" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
         </div>
-        <div class="pillar-title" data-en="Architectural Visualization" data-ar="الإظهار المعماري">Architectural Visualization</div>
-        <p class="pillar-desc" data-en="Photorealistic renders and animations that communicate your architectural vision with absolute precision — indistinguishable from reality." data-ar="صور إظهار وأنيميشن فوتوريالستي ينقل رؤيتك المعمارية بدقة مطلقة — لا تُميَّز عن الواقع.">Photorealistic renders and animations that communicate your architectural vision with absolute precision — indistinguishable from reality.</p>
-        <ul class="pillar-services" role="list">
-          <li class="pillar-service-item" data-en="Exterior & Interior 3D Renders" data-ar="صور إظهار خارجي وداخلي ثلاثية الأبعاد">Exterior &amp; Interior 3D Renders</li>
-          <li class="pillar-service-item" data-en="Architectural 3D Walkthrough Animations" data-ar="فيديوهات جولات معمارية ثلاثية الأبعاد">Architectural 3D Walkthrough Animations</li>
-          <li class="pillar-service-item" data-en="Aerial / Bird's Eye View Renders" data-ar="مناظير جوية وعرض الطائر">Aerial / Bird's Eye View Renders</li>
-          <li class="pillar-service-item" data-en="3D Floor Plan Rendering" data-ar="إظهار المخططات الطابقية ثلاثية الأبعاد">3D Floor Plan Rendering</li>
-          <li class="pillar-service-item" data-en="360° Virtual Tours" data-ar="جولات افتراضية 360 درجة">360° Virtual Tours</li>
-        </ul>
-        <a href="services.html#visualization" class="btn btn-ghost" data-en="Explore Service →" data-ar="اكتشف الخدمة →">Explore Service <span class="arrow">→</span></a>
       </div>
 
-      <!-- Pillar 2 -->
-      <div class="pillar-card reveal reveal-delay-1">
-        <div class="pillar-number" aria-hidden="true">02</div>
-        <div class="pillar-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      <!-- 02 — 3D Animation -->
+      <div class="svc-img-card reveal reveal-delay-1">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.56.jpeg"
+             alt="3D Architectural Animation" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">02</span>
+          <div class="svc-img-title" data-en="3D Architectural Animation" data-ar="الأنيميشن المعماري ثلاثي الأبعاد">3D Architectural Animation</div>
+          <p class="svc-img-desc" data-en="Cinematic walkthroughs and flyovers that bring unbuilt spaces to life before the first brick is laid." data-ar="جولات سينمائية تُحيي المشاريع قبل البناء.">Cinematic walkthroughs and flyovers that bring unbuilt spaces to life.</p>
+          <a href="services.html#visualization" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
         </div>
-        <div class="pillar-title" data-en="Media & Production" data-ar="الإعلام والإنتاج">Media & Production</div>
-        <p class="pillar-desc" data-en="Cinematic storytelling that elevates your brand — from brand films and motion graphics to social media content packages built for the regional market." data-ar="سرد سينمائي يرفع علامتك التجارية — من أفلام العلامة والموشن جرافيك إلى حزم المحتوى البصري للسوشيال ميديا.">Cinematic storytelling that elevates your brand — from brand films and motion graphics to social media content packages built for the regional market.</p>
-        <ul class="pillar-services" role="list">
-          <li class="pillar-service-item" data-en="Cinematic Filming & Video Production" data-ar="تصوير سينمائي وإنتاج فيديو">Cinematic Filming &amp; Video Production</li>
-          <li class="pillar-service-item" data-en="Motion Graphics & 2D/3D Animation" data-ar="موشن جرافيك وأنيميشن ثنائي وثلاثي الأبعاد">Motion Graphics &amp; 2D/3D Animation</li>
-          <li class="pillar-service-item" data-en="Brand Films for Real Estate Marketing" data-ar="أفلام علامة تجارية للتسويق العقاري">Brand Films for Real Estate Marketing</li>
-          <li class="pillar-service-item" data-en="Social Media Visual Content Packages" data-ar="حزم محتوى بصري للسوشيال ميديا">Social Media Visual Content Packages</li>
-        </ul>
-        <a href="services.html#media" class="btn btn-ghost" data-en="Explore Service →" data-ar="اكتشف الخدمة →">Explore Service <span class="arrow">→</span></a>
       </div>
 
-      <!-- Pillar 3 -->
-      <div class="pillar-card reveal reveal-delay-2">
-        <div class="pillar-number" aria-hidden="true">03</div>
-        <div class="pillar-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      <!-- 03 — Architectural Scale Models -->
+      <div class="svc-img-card reveal reveal-delay-2">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/anan-escan4.jpeg"
+             alt="Architectural Scale Models — Maquettes" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">03</span>
+          <div class="svc-img-title" data-en="Architectural Scale Models" data-ar="الماكيتات المعمارية">Architectural Scale Models</div>
+          <p class="svc-img-desc" data-en="Precision handcrafted maquettes — exhibition-ready physical models for sales centers and boardrooms." data-ar="ماكيتات دقيقة مصنوعة يدوياً لمراكز المبيعات وغرف الاجتماعات.">Precision handcrafted maquettes for sales centers and boardrooms.</p>
+          <a href="services.html#interactive" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
         </div>
-        <div class="pillar-title" data-en="Interactive & AI Solutions" data-ar="الحلول التفاعلية والذكاء الاصطناعي">Interactive & AI Solutions</div>
-        <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(201,164,82,0.1);border:1px solid rgba(201,164,82,0.2);border-radius:40px;font-size:0.65rem;font-weight:700;letter-spacing:0.14em;color:var(--gold);margin-bottom:14px;">
-          <span data-en="POWERED BY TURRIVA" data-ar="مدعوم من TURRIVA">POWERED BY TURRIVA</span>
-        </div>
-        <p class="pillar-desc" data-en="Physical and digital integration at scale — from touch-enabled i-Maquette models to real-time 3D configurators and AI-assisted client presentation tools." data-ar="تكامل مادي ورقمي على نطاق واسع — من نماذج i-Maquette بتقنية اللمس إلى مُكوِّنات ثلاثية الأبعاد فورية وأدوات تقديم ذكية.">Physical and digital integration at scale — from touch-enabled i-Maquette models to real-time 3D configurators and AI-assisted client presentation tools.</p>
-        <ul class="pillar-services" role="list">
-          <li class="pillar-service-item" data-en="Physical Architectural Scale Models (Maquettes)" data-ar="ماكيتات معمارية مادية مجسمة">Physical Architectural Scale Models (Maquettes)</li>
-          <li class="pillar-service-item" data-en="i-Maquette: Touch-enabled Interactive Digital Models" data-ar="i-Maquette: نماذج رقمية تفاعلية بتقنية اللمس">i-Maquette: Touch-enabled Interactive Digital Models</li>
-          <li class="pillar-service-item" data-en="Real-time 3D Configurators for Sales Centers" data-ar="مُكوِّنات ثلاثية الأبعاد لمراكز المبيعات">Real-time 3D Configurators for Sales Centers</li>
-          <li class="pillar-service-item" data-en="AI-Assisted Client Presentation Tools" data-ar="أدوات تقديم ذكية مدعومة بالذكاء الاصطناعي">AI-Assisted Client Presentation Tools</li>
-        </ul>
-        <a href="services.html#interactive" class="btn btn-ghost" data-en="Explore Service →" data-ar="اكتشف الخدمة →">Explore Service <span class="arrow">→</span></a>
       </div>
+
+      <!-- 04 — E-Maquette -->
+      <div class="svc-img-card reveal">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/anan-escan3.jpeg"
+             alt="E-Maquette Interactive Presentation" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">04</span>
+          <div class="svc-img-title" data-en="E-Maquette™ Interactive" data-ar="الماكيت الرقمي التفاعلي">E-Maquette™ Interactive</div>
+          <p class="svc-img-desc" data-en="Touch-enabled digital maquettes combining physical accuracy with real-time digital exploration — Turriva technology." data-ar="ماكيتات رقمية بشاشات لمس تجمع الدقة المادية مع الاستكشاف الرقمي الفوري.">Touch-enabled digital maquettes — real-time 3D exploration at a fingertip.</p>
+          <a href="services.html#interactive" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- 05 — VR & 360° Tours -->
+      <div class="svc-img-card reveal reveal-delay-1">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/anan-escan2.jpeg"
+             alt="VR and 360 Virtual Tours" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">05</span>
+          <div class="svc-img-title" data-en="VR & 360° Virtual Tours" data-ar="VR وجولات افتراضية 360°">VR &amp; 360° Virtual Tours</div>
+          <p class="svc-img-desc" data-en="Full-immersion virtual reality experiences that let clients explore every corner of an unbuilt design in real time." data-ar="تجارب واقع افتراضي غامرة تتيح استكشاف التصميم بالكامل قبل التنفيذ.">Full-immersion VR — explore every room before construction begins.</p>
+          <a href="services.html#visualization" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- 06 — Filming & Production -->
+      <div class="svc-img-card reveal reveal-delay-2">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.44-2.jpeg"
+             alt="Cinematic Filming and Production" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">06</span>
+          <div class="svc-img-title" data-en="Filming & Production" data-ar="التصوير والإنتاج">Filming &amp; Production</div>
+          <p class="svc-img-desc" data-en="Cinematic filming, event documentation, and brand video production that captures the story behind your project." data-ar="تصوير سينمائي، توثيق فعاليات، وإنتاج فيديو العلامة التجارية.">Cinematic filming, events, and brand storytelling.</p>
+          <a href="services.html#media" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- 07 — Motion Graphics & 2D Animation -->
+      <div class="svc-img-card reveal">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.48.jpeg"
+             alt="Motion Graphics and 2D Animation" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">07</span>
+          <div class="svc-img-title" data-en="Motion Graphics & Animation" data-ar="الموشن جرافيك والأنيميشن">Motion Graphics &amp; Animation</div>
+          <p class="svc-img-desc" data-en="2D &amp; 3D motion graphics, animated explainers, and title sequences crafted for real estate and corporate marketing." data-ar="موشن جرافيك ثنائي وثلاثي الأبعاد للتسويق العقاري والشركات.">2D &amp; 3D motion graphics and animated explainers for marketing.</p>
+          <a href="services.html#media" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- 08 — Branding & Identity -->
+      <div class="svc-img-card reveal reveal-delay-1">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.18.45-2.jpeg"
+             alt="Branding and Visual Identity" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">08</span>
+          <div class="svc-img-title" data-en="Branding & Visual Identity" data-ar="الهوية البصرية والعلامة التجارية">Branding &amp; Visual Identity</div>
+          <p class="svc-img-desc" data-en="Strategic brand development — logo design, visual identity systems, and promotional materials for real estate projects." data-ar="تطوير العلامة التجارية — تصميم الشعار والهوية البصرية والمواد الترويجية.">Strategic brand development and identity systems for real estate.</p>
+          <a href="services.html#media" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- 09 — Digital Marketing -->
+      <div class="svc-img-card reveal reveal-delay-2">
+        <img src="https://3dgraphicshouse.com/wp-content/uploads/2026/03/WhatsApp-Image-1447-09-13-at-19.25.16.jpeg"
+             alt="Digital Marketing and Social Media Content" loading="lazy">
+        <div class="svc-overlay"></div>
+        <div class="svc-content">
+          <span class="svc-img-num">09</span>
+          <div class="svc-img-title" data-en="Digital Marketing" data-ar="التسويق الرقمي">Digital Marketing</div>
+          <p class="svc-img-desc" data-en="Social media content packages, campaigns, and digital advertising built for the Saudi and Gulf real estate market." data-ar="حزم محتوى سوشيال ميديا وحملات إعلانية رقمية للسوق العقاري السعودي والخليجي.">Social media packages and campaigns for the Gulf real estate market.</p>
+          <a href="services.html#media" class="svc-img-link" data-en="Explore →" data-ar="اكتشف →">Explore <span>→</span></a>
+        </div>
+      </div>
+
+    </div><!-- /services-visual-grid -->
+
+    <div style="text-align:center;margin-top:48px;">
+      <a href="services.html" class="btn btn-gold" data-en="View All Services" data-ar="عرض جميع الخدمات">
+        View All Services
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
+
   </div>
 </section>
 
@@ -837,35 +910,37 @@
 
   <div class="portfolio-grid" style="margin-top:48px;" role="list" aria-label="Portfolio grid">
     <div class="portfolio-item reveal" role="listitem" aria-label="Jeddah Forum">
-      <img src="assets/images/portfolio/jeddah-forum.jpg" alt="Jeddah Forum" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      <img src="assets/images/portfolio/jeddah-forum.jpg" alt="Jeddah Forum" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
         <div class="portfolio-item-tag" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</div>
         <div class="portfolio-item-title" data-en="Jeddah Forum" data-ar="منتدى جدة">Jeddah Forum</div>
       </div>
     </div>
-    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Rafal Pavilions">
-      <img src="assets/images/portfolio/rafal-pavilions.jpg" alt="Rafal Pavilions" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Anan Escan — Luxury Villa">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/Anan-Escan-Co.01.jpeg"
+           alt="Anan Escan Luxury Villa Render" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
-        <div class="portfolio-item-tag" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</div>
-        <div class="portfolio-item-title" data-en="Rafal Pavilions" data-ar="رفال بافيليونز">Rafal Pavilions</div>
+        <div class="portfolio-item-tag" data-en="3D Rendering" data-ar="إظهار ثلاثي الأبعاد">3D Rendering</div>
+        <div class="portfolio-item-title" data-en="Anan Escan Villa" data-ar="فيلا عنان إسكان">Anan Escan Villa</div>
       </div>
     </div>
     <div class="portfolio-item reveal" role="listitem" aria-label="Makkah Market Center">
-      <img src="assets/images/portfolio/makkah-market.jpg" alt="Makkah Market Center" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      <img src="assets/images/portfolio/makkah-market.jpg" alt="Makkah Market Center" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
         <div class="portfolio-item-tag" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</div>
         <div class="portfolio-item-title" data-en="Makkah Market Center" data-ar="مركز سوق مكة">Makkah Market Center</div>
       </div>
     </div>
-    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Wahat Alsalam">
-      <img src="assets/images/portfolio/wahat-alsalam.jpg" alt="Wahat Alsalam" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Anan Escan Scale Model">
+      <img src="https://3dgraphicshouse.com/wp-content/uploads/2025/03/anan-escan4.jpeg"
+           alt="Anan Escan Architectural Scale Model" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
-        <div class="portfolio-item-tag" data-en="Visualization" data-ar="إظهار معماري">Visualization</div>
-        <div class="portfolio-item-title" data-en="Wahat Alsalam" data-ar="واحة السلام">Wahat Alsalam</div>
+        <div class="portfolio-item-tag" data-en="Scale Model" data-ar="ماكيت معماري">Scale Model</div>
+        <div class="portfolio-item-title" data-en="Anan Escan Model" data-ar="ماكيت عنان إسكان">Anan Escan Model</div>
       </div>
     </div>
     <div class="portfolio-item reveal reveal-delay-2" role="listitem" aria-label="Alrajhi Naseem Al-Haram">
-      <img src="assets/images/portfolio/alrajhi-naseem.jpg" alt="Alrajhi Naseem Al-Haram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      <img src="assets/images/portfolio/alrajhi-naseem.jpg" alt="Alrajhi Naseem Al-Haram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
         <div class="portfolio-item-tag" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</div>
         <div class="portfolio-item-title" data-en="Alrajhi Naseem Al-Haram" data-ar="الراجحي نسيم الحرام">Alrajhi Naseem Al-Haram</div>

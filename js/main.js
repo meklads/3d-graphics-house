@@ -77,36 +77,41 @@ function initMobileNav() {
 
 /* ─── Scroll Reveal Animations ────────────────────────── */
 function initScrollReveal() {
-  const targets = $$('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  const targets = $$('.reveal, .reveal-left, .reveal-right, .reveal-scale, .section-label, .svc-img-card.reveal');
   if (!targets.length) return;
 
   // Enable CSS hidden state now that JS is running
   document.body.classList.add('js-ready');
 
+  const reveal = (el) => {
+    el.classList.add('visible');   /* legacy class */
+    el.classList.add('in-view');   /* new luxury animations class */
+  };
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('visible');
+        reveal(e.target);
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 
   targets.forEach(el => {
     // If already above the fold at load time → make visible immediately
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight + 100) {
-      el.classList.add('visible');
+      reveal(el);
     } else {
       io.observe(el);
     }
   });
 
-  // Safety net: after 1.5s reveal anything still hidden
+  // Safety net: after 1.8s reveal anything still hidden
   setTimeout(() => {
-    $$('.reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible), .reveal-scale:not(.visible)')
-      .forEach(el => el.classList.add('visible'));
-  }, 1500);
+    $$('.reveal, .reveal-left, .reveal-right, .reveal-scale, .svc-img-card.reveal')
+      .forEach(el => { if (!el.classList.contains('visible')) reveal(el); });
+  }, 1800);
 }
 
 /* ─── Animated Stat Counters ──────────────────────────── */
@@ -293,28 +298,14 @@ function initCostEstimator() {
   $$('select, input', estimator).forEach(el => on(el, 'change', update));
 }
 
-/* ─── Light / Dark Theme Toggle ──────────────────────── */
+/* ─── Theme: Locked to Light Mode ─────────────────────── */
 function initThemeToggle() {
+  /* Light mode is permanent — always apply and remove toggle button */
+  document.documentElement.setAttribute('data-theme', 'light');
+  try { localStorage.setItem('gh_theme', 'light'); } catch(e) {}
+  /* Hide the toggle button if present */
   const btn = $('.theme-toggle');
-  if (!btn) return;
-
-  const apply = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    try { localStorage.setItem('gh_theme', theme); } catch(e) {}
-    // Sun = switch TO light, Moon = switch TO dark
-    btn.innerHTML = theme === 'light' ? '&#9790;' : '&#9728;';
-    btn.title = theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
-  };
-
-  // Restore saved preference (default: dark)
-  let saved = 'dark';
-  try { saved = localStorage.getItem('gh_theme') || 'dark'; } catch(e) {}
-  apply(saved);
-
-  on(btn, 'click', () => {
-    const cur = document.documentElement.getAttribute('data-theme') || 'dark';
-    apply(cur === 'dark' ? 'light' : 'dark');
-  });
+  if (btn) btn.style.display = 'none';
 }
 
 /* ─── Language Switcher (EN ↔ AR) ─────────────────────── */

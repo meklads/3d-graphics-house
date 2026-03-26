@@ -40,97 +40,353 @@
   --container:     1320px;
 }
 
-/* ---------- Light Theme Override ---------- */
+/* ============================================================
+   LUXURY LIGHT THEME — White / Silver / Charcoal
+   Premium architecture studio aesthetic
+   ============================================================ */
 [data-theme="light"] {
-  --black:        #f2ede5;
-  --anthracite:   #e8e2d8;
-  --card-bg:      #ffffff;
-  --card-hover:   #f8f4ee;
-  --border:       rgba(80, 60, 20, 0.12);
-  --border-hover: rgba(201, 164, 82, 0.5);
-  --gold-pale:    rgba(201, 164, 82, 0.10);
-  --text:         #1f1a13;
-  --text-muted:   #5c4f38;
-  --text-dim:     #9a8a72;
-  --white:        #1a1410;
-  --overlay:      rgba(30, 25, 15, 0.65);
-}
-/* Keep hero always dark so video & vignette look correct */
-[data-theme="light"] .hero {
-  background: #080808;
-}
-/* Hero text must stay WHITE — hero bg is forced dark in both modes */
-[data-theme="light"] .hero-content h1,
-[data-theme="light"] .hero-content h1 em,
-[data-theme="light"] .hero-content span { color: #ffffff; }
-[data-theme="light"] .hero-eyebrow { color: var(--gold); }
-[data-theme="light"] .hero-subtitle { color: rgba(232, 226, 217, 0.8); }
-[data-theme="light"] .trust-number { color: #ffffff; }
-[data-theme="light"] .trust-label { color: rgba(232, 226, 217, 0.55); }
-[data-theme="light"] .hero-ctas .btn-ghost { color: rgba(232, 226, 217, 0.7); border-color: rgba(232, 226, 217, 0.25); }
-[data-theme="light"] .hero-ctas .btn-ghost:hover { color: #fff; border-color: rgba(232, 226, 217, 0.6); }
-[data-theme="light"] .hero-scroll-indicator span { color: var(--gold); }
-[data-theme="light"] .hero-scroll-indicator .scroll-line { background: linear-gradient(to bottom, var(--gold), transparent); }
+  /* ── Surface hierarchy ── */
+  --black:         #FFFFFF;              /* primary bg = pure white */
+  --anthracite:    #F4F6FA;              /* secondary sections = cool silver-white */
+  --card-bg:       #FFFFFF;              /* card backgrounds */
+  --card-hover:    #F9FAFC;             /* subtle card hover */
 
-/* Navbar STAYS DARK in light mode — logo is white/gold, needs dark bg */
+  /* ── Borders ── */
+  --border:        rgba(145, 158, 195, 0.20);
+  --border-hover:  rgba(184, 149, 61, 0.55);
+
+  /* ── Gold accent (deeper for white bg contrast) ── */
+  --gold:          #B5912E;
+  --gold-light:    #D0A840;
+  --gold-pale:     rgba(181, 145, 46, 0.08);
+  --gold-glow:     rgba(181, 145, 46, 0.18);
+
+  /* ── Typography ── */
+  --text:          #111827;              /* deep navy-charcoal body text */
+  --text-muted:    #4B5563;             /* medium slate gray */
+  --text-dim:      #9CA3AF;             /* light slate */
+  --white:         #111827;             /* heading "white" → now dark charcoal */
+
+  /* ── Misc ── */
+  --overlay:       rgba(8, 10, 22, 0.70);
+}
+
+/* ── Navbar: stays dark — logo is white/gold, needs contrast ── */
 [data-theme="light"] .navbar {
-  background: rgba(12, 10, 8, 0.94);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(201, 164, 82, 0.12);
+  background: rgba(10, 11, 18, 0.97);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(181, 145, 46, 0.15);
+  box-shadow: 0 1px 0 rgba(181, 145, 46, 0.06);
 }
 [data-theme="light"] .navbar.scrolled {
-  background: rgba(12, 10, 8, 0.98);
+  background: rgba(8, 9, 16, 0.99);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.25);
 }
-[data-theme="light"] .nav-link { color: rgba(232, 226, 217, 0.65); }
+[data-theme="light"] .nav-link { color: rgba(232, 228, 218, 0.65); }
 [data-theme="light"] .nav-link:hover,
-[data-theme="light"] .nav-link.active { color: #fff; }
+[data-theme="light"] .nav-link.active { color: #D0A840; }
 
-/* Footer stays dark */
-[data-theme="light"] .footer { background: #100e0a; color: #e8e2d9; }
-[data-theme="light"] .footer * { color: inherit; }
-[data-theme="light"] .footer .footer-link { color: rgba(232, 226, 217, 0.55); }
-[data-theme="light"] .footer .footer-link:hover { color: var(--gold); }
-
-/* Mobile nav in light mode */
-[data-theme="light"] .mobile-nav { background: rgba(242, 237, 229, 0.98); }
-[data-theme="light"] .mobile-nav .nav-link { color: var(--white); }
-
-/* Cards in light mode */
-[data-theme="light"] .pillar-card,
-[data-theme="light"] .portfolio-card,
-[data-theme="light"] .insight-card,
-[data-theme="light"] .cost-estimator {
-  background: var(--card-bg);
-  border-color: var(--border);
+/* ── Hero: always cinematic dark ── */
+[data-theme="light"] .hero-split { background: #080808; }
+[data-theme="light"] .hero-split-panel { background: #080808; }
+[data-theme="light"] .hero-trust-bar {
+  background: rgba(8, 8, 8, 0.97);
+  border-top-color: rgba(181, 145, 46, 0.22);
 }
-[data-theme="light"] .pillar-title,
-[data-theme="light"] .insight-title { color: var(--white); }
+[data-theme="light"] .trust-number { color: #ffffff; }
+[data-theme="light"] .trust-label  { color: rgba(220, 215, 200, 0.55); }
 
-/* Partners row light */
-[data-theme="light"] .partners-row { background: var(--anthracite); }
-[data-theme="light"] .partner-logo-item { color: var(--text-muted); border-color: var(--border); }
+/* ── Mobile nav ── */
+[data-theme="light"] .mobile-nav {
+  background: rgba(10, 11, 18, 0.98);
+  backdrop-filter: blur(24px);
+}
+[data-theme="light"] .mobile-nav .nav-link { color: rgba(232, 228, 218, 0.8); }
 
-/* Section headings in light mode */
+/* ── Section backgrounds ── */
+[data-theme="light"] body { background: #FFFFFF; }
+[data-theme="light"] .section { background: #FFFFFF; }
+[data-theme="light"] .about-preview    { background: #F4F6FA; }
+[data-theme="light"] .services-preview { background: #FFFFFF; }
+[data-theme="light"] .service-pillar-section { background: #F4F6FA; }
+[data-theme="light"] .why-us          { background: #FFFFFF; }
+[data-theme="light"] .turriva-section { background: #F4F6FA; }
+[data-theme="light"] .process-section { background: #FFFFFF; }
+[data-theme="light"] .testimonials    { background: #F4F6FA; }
+[data-theme="light"] .industries      { background: #FFFFFF; }
+[data-theme="light"] .stats-band      { background: #111827; }
+[data-theme="light"] .stats-row       { background: #111827; }
+[data-theme="light"] .cta-banner      { background: #111827; }
+[data-theme="light"] .blog-section    { background: #F4F6FA; }
+[data-theme="light"] .partners-row    { background: #F4F6FA; }
+
+/* ── Headings ── */
 [data-theme="light"] h1,
 [data-theme="light"] h2,
 [data-theme="light"] h3,
-[data-theme="light"] h4 { color: var(--white); }
-/* Re-apply white explicitly to hero headings since hero bg stays dark */
-[data-theme="light"] .hero h1,
-[data-theme="light"] .hero h1 em { color: #ffffff !important; }
+[data-theme="light"] h4 { color: #111827; }
+[data-theme="light"] .section-title em,
+[data-theme="light"] h1 em,
+[data-theme="light"] h2 em { color: var(--gold); }
+[data-theme="light"] .section-label { color: var(--gold); }
+[data-theme="light"] .section-label::before { background: var(--gold); }
 
-/* Sections that need explicit light treatment */
-[data-theme="light"] .about-preview { background: var(--anthracite); }
-[data-theme="light"] .service-pillar-section { background: var(--black); }
-[data-theme="light"] .stats-band { background: var(--anthracite); }
-[data-theme="light"] .blog-section { background: var(--black); }
-[data-theme="light"] .blog-card { background: var(--card-bg); border-color: var(--border); }
-[data-theme="light"] .blog-num { color: var(--gold); }
-[data-theme="light"] .blog-cat { color: var(--gold); }
-[data-theme="light"] .blog-title { color: var(--white); }
-[data-theme="light"] .blog-excerpt { color: var(--text-muted); }
-[data-theme="light"] .process-step { background: var(--card-bg); border-color: var(--border); }
-[data-theme="light"] .process-num { color: var(--gold); }
+/* Hero headings stay white (dark bg) */
+[data-theme="light"] .hero-split-title,
+[data-theme="light"] .hero-split-eyebrow,
+[data-theme="light"] .hero-split-sub { color: inherit; }
+
+/* ── Cards ── */
+[data-theme="light"] .pillar-card,
+[data-theme="light"] .portfolio-card,
+[data-theme="light"] .insight-card,
+[data-theme="light"] .cost-estimator,
+[data-theme="light"] .process-step,
+[data-theme="light"] .why-item,
+[data-theme="light"] .testimonial-card {
+  background: #FFFFFF;
+  border-color: rgba(145, 158, 195, 0.20);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+}
+[data-theme="light"] .pillar-card:hover,
+[data-theme="light"] .portfolio-card:hover,
+[data-theme="light"] .insight-card:hover {
+  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+  border-color: rgba(181, 145, 46, 0.35);
+}
+[data-theme="light"] .pillar-title  { color: #111827; }
+[data-theme="light"] .pillar-number { color: rgba(181, 145, 46, 0.3); }
+[data-theme="light"] .pillar-desc   { color: #4B5563; }
+[data-theme="light"] .pillar-service-item { color: #4B5563; }
+[data-theme="light"] .pillar-service-item::before { background: var(--gold); }
+[data-theme="light"] .insight-title { color: #111827; }
+[data-theme="light"] .blog-num      { color: var(--gold); }
+[data-theme="light"] .blog-cat      { color: var(--gold); }
+[data-theme="light"] .blog-title    { color: #111827; }
+[data-theme="light"] .blog-excerpt  { color: #4B5563; }
+[data-theme="light"] .blog-card     { background: #FFFFFF; border-color: rgba(145, 158, 195, 0.20); }
+[data-theme="light"] .process-num   { color: var(--gold); }
+
+/* ── Partners ── */
+[data-theme="light"] .partner-logo-item {
+  color: #4B5563;
+  border-color: rgba(145, 158, 195, 0.20);
+}
+
+/* ── Buttons in light sections ── */
+[data-theme="light"] .btn-ghost {
+  color: #111827;
+  border-color: rgba(145, 158, 195, 0.35);
+}
+[data-theme="light"] .btn-ghost:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-pale);
+}
+
+/* ── Footer stays dark ── */
+[data-theme="light"] .footer { background: #0A0B12; color: #E0D8C8; }
+[data-theme="light"] .footer * { color: inherit; }
+[data-theme="light"] .footer .footer-link { color: rgba(220, 215, 200, 0.5); }
+[data-theme="light"] .footer .footer-link:hover { color: var(--gold); }
+
+/* ── Showreel modal ── */
+[data-theme="light"] .showreel-modal { background: rgba(8, 9, 18, 0.97); }
+
+/* ── About section ── */
+[data-theme="light"] .about-text { color: #4B5563; }
+[data-theme="light"] .about-title { color: #111827; }
+
+/* ── Turriva section in light mode ── */
+[data-theme="light"] .turriva-section {
+  background: linear-gradient(135deg, #F4F6FA 0%, #ECEEF5 100%);
+}
+
+/* ============================================================
+   PREMIUM ANIMATIONS — Luxury motion design
+   ============================================================ */
+
+/* Float animation — hero elements, featured cards */
+@keyframes luxFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* Shimmer sweep — cards, CTA buttons */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* Gold line sweep — section dividers */
+@keyframes goldSweep {
+  0%   { transform: scaleX(0); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+/* Scale reveal — portfolio cards */
+@keyframes scaleReveal {
+  from { opacity: 0; transform: scale(0.94) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Pulse ring — gold accent circles */
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(181, 145, 46, 0.35); }
+  70%  { box-shadow: 0 0 0 12px rgba(181, 145, 46, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(181, 145, 46, 0); }
+}
+
+/* Count-up number animation handled in JS */
+
+/* Stagger animation helpers */
+.anim-float  { animation: luxFloat 4s ease-in-out infinite; }
+.anim-float-2 { animation: luxFloat 4s ease-in-out 0.5s infinite; }
+.anim-float-3 { animation: luxFloat 4s ease-in-out 1s infinite; }
+
+/* Scroll reveal — enhanced */
+.reveal-scale  { opacity: 0; transform: scale(0.95) translateY(20px); transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+.reveal-left   { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal-right  { opacity: 0; transform: translateX(40px);  transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal-scale.in-view,
+.reveal-left.in-view,
+.reveal-right.in-view { opacity: 1; transform: none; }
+
+/* Gold section divider line */
+.gold-line {
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 60px;
+  width: 80px;
+  transform-origin: center;
+  animation: goldSweep 1s ease forwards;
+}
+
+/* ── Premium card hover effects ── */
+.pillar-card,
+.portfolio-card,
+.insight-card {
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),
+              box-shadow 0.4s ease,
+              border-color 0.3s ease;
+}
+.pillar-card:hover  { transform: translateY(-6px); }
+
+/* Service image card */
+.svc-img-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  aspect-ratio: 4/3;
+  background: #0d0d0d;
+}
+.svc-img-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.svc-img-card:hover img { transform: scale(1.06); }
+.svc-img-card .svc-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,8,8,0.90) 0%, rgba(8,8,8,0.3) 50%, transparent 100%);
+  transition: background 0.4s ease;
+}
+.svc-img-card:hover .svc-overlay {
+  background: linear-gradient(to top, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.55) 60%, rgba(8,8,8,0.1) 100%);
+}
+.svc-img-card .svc-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 28px 24px 24px;
+}
+.svc-img-num {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+  color: var(--gold); margin-bottom: 8px; display: block;
+}
+.svc-img-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem; font-weight: 600;
+  color: #fff; line-height: 1.25; margin-bottom: 10px;
+}
+.svc-img-desc {
+  font-size: 0.82rem; line-height: 1.6;
+  color: rgba(220,215,200,0.75);
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+.svc-img-card:hover .svc-img-desc { max-height: 80px; opacity: 1; }
+.svc-img-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--gold); text-transform: uppercase; text-decoration: none;
+  margin-top: 14px; opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s 0.1s ease, transform 0.3s ease;
+}
+.svc-img-card:hover .svc-img-link { opacity: 1; transform: none; }
+
+/* Services grid layout */
+.services-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+.services-visual-grid .svc-img-card.featured {
+  grid-column: span 2;
+  aspect-ratio: 16/9;
+}
+@media (max-width: 960px) {
+  .services-visual-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-visual-grid .svc-img-card.featured { grid-column: span 2; }
+}
+@media (max-width: 640px) {
+  .services-visual-grid { grid-template-columns: 1fr; }
+  .services-visual-grid .svc-img-card.featured { grid-column: span 1; aspect-ratio: 4/3; }
+}
+
+/* ── Section label gold sweep ── */
+.section-label {
+  position: relative;
+  overflow: visible;
+}
+.section-label::after {
+  content: '';
+  position: absolute;
+  bottom: -6px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.6s ease 0.2s;
+}
+.section-label.in-view::after { width: 100%; }
+
+/* ── Scroll-triggered reveal for service cards ── */
+.svc-img-card.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.svc-img-card.reveal.in-view,
+.svc-img-card.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.svc-img-card.reveal.reveal-delay-1 { transition-delay: 0.10s; }
+.svc-img-card.reveal.reveal-delay-2 { transition-delay: 0.20s; }
 [data-theme="light"] .process-title { color: var(--white); }
 [data-theme="light"] .testimonial-card { background: var(--card-bg); border-color: var(--border); }
 [data-theme="light"] .testimonial-text { color: var(--text); }
