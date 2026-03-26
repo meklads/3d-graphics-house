@@ -126,6 +126,24 @@
       background: linear-gradient(to right, var(--gold), rgba(201,164,82,0.3));
     }
 
+    /* ── Italic tagline (above eyebrow) ── */
+    .hero-full__tagline {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-size: clamp(0.88rem, 1.4vw, 1.05rem);
+      font-weight: 400;
+      color: rgba(235, 220, 185, 0.72);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: hfadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.08s forwards;
+      text-shadow: 0 1px 10px rgba(4,4,6,0.80);
+    }
+    .hero-full__tagline em {
+      font-style: normal;
+      color: rgba(201,164,82,0.90);
+    }
+
     /* ── Main title ── */
     .hero-full__title {
       font-family: var(--font-display);
@@ -590,6 +608,13 @@
   <!-- Main content -->
   <div class="container hero-full__body">
     <div class="hero-full__inner">
+
+      <!-- Italic tagline -->
+      <p class="hero-full__tagline"
+         data-en="Your Vision Partner &nbsp;—&nbsp; and an Extension of Your Team"
+         data-ar="شريك رؤيتك &nbsp;—&nbsp; وامتداد لفريقك">
+        Your Vision Partner &nbsp;—&nbsp; and an <em>Extension of Your Team</em>
+      </p>
 
       <!-- Eyebrow label -->
       <div class="hero-full__eyebrow">
