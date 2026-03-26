@@ -687,6 +687,59 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
+     TRUSTED-BY MARQUEE (DBOX-style scrolling client strip)
+══════════════════════════════════════════════════════════ -->
+<section class="marquee-strip" aria-label="Our Clients">
+  <div class="marquee-track">
+    <div class="marquee-content">
+      <span class="marquee-item">Alrajhi Real Estate</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Anan Escan Co.</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Muslim World League</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Makkah Region</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Ministry of Housing KSA</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Al-Khayyat Group</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Al-Ahli Saudi Club</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Wahat Al-Salam</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Aloula Nakheel Views</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Rafal Pavilions</span>
+      <span class="marquee-sep">✦</span>
+    </div>
+    <!-- Duplicate for seamless loop -->
+    <div class="marquee-content" aria-hidden="true">
+      <span class="marquee-item">Alrajhi Real Estate</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Anan Escan Co.</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Muslim World League</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Makkah Region</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Ministry of Housing KSA</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Al-Khayyat Group</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Al-Ahli Saudi Club</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Wahat Al-Salam</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Aloula Nakheel Views</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Rafal Pavilions</span>
+      <span class="marquee-sep">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
      ABOUT PREVIEW
 ══════════════════════════════════════════════════════════ -->
 <section class="section about-preview" id="about" aria-label="About 3D Graphics House">
@@ -983,6 +1036,46 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
+     FEATURED RENDERS — HORIZONTAL SCROLL (MIR style)
+══════════════════════════════════════════════════════════ -->
+<section class="hscroll-strip" aria-label="Featured renders gallery">
+  <div class="hscroll-header container">
+    <div class="section-label reveal" data-en="Featured Work" data-ar="أبرز الأعمال">Featured Work</div>
+    <p class="hscroll-hint" data-en="Drag to explore →" data-ar="اسحب للاستكشاف →">Drag to explore →</p>
+  </div>
+  <div class="hscroll-track" id="hscroll-track">
+    <div class="hscroll-item" data-lightbox="assets/images/services/portfolio-anan-render.jpg" data-lb-title="Anan Escan Villa — Golden Hour" data-lb-tag="3D Rendering">
+      <img src="assets/images/services/portfolio-anan-render.jpg" alt="Anan Escan Villa render" loading="lazy">
+      <div class="hscroll-overlay"><span>Anan Escan Villa</span></div>
+    </div>
+    <div class="hscroll-item" data-lightbox="assets/images/portfolio/aloula-nakheel.jpg" data-lb-title="Aloula Nakheel Views" data-lb-tag="3D Animation">
+      <img src="assets/images/portfolio/aloula-nakheel.jpg" alt="Aloula Nakheel Views" loading="lazy">
+      <div class="hscroll-overlay"><span>Aloula Nakheel Views</span></div>
+    </div>
+    <div class="hscroll-item" data-lightbox="assets/images/portfolio/wahat-alsalam.jpg" data-lb-title="Wahat Al-Salam" data-lb-tag="3D Animation">
+      <img src="assets/images/portfolio/wahat-alsalam.jpg" alt="Wahat Al-Salam" loading="lazy">
+      <div class="hscroll-overlay"><span>Wahat Al-Salam</span></div>
+    </div>
+    <div class="hscroll-item" data-lightbox="assets/images/portfolio/interior-render.jpg" data-lb-title="Luxury Interior — Photorealistic" data-lb-tag="Interior Visualization">
+      <img src="assets/images/portfolio/interior-render.jpg" alt="Luxury interior render" loading="lazy">
+      <div class="hscroll-overlay"><span>Luxury Interior</span></div>
+    </div>
+    <div class="hscroll-item" data-lightbox="assets/images/portfolio/birds-eye-view.jpg" data-lb-title="Aerial Master Plan View" data-lb-tag="Aerial Visualization">
+      <img src="assets/images/portfolio/birds-eye-view.jpg" alt="Birds eye view" loading="lazy">
+      <div class="hscroll-overlay"><span>Aerial Master Plan</span></div>
+    </div>
+    <div class="hscroll-item" data-lightbox="assets/images/services/svc-maquette.jpg" data-lb-title="Architectural Scale Model" data-lb-tag="Maquette">
+      <img src="assets/images/services/svc-maquette.jpg" alt="Architectural maquette" loading="lazy">
+      <div class="hscroll-overlay"><span>Precision Maquette</span></div>
+    </div>
+    <div class="hscroll-item" data-lightbox="assets/images/portfolio/rafal-pavilions.jpg" data-lb-title="Rafal Pavilions" data-lb-tag="3D Rendering">
+      <img src="assets/images/portfolio/rafal-pavilions.jpg" alt="Rafal Pavilions" loading="lazy">
+      <div class="hscroll-overlay"><span>Rafal Pavilions</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
      STATS ROW
 ══════════════════════════════════════════════════════════ -->
 <div class="stats-row" aria-label="Company statistics">
@@ -1024,45 +1117,64 @@
   </div>
 
   <div class="portfolio-grid" style="margin-top:48px;" role="list" aria-label="Portfolio grid">
-    <div class="portfolio-item reveal" role="listitem" aria-label="Jeddah Forum">
+    <div class="portfolio-item reveal" role="listitem" aria-label="Jeddah Forum" data-lightbox="assets/images/portfolio/jeddah-forum.jpg" data-lb-title="Jeddah Forum" data-lb-tag="3D Animation">
       <img src="assets/images/portfolio/jeddah-forum.jpg" alt="Jeddah Forum" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
         <div class="portfolio-item-tag" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</div>
         <div class="portfolio-item-title" data-en="Jeddah Forum" data-ar="منتدى جدة">Jeddah Forum</div>
       </div>
+      <div class="portfolio-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
     </div>
-    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Anan Escan — Luxury Villa">
-      <img src="assets/images/services/portfolio-anan-render.jpg"
-           alt="Anan Escan Luxury Villa Render" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
+    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Anan Escan — Luxury Villa" data-lightbox="assets/images/services/portfolio-anan-render.jpg" data-lb-title="Anan Escan Villa" data-lb-tag="3D Rendering">
+      <img src="assets/images/services/portfolio-anan-render.jpg" alt="Anan Escan Luxury Villa Render" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
         <div class="portfolio-item-tag" data-en="3D Rendering" data-ar="إظهار ثلاثي الأبعاد">3D Rendering</div>
         <div class="portfolio-item-title" data-en="Anan Escan Villa" data-ar="فيلا عنان إسكان">Anan Escan Villa</div>
       </div>
+      <div class="portfolio-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
     </div>
-    <div class="portfolio-item reveal" role="listitem" aria-label="Makkah Market Center">
+    <div class="portfolio-item reveal" role="listitem" aria-label="Makkah Market Center" data-lightbox="assets/images/portfolio/makkah-market.jpg" data-lb-title="Makkah Market Center" data-lb-tag="3D Animation">
       <img src="assets/images/portfolio/makkah-market.jpg" alt="Makkah Market Center" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
         <div class="portfolio-item-tag" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</div>
         <div class="portfolio-item-title" data-en="Makkah Market Center" data-ar="مركز سوق مكة">Makkah Market Center</div>
       </div>
+      <div class="portfolio-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
     </div>
-    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Anan Escan Scale Model">
-      <img src="assets/images/services/portfolio-anan-model.jpg"
-           alt="Anan Escan Architectural Scale Model" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
+    <div class="portfolio-item reveal reveal-delay-1" role="listitem" aria-label="Anan Escan Scale Model" data-lightbox="assets/images/services/portfolio-anan-model.jpg" data-lb-title="Anan Escan — Precision Scale Model" data-lb-tag="Architectural Model">
+      <img src="assets/images/services/portfolio-anan-model.jpg" alt="Anan Escan Architectural Scale Model" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
         <div class="portfolio-item-tag" data-en="Scale Model" data-ar="ماكيت معماري">Scale Model</div>
         <div class="portfolio-item-title" data-en="Anan Escan Model" data-ar="ماكيت عنان إسكان">Anan Escan Model</div>
       </div>
+      <div class="portfolio-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
     </div>
-    <div class="portfolio-item reveal reveal-delay-2" role="listitem" aria-label="Alrajhi Naseem Al-Haram">
+    <div class="portfolio-item reveal reveal-delay-2" role="listitem" aria-label="Alrajhi Naseem Al-Haram" data-lightbox="assets/images/portfolio/alrajhi-naseem.jpg" data-lb-title="Alrajhi Naseem Al-Haram" data-lb-tag="3D Animation">
       <img src="assets/images/portfolio/alrajhi-naseem.jpg" alt="Alrajhi Naseem Al-Haram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" loading="lazy">
       <div class="portfolio-overlay">
         <div class="portfolio-item-tag" data-en="3D Animation" data-ar="أنيميشن ثلاثي الأبعاد">3D Animation</div>
         <div class="portfolio-item-title" data-en="Alrajhi Naseem Al-Haram" data-ar="الراجحي نسيم الحرام">Alrajhi Naseem Al-Haram</div>
       </div>
+      <div class="portfolio-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg></div>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════
+     PORTFOLIO LIGHTBOX (MIR / DBOX style fullscreen view)
+══════════════════════════════════════════════════════════ -->
+<div id="gh-lightbox" class="gh-lightbox" role="dialog" aria-modal="true" aria-label="Project image viewer">
+  <button class="gh-lb-close" aria-label="Close">&times;</button>
+  <button class="gh-lb-prev" aria-label="Previous">&#8592;</button>
+  <button class="gh-lb-next" aria-label="Next">&#8594;</button>
+  <div class="gh-lb-img-wrap">
+    <img id="gh-lb-img" src="" alt="">
+  </div>
+  <div class="gh-lb-caption">
+    <span id="gh-lb-tag" class="gh-lb-tag-text"></span>
+    <span id="gh-lb-title" class="gh-lb-title-text"></span>
+  </div>
+</div>
 
 
 <!-- ═══════════════════════════════════════════════════════

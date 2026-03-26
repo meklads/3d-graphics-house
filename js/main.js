@@ -417,26 +417,128 @@ function initTestimonialCarousel() {
   }, 5000);
 }
 
-/* ─── Cursor Glow Effect ──────────────────────────────── */
+/* ─── Custom Precision Cursor (DBOX-inspired) ─────────── */
 function initCursorGlow() {
-  if (window.matchMedia('(pointer: coarse)').matches) return; // skip mobile
+  if (window.matchMedia('(pointer: coarse)').matches) return; // skip touch
 
-  const glow = document.createElement('div');
-  glow.className = 'cursor-glow';
-  glow.style.cssText = `
-    position: fixed; pointer-events: none; z-index: 9999;
-    width: 300px; height: 300px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,164,82,0.06) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
-    mix-blend-mode: screen;
-  `;
-  document.body.appendChild(glow);
+  const dot = document.createElement('div');
+  dot.className = 'gh-cursor';
+  const ring = document.createElement('div');
+  ring.className = 'gh-cursor-ring';
+  document.body.appendChild(dot);
+  document.body.appendChild(ring);
+
+  let mx = 0, my = 0, rx = 0, ry = 0;
 
   document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
   }, { passive: true });
+
+  // Smooth ring follower at 60fps
+  (function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  // Scale on interactive elements
+  const hoverEls = 'a, button, .svc-img-card, .portfolio-item, .hscroll-item, .btn, .nav-link, .filter-btn';
+  $$(`${hoverEls}`).forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+  });
+}
+
+/* ─── Portfolio Lightbox (fullscreen immersive view) ───── */
+function initLightbox() {
+  const lb = $('#gh-lightbox');
+  if (!lb) return;
+
+  const lbImg    = $('#gh-lb-img');
+  const lbTag    = $('#gh-lb-tag');
+  const lbTitle  = $('#gh-lb-title');
+  const closeBtn = $('.gh-lb-close');
+  const prevBtn  = $('.gh-lb-prev');
+  const nextBtn  = $('.gh-lb-next');
+
+  // Collect all lightbox-enabled items across page
+  let items = [];
+  let current = 0;
+
+  const open = (idx) => {
+    current = idx;
+    const it = items[idx];
+    if (!it) return;
+    lbImg.src = it.src;
+    lbImg.alt = it.title;
+    if (lbTag) lbTag.textContent = it.tag;
+    if (lbTitle) lbTitle.textContent = it.title;
+    lb.style.display = 'flex';
+    requestAnimationFrame(() => lb.classList.add('open'));
+    document.body.style.overflow = 'hidden';
+  };
+
+  const close = () => {
+    lb.classList.remove('open');
+    setTimeout(() => { lb.style.display = 'none'; }, 360);
+    document.body.style.overflow = '';
+  };
+
+  const navigate = (dir) => open((current + dir + items.length) % items.length);
+
+  on(closeBtn, 'click', close);
+  on(prevBtn, 'click', () => navigate(-1));
+  on(nextBtn, 'click', () => navigate(1));
+  on(lb, 'click', e => e.target === lb && close());
+
+  on(document, 'keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')      close();
+    if (e.key === 'ArrowLeft')   navigate(-1);
+    if (e.key === 'ArrowRight')  navigate(1);
+  });
+
+  // Register all [data-lightbox] elements
+  const registerItems = () => {
+    items = [];
+    $$('[data-lightbox]').forEach((el, idx) => {
+      items.push({
+        src:   el.dataset.lightbox,
+        title: el.dataset.lbTitle || '',
+        tag:   el.dataset.lbTag   || ''
+      });
+      on(el, 'click', () => open(idx));
+    });
+  };
+
+  registerItems();
+}
+
+/* ─── Horizontal Scroll Drag ──────────────────────────── */
+function initHScrollDrag() {
+  const track = $('#hscroll-track');
+  if (!track) return;
+
+  let isDown = false, startX = 0, scrollLeft = 0;
+
+  on(track, 'mousedown', e => {
+    isDown = true;
+    track.classList.add('dragging');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  on(document, 'mouseup',   () => { isDown = false; track.classList.remove('dragging'); });
+  on(track, 'mouseleave',   () => { isDown = false; track.classList.remove('dragging'); });
+  on(track, 'mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.4;
+  });
 }
 
 /* ─── Page Load Animation ─────────────────────────────── */
@@ -490,6 +592,8 @@ function _ghInit() {
   initContactForm();
   initTestimonialCarousel();
   initCursorGlow();
+  initLightbox();
+  initHScrollDrag();
   initPageLoader();
   initStickyQuote();
 
