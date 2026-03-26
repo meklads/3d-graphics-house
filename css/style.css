@@ -2196,6 +2196,33 @@ body[dir="rtl"] .sticky-quote-btn {
 .reveal-scale.reveal-delay-4  { transition-delay: 0.42s; }
 .reveal-delay-5               { transition-delay: 0.55s; }
 
+/* ── Global reveal override: ensure ALL .visible elements are truly visible ── */
+.js-ready .reveal.visible,
+.js-ready .reveal.in-view,
+.js-ready .reveal-left.visible,
+.js-ready .reveal-right.visible,
+.js-ready .reveal-scale.visible,
+.js-ready .section-label.visible,
+.js-ready .svc-img-card.reveal.visible,
+.js-ready .svc-img-card.reveal.in-view,
+.js-ready .portfolio-item.reveal.visible,
+.js-ready .portfolio-item.reveal.in-view,
+.js-ready .reason-card.reveal.visible,
+.js-ready .reason-card.reveal.in-view {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) !important;
+}
+/* Absolute fallback: if JS never fires, show everything */
+body:not(.js-ready) .reveal,
+body:not(.js-ready) .reveal-left,
+body:not(.js-ready) .reveal-right,
+body:not(.js-ready) .reveal-scale,
+body:not(.js-ready) .svc-img-card,
+body:not(.js-ready) .portfolio-item {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ---------- Mobile Responsive ---------- */
 @media (max-width: 1200px) {
   :root { --section-pad: 90px; }
