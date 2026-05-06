@@ -1,0 +1,15 @@
+# Node
+node_modules/
+dist/
+.env
+
+# Large video files (upload manually to server, don't store in git)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+
+# OS
+.DS_Store
+Thumbs.db
