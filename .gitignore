@@ -3,12 +3,11 @@ node_modules/
 dist/
 .env
 
-# Large video files (upload manually to server, don't store in git)
-*.mp4
+# Large video files — exclude the 90MB reel only
+GH-demo-reel-2025.mp4
 *.mov
 *.avi
 *.mkv
-*.webm
 
 # OS
 .DS_Store
